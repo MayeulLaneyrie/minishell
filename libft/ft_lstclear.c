@@ -1,0 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/19 23:10:23 by mlaneyri          #+#    #+#             */
+/*   Updated: 2022/03/15 16:45:40 by mlaneyri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	ft_lstclear(t_list **lst, void (*del)(void *))
+{
+	t_list	*cpy;
+	t_list	*cpy1;
+
+	if (!*lst)
+		return ;
+	cpy = *lst;
+	cpy1 = cpy->next;
+	while (cpy1)
+	{
+		ft_lstdelone(cpy1, del);
+		cpy = cpy1;
+		cpy1 = cpy1->next;
+		free(cpy);
+	}
+	cpy = *lst;
+	cpy1 = cpy->prev;
+	while (cpy1)
+	{
+		ft_lstdelone(cpy1, del);
+		cpy = cpy1;
+		cpy1 = cpy1->prev;
+		free(cpy);
+	}
+	ft_lstdelone(*lst);
+	free(*lst);
+	*lst = NULL;
+}
