@@ -6,7 +6,7 @@
 /*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:18:20 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/16 16:24:45 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/16 16:45:31 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 /*
 **	t_cmd (newdel_cmd_sh.c):
+**	ac = 0
+**	av = NULL
 */
 
 t_cmd	*new_cmd();
@@ -23,6 +25,8 @@ void	*del_cmd(t_cmd **cmd);
 
 /*
 **	t_sh (newdel_cmd_sh.c):
+**	cmd = NULL
+**	xt_stat = 0
 */
 
 t_sh	*new_sh();
