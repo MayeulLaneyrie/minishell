@@ -1,4 +1,4 @@
-# MkI:
+# MkI :
 
 * Display a prompt and ask for a command line
 * Manage unquoted, simple and double quoted strings
@@ -15,9 +15,9 @@
 
 > At that point, a command line should be made of only a simple command without any redirection.
 
-# MkII:
+# MkII :
 
-* All MkI functionalities, plus the following
+* All MkI functionalities, plus the following :
 
 * Manage history
 * Manage pipes
@@ -26,9 +26,9 @@
 * No redirection
 * No handling of ctrl-c, ctrl-d, ctrl-\
 
-# MkIII:
+# MkIII :
 
-* All MkII functionalities, plus the following
+* All MkII functionalities, plus the following :
 
 * '<', '>' and '>>' redirections
 * Variable expansion
@@ -38,9 +38,9 @@
 * No heredoc implementation
 * No handling of ctrl-c, ctrl-d, ctrl-\
 
-# MkIV:
+# MkIV :
 
-* All MkIII functionalities, plus the following
+* All MkIII functionalities, plus the following :
 
 * Handling of ctrl-c, ctrl-d, ctrl-\
 * Handling of $? expansion
@@ -49,9 +49,9 @@
 
 > At that point, all the functionalities of the mandatory part should be implemented properly.
 
-# MkV:	(BONUS)
+# MkV :	(BONUS)
 
-* All MkIV functionalities plus the following
+* All MkIV functionalities plus the following :
 
 * Manage && and || operators with parenthesis for priorities
-* Perform '*' file expansion for current directory
+* Perform '\*' file expansion for current directory
