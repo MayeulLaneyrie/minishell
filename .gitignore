@@ -1,4 +1,5 @@
 *.o
 *.a
 *.txt
+*.swp
 minishell
