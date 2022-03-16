@@ -8,25 +8,32 @@ RM			= rm -f
 AR			= ar rcs
 
 ${NAME}:	$(OBJS) libft.a
-	${CC} ${OBJS} ./libft/libft.a -o ${NAME}
+	@ echo -n "\033[1mCompiling ${NAME}...\033[0m"
+	@ ${CC} ${OBJS} ./libft/libft.a -o ${NAME} && echo " [DONE]"
 
 libft.a:
-	${MAKE} -C ./libft
+	@ echo -n "\033[1mMaking libft...\033[0m"
+	@ ${MAKE} --no-print-directory -C ./libft && echo " [DONE]"
 
 all:		${NAME}
 
 bonus:		${NAME}
 
 %.o:		%.c
-	${CC} -c $< -o $@
+	@ echo -n "\033[1mBuilding objects...\033[0m"
+	@ ${CC} -c $< -o $@ && echo " [DONE]"
 
 clean:
-	${MAKE} clean -C ./libft
-	${RM} ${OBJS} ${TEST_OBJS}
+	@ echo -n "\033[1mCleaning libft...\033[0m"
+	@ ${MAKE} --no-print-directory clean -C ./libft && echo " [DONE]"
+	@ echo -n "\033[1mCleaning object files...\033[0m"
+	@ ${RM} ${OBJS} ${TEST_OBJS} && echo " [DONE]"
 
 fclean:		clean
-	${MAKE} fclean -C ./libft
-	${RM} ${NAME}
+	@ echo -n "\033[1mCleaning binaries...\033[0m"
+	@ ${RM} ./libft/libft.a
+	@ ${RM} ${NAME}
+	@ echo " [DONE]"
 
 re:			fclean all
 

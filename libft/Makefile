@@ -51,16 +51,16 @@ CC			= clang -Wall -Wextra -Werror
 RM			= rm -f
 
 ${NAME}:	${OBJS}
-			ar rcs ${NAME} ${OBJS}
-			ranlib ${NAME}
+			@ ar rcs ${NAME} ${OBJS}
+			@ ranlib ${NAME}
 
 all:		${NAME}
 
 %.o:		%.c
-			${CC} -c $< -o $@
+			@ ${CC} -c $< -o $@
 
 clean:
-			${RM} ${OBJS} ${BONUS_OBJS}
+			@ ${RM} ${OBJS} ${BONUS_OBJS}
 
 fclean:		clean
 			${RM} ${NAME}
