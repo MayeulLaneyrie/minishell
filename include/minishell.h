@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 19:39:41 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/16 16:09:36 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/16 16:23:47 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@
 # include "../libft/libft.h"
 
 /*
-**	constdest.h holds the prototypes of the constructor and destructor functions
+**	newdel.h holds the prototypes of all constructor and destructor functions.
+**	Don't hesitate to put inside of it all the constructors and destructors of
+**	your own structures. All update to a structure definition should result in
+**	an update of its constructor and destructor.
 */
 # include "./consdest.h"
 
@@ -45,7 +48,8 @@ typedef struct s_cmd
 }	t_cmd;
 
 /*
-**	xt_status : The exit status of the last executed job. xt_stat should be the
+**	cmd : a parsed simple command
+**	xt_stat : The exit status of the last executed job. xt_stat should be the
 **	return value of main().
 */
 typedef struct s_sh
