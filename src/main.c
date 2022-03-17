@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 19:38:16 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/17 21:50:33 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/03/17 22:44:46 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	write(0, "Welcome to minishell \"MarkI\"!\n", 30);
-	sh = new_sh();
+	sh = new_sh(envp);
 	if (!sh)
 		return (-1);
 	while (!main_part1(sh))
