@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_part1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/15 19:38:16 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/17 23:09:36 by mlaneyri         ###   ########.fr       */
+/*   Created: 2022/03/17 22:02:22 by bifrah            #+#    #+#             */
+/*   Updated: 2022/03/17 22:06:52 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	main(int ac, char **av, char **envp)
+int	main_part1(t_sh *sh)
 {
-	t_sh	*sh;
-
-	(void)ac;
-	(void)av;
-	write(0, "Welcome to minishell \"MarkI\"!\n", 30);
-	sh = new_sh(envp);
-	if (!sh)
-		return (-1);
-	while (!main_part1(sh))
-	{
-		if (main_part2(sh))
-			break ;
-	}
-	del_sh(&sh);
-	return (0);
+	
 }

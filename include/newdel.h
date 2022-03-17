@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   newdel.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:18:20 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/17 20:08:08 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/17 22:46:55 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ void	*del_cmd(t_cmd **cmd);
 
 /*
 **	t_sh (newdel_cmd_sh.c):
+**	ret->envp = envp;
 **	cmd = NULL
 **	xt_stat = 0
 */
 
-t_sh	*new_sh(void);
+t_sh	*new_sh(char **envp);
 
 void	*del_sh(t_sh **sh);
 

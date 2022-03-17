@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 19:39:41 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/17 20:08:00 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/17 22:45:33 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_cmd
 */
 typedef struct s_sh
 {
+	char	**envp;
 	t_cmd	*cmd;
 	int		xt_stat;
 }	t_sh;

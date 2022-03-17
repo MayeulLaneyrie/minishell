@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   newdel_cmd_sh.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:24:59 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/17 19:51:50 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/17 22:46:30 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,16 @@ void	*del_cmd(t_cmd **cmd)
 	return (NULL);
 }
 
-t_sh	*new_sh(void)
+t_sh	*new_sh(char **envp)
 {
 	t_sh	*ret;
 
+	if (!envp)
+		return (NULL);
 	ret = malloc(sizeof(t_sh));
 	if (!ret)
 		return (NULL);
+	ret->envp = envp;
 	ret->cmd = NULL;
 	ret->xt_stat = 0;
 	return (ret);
