@@ -1,11 +1,11 @@
 # MkI :
 
-* Display a prompt and ask for a command line
-* Manage unquoted, simple and double quoted strings
-* Find and launch the correct executable, passing the correct arguments
-* Wait for the job to end, and store its exit status
+- [ ] Display a prompt and ask for a command line
+- [ ] Manage unquoted, simple and double quoted strings
+- [ ] Find and launch the correct executable, passing the correct arguments
+- [ ] Wait for the job to end, and store its exit status
 
-* "exit" builtin
+- [ ] "exit" builtin
 
 * No history
 * No expansion
@@ -19,8 +19,8 @@
 
 * All MkI functionalities, plus the following :
 
-* Manage history
-* Manage pipes
+- [ ] Manage history
+- [ ] Manage pipes
 
 * No expansion
 * No redirection
@@ -30,10 +30,10 @@
 
 * All MkII functionalities, plus the following :
 
-* '<', '>' and '>>' redirections
-* Variable expansion
+- [ ] '<', '>' and '>>' redirections
+- [ ] Variable expansion
 
-* "env", "unset" and "export" builtins
+- [ ] "env", "unset" and "export" builtins
 
 * No heredoc implementation
 * No handling of ctrl-c, ctrl-d, ctrl-\
@@ -42,10 +42,10 @@
 
 * All MkIII functionalities, plus the following :
 
-* Handling of ctrl-c, ctrl-d, ctrl-\
-* Handling of $? expansion
-* Heredoc implementation
-* "echo", "cd" and "pwd" implementation
+- [ ] Handling of ctrl-c, ctrl-d, ctrl-\
+- [ ] Handling of $? expansion
+- [ ] Heredoc implementation
+- [ ] "echo", "cd" and "pwd" implementation
 
 > At that point, all the functionalities of the mandatory part should be implemented properly.
 
@@ -53,5 +53,5 @@
 
 * All MkIV functionalities plus the following :
 
-* Manage && and || operators with parenthesis for priorities
-* Perform '\*' file expansion for current directory
+- [ ] Manage && and || operators with parenthesis for priorities
+- [ ] Perform '\*' file expansion for current directory

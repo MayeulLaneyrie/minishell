@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 19:38:16 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/17 20:16:41 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/17 20:59:51 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(void)
 	while (!main_part1(sh))
 	{
 		if (main_part2(sh))
-			break;
+			break ;
 	}
 	del_sh(&sh);
 	return (0);
