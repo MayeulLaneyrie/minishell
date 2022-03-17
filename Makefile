@@ -1,4 +1,5 @@
-SRCS		=	src/main.c
+SRCS		=	src/main.c \
+				src/newdel.c
 
 OBJS		= ${SRCS:.c=.o}
 
