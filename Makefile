@@ -1,5 +1,5 @@
 SRCS		=	src/main.c \
-				src/newdel.c
+				src/newdel_cmd_sh.c
 
 OBJS		= ${SRCS:.c=.o}
 
