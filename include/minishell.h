@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 19:39:41 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/16 16:23:47 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/17 20:08:00 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,6 @@
 
 # include "../libft/libft.h"
 
-/*
-**	newdel.h holds the prototypes of all constructor and destructor functions.
-**	Don't hesitate to put inside of it all the constructors and destructors of
-**	your own structures. All update to a structure definition should result in
-**	an update of its constructor and destructor.
-*/
-# include "./consdest.h"
-
 typedef struct s_cmd
 {
 	int		ac;
@@ -57,5 +49,25 @@ typedef struct s_sh
 	t_cmd	*cmd;
 	int		xt_stat;
 }	t_sh;
+
+/*
+**	newdel.h holds the prototypes of all constructor and destructor functions.
+**	Don't hesitate to put inside of it all the constructors and destructors of
+**	your own structures. All update to a structure definition should result in
+**	an update of its constructor and destructor.
+*/
+# include "./newdel.h"
+
+/*
+**	First steps of shell operations : reading a line, lexing and parsing it.
+**	Should return 0 if a command line has been correctly parsed, and any other
+**	value to indicate that minishell should exit.
+**	When called, cmd member of sh won't have been initialized yet.
+**	When returning, cmd should be correctly initialized, unless exiting shell
+**	is required.
+*/
+int	main_part1(t_sh *sh);
+
+int	main_part2(t_sh *sh);
 
 #endif
