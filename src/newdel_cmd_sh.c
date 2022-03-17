@@ -6,13 +6,13 @@
 /*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:24:59 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/16 16:44:21 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/17 19:51:50 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-t_cmd	*new_cmd()
+t_cmd	*new_cmd(void)
 {
 	t_cmd	*ret;
 
@@ -42,7 +42,7 @@ void	*del_cmd(t_cmd **cmd)
 	return (NULL);
 }
 
-t_sh	*new_sh()
+t_sh	*new_sh(void)
 {
 	t_sh	*ret;
 
