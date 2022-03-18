@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 19:39:41 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/18 01:43:14 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/18 03:43:20 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@
 **	an update of its constructor and destructor.
 */
 # include "./newdel.h"
+
+/*
+**	env.h holds the definition of environment manipulation functions.
+*/
+# include "./env.h"
 
 /*
 **	First steps of shell operations : reading a line, lexing and parsing it.
