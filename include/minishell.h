@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 19:39:41 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/17 22:45:33 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/03/17 23:35:23 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,8 @@ typedef struct s_sh
 int	main_part1(t_sh *sh);
 
 int	main_part2(t_sh *sh);
+
+# define NULL_RDLINE	1
+# define BLANK_RDLINE	2
 
 #endif
