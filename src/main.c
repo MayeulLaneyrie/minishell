@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 19:38:16 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/17 23:09:36 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/18 18:52:38 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	write(0, "Welcome to minishell \"MarkI\"!\n", 30);
+	return (0);//For now, minishell makes my computer crash >_<
 	sh = new_sh(envp);
 	if (!sh)
 		return (-1);

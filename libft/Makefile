@@ -50,9 +50,12 @@ NAME		= libft.a
 CC			= clang -Wall -Wextra -Werror
 RM			= rm -f
 
-${NAME}:	${OBJS}
+${NAME}:	${OBJS} | silent
 			@ ar rcs ${NAME} ${OBJS}
 			@ ranlib ${NAME}
+
+silent:
+			@:
 
 all:		${NAME}
 
