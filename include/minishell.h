@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 19:39:41 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/17 22:45:33 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/03/18 01:43:14 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,16 @@
 
 # include <signal.h>
 
+/*
+**	Just a regular libft, with doubly chained lists.
+*/
 # include "../libft/libft.h"
 
-typedef struct s_cmd
-{
-	int		ac;
-	char	**av;
-}	t_cmd;
-
 /*
-**	cmd : a parsed simple command
-**	xt_stat : The exit status of the last executed job. xt_stat should be the
-**	return value of main().
+**	structures.h is the dedicated place to define custom structures, expecially
+**	if they are going to be refered to in other header files.
 */
-typedef struct s_sh
-{
-	char	**envp;
-	t_cmd	*cmd;
-	int		xt_stat;
-}	t_sh;
+# include "./structures.h"
 
 /*
 **	newdel.h holds the prototypes of all constructor and destructor functions.
