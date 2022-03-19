@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 21:01:52 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/19 13:26:31 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/19 17:21:37 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,11 @@ char	*search_path(char *path, char *name)
 		if (!temp)
 			return (NULL);
 		if (!access(temp, F_OK))
-			return (temp);//TODO: fix memleak on dirs 
+			return (temp + del_split((void ***)&dirs, -1));
 		free(temp);
 	}
-	return (NULL);//TODO: same
+	del_split((void ***)&dirs, -1);
+	return (NULL);
 }
 
 int	cmd_proc(t_sh *sh, t_cmd *cmd)
