@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 19:38:16 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/18 18:52:38 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/19 13:28:36 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(int ac, char **av, char **envp)
 {
 	t_sh	*sh;
+	int		ret;
 
 	(void)ac;
 	(void)av;
@@ -28,6 +29,7 @@ int	main(int ac, char **av, char **envp)
 		if (main_part2(sh))
 			break ;
 	}
+	ret = sh->xt_stat;
 	del_sh(&sh);
-	return (0);
+	return (ret);
 }

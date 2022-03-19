@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 21:01:52 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/18 18:40:15 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/19 13:26:31 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,24 @@ char	*ft_cat3(char *s1, char *s2, char *s3)
 	ft_strlcat(ret, s2, size);
 	ft_strlcat(ret, s3, size);
 	return (ret);
+}
+
+int	cnf_handler(t_sh *sh, t_cmd *cmd)
+{
+	char	*s;
+	int		l;
+
+	l = ft_strlen(cmd->av[0]) + 20;
+	s = malloc(l + 1);
+	if (!s)
+		return (-1);
+	s[0] = 0;
+	ft_strlcat(s, cmd->av[0], l);
+	ft_strlcat(s, ": command not found\n", l);
+	write(2, s, l);
+	free(s);
+	sh->xt_stat = 128;
+	return (-1);
 }
 
 char	*search_path(char *path, char *name)
@@ -62,10 +80,7 @@ int	cmd_proc(t_sh *sh, t_cmd *cmd)
 		//TODO: search builtin
 		cmd_path = search_path(get_var(sh->envp, "PATH"), cmd_path);
 		if (!cmd_path)
-		{
-			sh->xt_stat = 128;
-			return (-1);
-		}
+			return (cnf_handler(sh, cmd));
 	}
 	execve(cmd_path, cmd->av, sh->envp);
 	return (-1);
