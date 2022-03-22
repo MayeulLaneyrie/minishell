@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 22:02:22 by bifrah            #+#    #+#             */
-/*   Updated: 2022/03/22 17:21:08 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/03/22 17:28:20 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,7 @@ int	main_part1(t_sh *sh)
 /*
 ** TO DO :
 **
-**- faire une recuperation de ce qu'il y a dans les quote (fct : take_quote)
-**- le comparer avec rdline pour l'extraire et le stocker dans un char *
-**sans split les espace
-**- faire de meme pour double quote
+**- faire une recuperation de ce qu'il y a dans les quote
+**- l'ajouter au av
+**-	recommencer jusqu'a \0
 */
