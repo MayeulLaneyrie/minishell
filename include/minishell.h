@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 19:39:41 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/17 23:35:23 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/03/22 16:19:59 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_sh
 **	your own structures. All update to a structure definition should result in
 **	an update of its constructor and destructor.
 */
+
 # include "./newdel.h"
 
 /*
@@ -67,11 +68,21 @@ typedef struct s_sh
 **	When returning, cmd should be correctly initialized, unless exiting shell
 **	is required.
 */
+
 int	main_part1(t_sh *sh);
+
+/*
+**	Utils main_part1
+*/
+
+int	count_quote(char *rdline);
+int	find_quote(char *rdline);
+int	ac_of_av(char **av);
 
 int	main_part2(t_sh *sh);
 
 # define NULL_RDLINE	1
-# define BLANK_RDLINE	2
+# define WRONG_NB_QUOTE	2
+# define BLANK_RDLINE	3
 
 #endif
