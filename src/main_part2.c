@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 21:01:52 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/19 17:21:37 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/23 04:00:29 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	cnf_handler(t_sh *sh, t_cmd *cmd)
 	char	*s;
 	int		l;
 
-	l = ft_strlen(cmd->av[0]) + 20;
+	l = ft_strlen(cmd->av[0]) + 21;
 	s = malloc(l + 1);
 	if (!s)
 		return (-1);
@@ -64,10 +64,10 @@ char	*search_path(char *path, char *name)
 		if (!temp)
 			return (NULL);
 		if (!access(temp, F_OK))
-			return (temp + del_split((void ***)&dirs, -1));
+			return (temp/* + del_split((void ***)&dirs, -1)*/);
 		free(temp);
 	}
-	del_split((void ***)&dirs, -1);
+	/*del_split((void ***)&dirs, -1); */
 	return (NULL);
 }
 
@@ -83,7 +83,12 @@ int	cmd_proc(t_sh *sh, t_cmd *cmd)
 		if (!cmd_path)
 			return (cnf_handler(sh, cmd));
 	}
+	printf("EXECVE %s:\n", cmd_path);
 	execve(cmd_path, cmd->av, sh->envp);
+	printf("\tFAILED !\nAV:\n");
+	for (int i = 0; i < cmd->ac; i++)
+		printf("\t%s\n", cmd->av[i]);
+	printf("CAUSE: %s\n", strerror(errno));
 	return (-1);
 }
 
@@ -97,5 +102,6 @@ int	main_part2(t_sh *sh)
 	del_cmd(&sh->cmd);
 	if (pid < 0)
 		return (-1);
+	waitpid(pid, NULL, 0);
 	return (0);
 }
