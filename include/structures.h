@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 01:38:14 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/18 01:42:06 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/23 01:38:59 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,11 @@ typedef struct s_sh
 	t_cmd	*cmd;
 	int		xt_stat;
 }	t_sh;
+
+typedef struct s_split
+{
+	void	**data;
+	int		size;
+}	t_split;
 
 #endif

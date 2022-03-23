@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:24:59 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/19 21:25:59 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/23 01:39:19 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,22 +65,4 @@ void	*del_sh(t_sh **sh)
 	free(*sh);
 	*sh = NULL;
 	return (NULL);
-}
-
-int	del_split(void ***split, int size)
-{
-	int	i;
-
-	if (!split || !*split)
-		return (0);
-	i = -1;
-	while ((*split)[++i])
-	{
-		if (size > 0 && i == size)
-			break ;
-		free((*split)[i]);
-	}
-	free(*split);
-	*split = NULL;
-	return (0);
 }
