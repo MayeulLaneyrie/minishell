@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 21:27:09 by mlaneyri          #+#    #+#             */
-/*   Updated: 2020/11/19 22:48:49 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/23 02:41:54 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	ft_lstadd_front(t_list **alst, t_list *new)
 {
+	if (!new)
+		return (NULL);
 	new->next = *alst;
 	*alst = new;
+	return (NULL);
 }
