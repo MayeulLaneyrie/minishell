@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 01:47:35 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/23 02:26:02 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/23 16:20:53 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 /*
 **	new_split mallocates data to a void ** of size n.
-**	Size is initialized to 0, as the split yet to be filled with data.
+**	len is initialized to 0, as the split yet to be filled with data.
 */
 
 t_split	*new_split(int n);

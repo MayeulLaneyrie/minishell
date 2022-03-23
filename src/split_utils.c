@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 01:39:30 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/23 04:05:00 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/23 16:20:26 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ t_split	*new_split(int n)
 	i = -1;
 	while (++i < n + 1)
 		ret->data[i] = NULL;
-	ret->size = 0;
+	ret->size = n;
+	ret->len = 0;
 	return (ret);
 }
 
@@ -40,7 +41,7 @@ void	*del_split(t_split **split)
 	if (!split || !*split)
 		return (0);
 	i = -1;
-	while (++i < (*split)->size)
+	while (++i < (*split)->len)
 		free((*split)->data[i]);
 	free((*split)->data);
 	free(*split);
@@ -60,10 +61,10 @@ t_split	*list_to_split(t_list **lst)
 	ret = new_split(n);
 	if (!ret)
 		return (NULL);
-	while (ret->size < n)
+	while (ret->len < n)
 	{
-		(ret->data)[ret->size] = (*lst)->data;
-		ret->size++;
+		(ret->data)[ret->len] = (*lst)->data;
+		ret->len++;
 		cpy = *lst;
 		*lst = (*lst)->next;
 		free(cpy);
@@ -85,7 +86,7 @@ t_list	*split_to_list(t_split **split)
 
 	ret = NULL;
 	i = -1;
-	while (++i < (*split)->size)
+	while (++i < (*split)->len)
 	{
 		new = ft_lstnew((*split)->data);
 		if (!new)
