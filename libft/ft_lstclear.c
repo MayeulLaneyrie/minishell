@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 23:10:23 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/23 02:40:54 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/23 03:13:15 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	*ft_lstclear(t_list **lst, void (*del)(void *))
 	if (!*lst)
 		return (NULL);
 	ft_lstclearall(*lst, del);
-	ft_lstdelone(*lst);
+	ft_lstdelone(*lst, del);
 	free(*lst);
 	*lst = NULL;
 	return (NULL);

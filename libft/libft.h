@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 18:25:27 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/23 02:42:01 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/23 03:13:58 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void		*ft_lstdelone(t_list *lst, void (*del)(void *));
 
 void		*ft_lstclear(t_list **lst, void (*del)(void *));
 
-void		*ft_lstiter(t_list *lst, void (*f)(void *));
+void		ft_lstiter(t_list *lst, void (*f)(void *));
 
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 

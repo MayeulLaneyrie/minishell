@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 01:39:30 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/23 02:21:12 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/23 04:05:00 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,22 @@
 t_split	*new_split(int n)
 {
 	t_split	*ret;
+	int		i;
 
 	ret = malloc(sizeof(t_split));
 	if (!ret)
 		return (NULL);
-	ret->data = malloc((n + 1) * sizeof(void **));
+	ret->data = malloc((n + 1) * sizeof(void *));
 	if (!ret->data)
 	{
 		free(ret);
 		return (NULL);
 	}
+	i = -1;
+	while (++i < n + 1)
+		ret->data[i] = NULL;
 	ret->size = 0;
+	return (ret);
 }
 
 void	*del_split(t_split **split)
@@ -37,7 +42,7 @@ void	*del_split(t_split **split)
 	i = -1;
 	while (++i < (*split)->size)
 		free((*split)->data[i]);
-	free((*split)->data)
+	free((*split)->data);
 	free(*split);
 	*split = NULL;
 	return (0);
@@ -46,20 +51,22 @@ void	*del_split(t_split **split)
 t_split	*list_to_split(t_list **lst)
 {
 	int		n;
+	t_list	*cpy;
 	t_split	*ret;
 
 	if (!lst || !*lst)
 		return (NULL);
 	n = ft_lstsize(*lst);
-	ret = new_list(n);
+	ret = new_split(n);
 	if (!ret)
 		return (NULL);
 	while (ret->size < n)
 	{
-		ret->data[ret->size] = (*lst)->data;
+		(ret->data)[ret->size] = (*lst)->data;
 		ret->size++;
+		cpy = *lst;
 		*lst = (*lst)->next;
-		free((*lst)->prev);
+		free(cpy);
 	}
 	*lst = NULL;
 	return (ret);
