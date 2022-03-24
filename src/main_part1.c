@@ -12,37 +12,56 @@
 
 #include "../include/minishell.h"
 
+int	is_meta(char c)
+{
+	if (c == '\t' || c == '\n' || c == '\r' || c == '\v' || c == '\f'
+	|| c == ' ' || c == '|' || c == '&' || c == ';' || c == '(' || c == ')' 
+	|| c == '<' || c == '>')
+		return (1);
+	return (0);
+}
+
+int	word_len(char *rdline, int index)
+{
+	int		tmp;
+	bool	quoted;
+	bool	d_quoted;
+
+	tmp = index;
+	quoted = false;
+	d_quoted = false;
+
+	while (rdline[i])
+	{
+		if (rdline[index] != '"')
+			d_quoted = true;
+		if (rdline[index] != "'")
+			quoted = true;
+		while (is_meta(rdline[index]) == 0)
+			index++;
+	}
+	return (index - tmp);
+}
+
 int	fill_cmd(t_sh *sh, char *rdline)
 {
-	char	*tmp;
+	char	*word;
+	t_list	*list;
 	int		i;
-	int		j;
-	int		k;
 
-	tmp = (char *)malloc(sizeof(char) * (ft_strlen(rdline) + 1));
+	list = NULL;
 	i = 0;
-	j = 0;
-	k = 0;
 	while (rdline[i])
 	{
-		if (rdline[i] == '"')
-		{
-			tmp[i] = '\0';
-			break ;
-		}
-		tmp[i] = rdline[i];
-		i++;
+		while (is_meta(rdline[i]) == 1)
+			i++;
+		if (is_meta(rdline[i]) == 0)
+			word = ft_strlcpy(rdline + i, word_len(rdline, i));
+		i += word_len(rdline, i);
+		if (!ft_lstadd_back(&lst, ft_lstnew(word)))
+			return (ft_lstclear(&lst, &free));
 	}
-	sh->cmd->av = ft_split(tmp, ' ');
-	j = count_tab(sh->cmd->av);
-	while (rdline[i])
-	{
-		tmp[k++] = rdline[i++];
-		if (rdline[i] == '"')
-			break ;
-	}
-	tmp[k] = '\0';
-	
+
 	return (0);
 }
 

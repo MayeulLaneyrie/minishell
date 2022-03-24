@@ -31,6 +31,8 @@
 
 # include <signal.h>
 
+# include <stdbool.h>
+
 # include "../libft/libft.h"
 
 typedef struct s_cmd
