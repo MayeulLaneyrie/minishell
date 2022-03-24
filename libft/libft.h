@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 18:25:27 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/23 03:13:58 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/24 17:34:56 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define LIBFT_H
 
 # include <stdlib.h>
+
+# include "../include/structures.h"
+# include "../include/split_utils.h"
 
 /*
 **	libc functions
@@ -77,7 +80,7 @@ char		*ft_strjoin(char const *s1, char const *s2);
 
 char		*ft_strtrim(char const *s1, char const *set);
 
-char		**ft_split(char const *s, char c);
+t_split		*ft_split(char const *s, char c);
 
 char		*ft_itoa(int n);
 
@@ -94,13 +97,6 @@ void		ft_putnbr_fd(int n, int fd);
 /*
 **	Bonus functions
 */
-
-typedef struct s_list
-{
-	void			*data;
-	struct s_list	*next;
-	struct s_list	*prev;
-}	t_list;
 
 t_list		*ft_lstnew(void *data);
 
