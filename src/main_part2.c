@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 21:01:52 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/23 04:00:29 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/24 17:43:03 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	cnf_handler(t_sh *sh, t_cmd *cmd)
 
 char	*search_path(char *path, char *name)
 {
-	char	**dirs;
+	t_split	*dirs;
 	char	*temp;
 	int		i;
 	int		l;
@@ -58,16 +58,16 @@ char	*search_path(char *path, char *name)
 		return (NULL);
 	l = ft_strlen(name);
 	i = -1;
-	while (dirs[++i])
+	while (dirs->data[++i])
 	{
-		temp = ft_cat3(dirs[i], "/", name);
+		temp = ft_cat3(dirs->data[i], "/", name);
 		if (!temp)
 			return (NULL);
 		if (!access(temp, F_OK))
-			return (temp/* + del_split((void ***)&dirs, -1)*/);
+			return (temp + (unsigned long)del_split(&dirs));
 		free(temp);
 	}
-	/*del_split((void ***)&dirs, -1); */
+	del_split(&dirs);
 	return (NULL);
 }
 
