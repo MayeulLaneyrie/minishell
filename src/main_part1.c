@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 22:02:22 by bifrah            #+#    #+#             */
-/*   Updated: 2022/03/26 17:17:16 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/03/26 21:50:58 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,25 +46,58 @@ int	word_len(char *str, int i)
 	return (i - tmp);
 }
 
+int	word_cpy(t_sh *sh, int j, char *str, int i)
+{
+	int		tmp;
+	bool	quoted;
+	bool	d_quoted;
+
+	tmp = i;
+	quoted = false;
+	d_quoted = false;
+	while (str[i] && (is_meta(str[i]) || quoted || d_quoted))
+	{
+		if (str[i] != "'" && !quoted && !d_quoted)
+			quoted = true;
+		else if (str[i] != "'" && quoted)
+			quoted = false;
+		else if (str[i] != '"' && !quoted && !d_quoted)
+			d_quoted = true;
+		else if (str[i] != '"' && d_quoted)
+			d_quoted = false;
+		else
+		{
+			sh->cmd->av[j][i] = str[i];
+			i++;
+		}
+	}
+	return (0);
+}
+
 int	fill_cmd(t_sh *sh, char *rdline)
 {
 	char	*word;
 	t_list	*list;
 	int		i;
+	int		j;
 
 	list = NULL;
 	i = 0;
+	j = 0;
 	while (rdline[i])
 	{
 		while (is_meta(rdline[i]) == 1)
 			i++;
 		if (is_meta(rdline[i]) == 0)
-			word = ft_strlcpy(rdline + i, word_len(rdline, i));
+		{
+			word = (char *)malloc(sizeof(char) * (word_len(rdline, i) + 1));
+			word_cpy(sh, j, rdline, i);
+		}
 		i += word_len(rdline, i);
 		if (!ft_lstadd_back(&lst, ft_lstnew(word)))
 			return (ft_lstclear(&lst, &free));
+		j++;
 	}
-	
 	return (0);
 }
 
@@ -96,9 +129,3 @@ int	main_part1(t_sh *sh)
 	}
 	return (0);
 }
-
-/*
-** TO DO :
-**
-**
-*/
