@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   structures.h                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/18 01:38:14 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/24 17:38:19 by mlaneyri         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 /*
 **	structures.h is the dedicated place to define custom structures, expecially
 **	if they are going to be refered to in other header files.

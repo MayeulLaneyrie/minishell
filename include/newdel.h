@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   newdel.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/16 16:18:20 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/23 01:47:26 by mlaneyri         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 /*
 **	newdel.h holds the prototypes of all constructor and destructor functions.
 **	Don't hesitate to put inside of it all the constructors and destructors of
