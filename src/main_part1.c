@@ -6,41 +6,44 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 22:02:22 by bifrah            #+#    #+#             */
-/*   Updated: 2022/03/22 17:28:20 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/03/26 17:17:16 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	is_meta(char c)
+bool	is_meta(char c)
 {
 	if (c == '\t' || c == '\n' || c == '\r' || c == '\v' || c == '\f'
-	|| c == ' ' || c == '|' || c == '&' || c == ';' || c == '(' || c == ')' 
-	|| c == '<' || c == '>')
-		return (1);
-	return (0);
+		|| c == ' ' || c == '|' || c == '&' || c == ';' || c == '(' || c == ')'
+		|| c == '<' || c == '>')
+		return (true);
+	return (false);
 }
 
-int	word_len(char *rdline, int index)
+int	word_len(char *str, int i)
 {
 	int		tmp;
 	bool	quoted;
 	bool	d_quoted;
 
-	tmp = index;
+	tmp = i;
 	quoted = false;
 	d_quoted = false;
-
-	while (rdline[i])
+	while (str[i] && (is_meta(str[i]) || quoted || d_quoted))
 	{
-		if (rdline[index] != '"')
-			d_quoted = true;
-		if (rdline[index] != "'")
+		if (str[i] != "'" && !quoted && !d_quoted)
 			quoted = true;
-		while (is_meta(rdline[index]) == 0)
-			index++;
+		else if (str[i] != "'" && quoted)
+			quoted = false;
+		else if (str[i] != '"' && !quoted && !d_quoted)
+			d_quoted = true;
+		else if (str[i] != '"' && d_quoted)
+			d_quoted = false;
+		else
+			i++;
 	}
-	return (index - tmp);
+	return (i - tmp);
 }
 
 int	fill_cmd(t_sh *sh, char *rdline)
@@ -61,7 +64,7 @@ int	fill_cmd(t_sh *sh, char *rdline)
 		if (!ft_lstadd_back(&lst, ft_lstnew(word)))
 			return (ft_lstclear(&lst, &free));
 	}
-
+	
 	return (0);
 }
 
@@ -97,7 +100,5 @@ int	main_part1(t_sh *sh)
 /*
 ** TO DO :
 **
-**- faire une recuperation de ce qu'il y a dans les quote
-**- l'ajouter au av
-**-	recommencer jusqu'a \0
+**
 */
