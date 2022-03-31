@@ -54,21 +54,3 @@ void	*del_sh(t_sh **sh)
 	*sh = NULL;
 	return (NULL);
 }
-
-int		del_split(void ***split, int size)
-{
-	int	i;
-
-	if (!split || !*split)
-		return (0);
-	i = -1;
-	while ((*split)[++i])
-	{
-		if (size > 0 && i == size)
-			break ;
-		free((*split)[i]);
-	}
-	free(*split);
-	*split = NULL;
-	return (0);
-}

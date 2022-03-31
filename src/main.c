@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/15 19:38:16 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/19 17:30:56 by mlaneyri         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-=======
->>>>>>> dev_ben_j
 #include "../include/minishell.h"
 
 int	main(int ac, char **av, char **envp)
@@ -23,7 +8,6 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	printf("Welcome to minishell \"MarkI\"!\n");
-	return (0);//For now, minishell makes my computer crash >_<
 	sh = new_sh(envp);
 	if (!sh)
 		return (-1);

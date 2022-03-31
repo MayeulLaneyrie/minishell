@@ -64,8 +64,12 @@ int	word_cpy(t_sh *sh, int j, char *str, int i)
 
 int	fill_cmd(t_sh *sh, char *rdline)
 {
+<<<<<<< HEAD
 	char	*word;
 	t_list	*list;
+=======
+	char	*tmp;
+>>>>>>> a1c7f41d06fdacea233ab5d0dd683f00713e56e0
 	int		i;
 	int		j;
 
@@ -119,6 +123,19 @@ int	main_part1(t_sh *sh)
 		else
 			ret = fill_cmd(sh, rdline);
 	}
+<<<<<<< HEAD
 >>>>>>> dev_ben_j
 	return (0);
 }
+=======
+	return (0);
+}
+
+/*
+** TO DO :
+**
+**- faire une recuperation de ce qu'il y a dans les quote
+**- l'ajouter au av
+**-	recommencer jusqu'a \0
+*/
+>>>>>>> a1c7f41d06fdacea233ab5d0dd683f00713e56e0

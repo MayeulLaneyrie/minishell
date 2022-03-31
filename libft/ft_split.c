@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 14:16:52 by mlaneyri          #+#    #+#             */
-/*   Updated: 2020/12/31 00:08:27 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/25 01:34:38 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,17 @@ static int	ft_splitfill(char **ret, char const *s, char c)
 	return (-1);
 }
 
-char	**ft_split(char const *s, char c)
+t_split	*ft_split(char const *s, char c)
 {
-	char	**ret;
+	t_split	*ret;
 	int		size;
 
 	size = ft_splitsize(s, c);
-	ret = malloc(sizeof(char *) * (size + 1));
+	ret = new_split(size);
 	if (!ret)
 		return (NULL);
-	if (ft_splitfill(ret, s, c))
-	{
-		free(ret);
-		return (NULL);
-	}
-	ret[size] = 0;
+	if (ft_splitfill((char **)ret->data, s, c))
+		return (del_split(&ret));
+	ret->len = size;
 	return (ret);
 }
