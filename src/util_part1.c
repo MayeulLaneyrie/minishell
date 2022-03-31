@@ -19,7 +19,7 @@ int	count_quote(char *rdline)
 	count = 0;
 	while (rdline[i])
 	{
-		if (rdline[i] == "'")
+		if (rdline[i] == '\'')
 			count++;
 		i++;
 	}
@@ -30,8 +30,8 @@ int	count_quote(char *rdline)
 
 int	find_quote(char *rdline)
 {
-	if (ft_strnstr(rdline, "'", 1) == NULL
-		&& ft_strnstr(rdline, '"', 1) == NULL)
+	if (ft_strnstr(rdline, "\'", 1) == NULL
+		&& ft_strnstr(rdline, "\"", 1) == NULL)
 		return (0);
 	else
 		return (1);

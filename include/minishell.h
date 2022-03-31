@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 19:39:41 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/22 16:19:59 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/03/31 19:07:13 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,6 @@ typedef struct s_sh
 */
 
 int	main_part1(t_sh *sh);
-
-/*
-**	Utils main_part1
-*/
 
 int	count_quote(char *rdline);
 int	find_quote(char *rdline);

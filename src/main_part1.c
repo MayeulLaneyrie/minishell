@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main_part1.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/17 22:02:22 by bifrah            #+#    #+#             */
-/*   Updated: 2022/03/26 21:50:58 by bifrah           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../include/minishell.h"
 
 bool	is_meta(char c)
@@ -32,9 +20,9 @@ int	word_len(char *str, int i)
 	d_quoted = false;
 	while (str[i] && (is_meta(str[i]) || quoted || d_quoted))
 	{
-		if (str[i] != "'" && !quoted && !d_quoted)
+		if (str[i] != '\'' && !quoted && !d_quoted)
 			quoted = true;
-		else if (str[i] != "'" && quoted)
+		else if (str[i] != '\'' && quoted)
 			quoted = false;
 		else if (str[i] != '"' && !quoted && !d_quoted)
 			d_quoted = true;
@@ -57,9 +45,9 @@ int	word_cpy(t_sh *sh, int j, char *str, int i)
 	d_quoted = false;
 	while (str[i] && (is_meta(str[i]) || quoted || d_quoted))
 	{
-		if (str[i] != "'" && !quoted && !d_quoted)
+		if (str[i] != '\'' && !quoted && !d_quoted)
 			quoted = true;
-		else if (str[i] != "'" && quoted)
+		else if (str[i] != '\'' && quoted)
 			quoted = false;
 		else if (str[i] != '"' && !quoted && !d_quoted)
 			d_quoted = true;
@@ -94,8 +82,7 @@ int	fill_cmd(t_sh *sh, char *rdline)
 			word_cpy(sh, j, rdline, i);
 		}
 		i += word_len(rdline, i);
-		if (!ft_lstadd_back(&lst, ft_lstnew(word)))
-			return (ft_lstclear(&lst, &free));
+		ft_lstadd_back(&list, ft_lstnew(word));
 		j++;
 	}
 	return (0);
@@ -104,16 +91,18 @@ int	fill_cmd(t_sh *sh, char *rdline)
 int	main_part1(t_sh *sh)
 {
 	char	*rdline;
+	int		ret;
 
+	ret = 0;
 	rdline = readline("Minishell MkI");
 	if (rdline == NULL)
 		return (NULL_RDLINE);
 	if (count_quote(rdline) == -1)
 		return (WRONG_NB_QUOTE);
-	else if (rdline == "")
+	else if (rdline[0] == '\0')
 	{
 		sh->cmd = new_cmd();
-		sh->cmd->av = "";
+		sh->cmd->av[0][0] = '\0';
 		return (BLANK_RDLINE);
 	}
 	else
@@ -125,7 +114,7 @@ int	main_part1(t_sh *sh)
 			sh->cmd->ac = ac_of_av(sh->cmd->av);
 		}
 		else
-			fill_cmd(sh, rdline);
+			ret = fill_cmd(sh, rdline);
 	}
 	return (0);
 }
