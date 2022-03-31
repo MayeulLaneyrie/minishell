@@ -111,7 +111,7 @@ int	main_part1(t_sh *sh)
 		sh->cmd = new_cmd();
 		if (find_quote(rdline) == 0)
 		{
-			sh->cmd->av = ft_split(rdline, ' ');
+			sh->cmd->av = ft_split_b(rdline, ' ');
 			sh->cmd->ac = ac_of_av(sh->cmd->av);
 		}
 		else

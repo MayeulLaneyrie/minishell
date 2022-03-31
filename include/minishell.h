@@ -4,6 +4,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <errno.h>
 
 # include <string.h>
 
@@ -55,13 +56,19 @@
 **	is required.
 */
 
-int	main_part1(t_sh *sh);
+int		main_part1(t_sh *sh);
 
-int	count_quote(char *rdline);
-int	find_quote(char *rdline);
-int	ac_of_av(char **av);
+int		fill_cmd(t_sh *sh, char *rdline);
+int		word_cpy(t_sh *sh, int j, char *str, int i);
+int		word_len(char *str, int i);
+bool	is_meta(char c);
 
-int	main_part2(t_sh *sh);
+int		count_quote(char *rdline);
+int		find_quote(char *rdline);
+int		ac_of_av(char **av);
+char	**ft_split_b(char const *s, char c);
+
+int		main_part2(t_sh *sh);
 
 # define NULL_RDLINE	1
 # define WRONG_NB_QUOTE	2
