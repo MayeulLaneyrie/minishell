@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 19:39:41 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/18 03:43:20 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/03/31 19:41:51 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 /*
 **	Just a regular libft, with doubly chained lists.
 */
+# include <stdbool.h>
+
 # include "../libft/libft.h"
 
 /*
@@ -48,6 +50,7 @@
 **	your own structures. All update to a structure definition should result in
 **	an update of its constructor and destructor.
 */
+
 # include "./newdel.h"
 
 /*
@@ -63,8 +66,17 @@
 **	When returning, cmd should be correctly initialized, unless exiting shell
 **	is required.
 */
+
 int	main_part1(t_sh *sh);
 
+int	count_quote(char *rdline);
+int	find_quote(char *rdline);
+int	ac_of_av(char **av);
+
 int	main_part2(t_sh *sh);
+
+# define NULL_RDLINE	1
+# define WRONG_NB_QUOTE	2
+# define BLANK_RDLINE	3
 
 #endif
