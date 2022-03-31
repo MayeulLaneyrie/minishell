@@ -2,7 +2,7 @@ SRCS		=	src/main.c \
 				src/newdel_cmd_sh.c \
 				src/main_part1.c \
 				src/main_part2.c \
-				src/env.c
+				src/env.c \
 				src/util_part1.c
 
 OBJS		= ${SRCS:.c=.o}
