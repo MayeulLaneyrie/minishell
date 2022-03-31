@@ -1,12 +1,9 @@
 SRCS		=	src/main.c \
 				src/newdel_cmd_sh.c \
 				src/main_part1.c \
-<<<<<<< HEAD
 				src/main_part2.c \
 				src/env.c
-=======
 				src/util_part1.c
->>>>>>> dev_ben_j
 
 OBJS		= ${SRCS:.c=.o}
 
