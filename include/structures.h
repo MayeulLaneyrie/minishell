@@ -1,6 +1,6 @@
 /*
-**	structures.h is the dedicated place to define custom structures, expecially
-**	if they are going to be refered to in other header files.
+**	structures.h est le lieu dedié pour définir des structures custom,
+**	en particulier si d'autres fichiers .h y font référence
 */
 
 #ifndef STRUCTURES_H
@@ -14,9 +14,9 @@ typedef struct s_cmd
 }	t_cmd;
 
 /*
-**	cmd : a parsed simple command
-**	xt_stat : The exit status of the last executed job. xt_stat should be the
-**	return value of main().
+**	cmd : une commande simple parsée.
+**	xt_stat : Le statut de sortie de la dernière tache exécutée. xt_stat devrait
+**		être la valeur de retour de main().
 */
 typedef struct s_sh
 {
@@ -25,11 +25,20 @@ typedef struct s_sh
 	int		xt_stat;
 }	t_sh;
 
+/*
+**	data : un void** pouvant pointer vers n'importe quel type de données.
+**	size : la capacité maximale du split.
+**	len : le nombre de pointeur réellement stockés.
+**	
+**	Toute fonction modifiant un t_split doit garantir que len ne sera jamais
+**	supérieur à size. On pourra éventuellement remplacer data pour stocker plus
+**	de données.
+*/
 typedef struct s_split
 {
 	void	**data;
-	int		len;
 	int		size;
+	int		len;
 }	t_split;
 
 typedef struct s_list

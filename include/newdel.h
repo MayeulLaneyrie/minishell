@@ -1,8 +1,8 @@
 /*
-**	newdel.h holds the prototypes of all constructor and destructor functions.
-**	Don't hesitate to put inside of it all the constructors and destructors of
-**	your own structures. All update to a structure definition should result in
-**	an update of its constructor and destructor.
+**	newdel.h contient les prototypes de tous les constructeurs et destructeurs.
+**	Ne pas hésiter a y rajouter les constructeurs et destructeurs de ses propres
+**	structures. Chaque modification apportée a la définition d'une structure
+**	devra donner lieu a une mise a jour de son constructeur et destructeur.
 */
 
 #ifndef NEWDEL_H

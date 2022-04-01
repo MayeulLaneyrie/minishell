@@ -22,36 +22,36 @@
 # include <signal.h>
 
 /*
-**	Just a regular libft, with doubly chained lists.
+**	Juste une libft normale, avec des chaînes doublement chainées.
 */
 # include "../libft/libft.h"
 
 /*
-**	structures.h is the dedicated place to define custom structures, expecially
-**	if they are going to be refered to in other header files.
+**	structures.h est le lieu dedié pour définir des structures custom,
+**	en particulier si d'autres fichiers .h y font référence
 */
 # include "./structures.h"
 
 /*
-**	newdel.h holds the prototypes of all constructor and destructor functions.
-**	Don't hesitate to put inside of it all the constructors and destructors of
-**	your own structures. All update to a structure definition should result in
-**	an update of its constructor and destructor.
+**	newdel.h contient les prototypes de tous les constructeurs et destructeurs.
+**	Ne pas hésiter a y rajouter les constructeurs et destructeurs de ses propres
+**	structures. Chaque modification apportée a la définition d'une structure
+**	devra donner lieu a une mise a jour de son constructeur et destructeur.
 */
 # include "./newdel.h"
 
 /*
-**	env.h holds the definition of environment manipulation functions.
+**	env.h contient la définition de fonctions de gestion de l'environnement.
 */
 # include "./env.h"
 
 /*
-**	First steps of shell operations : reading a line, lexing and parsing it.
-**	Should return 0 if a command line has been correctly parsed, and any other
-**	value to indicate that minishell should exit.
-**	When called, cmd member of sh won't have been initialized yet.
-**	When returning, cmd should be correctly initialized, unless exiting shell
-**	is required.
+**	Premières étapes du fonctionnement du shell :  lire une ligne, la découper
+**	et la parser. Doit renvoyer 0 si une ligne de commande a été correctement
+**	parsée, et n'importe quelle autre valeur pour indiquer que minishell doit
+**	s'arrêter.
+**	A l'appel, sh->cmd n'aura pas encore été initialisé. Au retour, cmd devra
+**	avoir été correctement initialisé, a moins qu'il faille quitter le shell.
 */
 
 int		main_part1(t_sh *sh);

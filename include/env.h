@@ -2,10 +2,11 @@
 # define ENV_H
 
 /*
-**	This one is pretty self explanatory. Please note that the return value is
-**	not copied. It means that you don't have to free it, but also that you may
-**	want to copy it yourself for long-term use, as subsequent calls to set_var
-**	and unset_var may change the pointed data.
+**	Celle-ci est assez explicite. Important de noter que les données renvoyées
+**	ne sont pas copiées, ce qui signifie qu'on n'a pas à les free(), mais aussi
+**	qu'on pourrait vouloir les copier soi-même pour un usage sur le long terme,
+**	car des appels ultérieurs à set_var() et unset_var() pourraient modifier les
+**	données pointées.
 */
 char	*get_var(char **envp, char *name);
 
