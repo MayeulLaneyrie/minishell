@@ -39,12 +39,12 @@ char	*search_path(char *path, char *name)
 	t_split	*dirs;
 	char	*temp;
 	int		i;
-	int		l;
+	// int		l;
 
 	dirs = ft_split(path, ':');
 	if (!dirs)
 		return (NULL);
-	l = ft_strlen(name);
+	// l = ft_strlen(name);
 	i = -1;
 	while (dirs->data[++i])
 	{

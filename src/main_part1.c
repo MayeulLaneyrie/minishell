@@ -36,11 +36,9 @@ int	word_len(char *str, int i)
 
 int	word_cpy(t_sh *sh, int j, char *str, int i)
 {
-	int		tmp;
 	bool	quoted;
 	bool	d_quoted;
 
-	tmp = i;
 	quoted = false;
 	d_quoted = false;
 	while (str[i] && (is_meta(str[i]) || quoted || d_quoted))
@@ -79,6 +77,8 @@ int	fill_cmd(t_sh *sh, char *rdline)
 		if (is_meta(rdline[i]) == 0)
 		{
 			word = (char *)malloc(sizeof(char) * (word_len(rdline, i) + 1));
+			if (!word)
+				return (1);
 			word_cpy(sh, j, rdline, i);
 		}
 		i += word_len(rdline, i);
@@ -115,7 +115,11 @@ int	main_part1(t_sh *sh)
 			sh->cmd->ac = ac_of_av(sh->cmd->av);
 		}
 		else
+		{
 			ret = fill_cmd(sh, rdline);
+			if (ret != 0)
+				return (1);
+		}
 	}
 	return (0);
 }

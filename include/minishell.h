@@ -2,14 +2,15 @@
 # define MINISHELL_H
 
 # include <stdlib.h>
-# include <stdio.h>
 # include <unistd.h>
 # include <errno.h>
+# include <stdbool.h>
 
-# include <string.h>
-
+# include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+# include <string.h>
 
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -23,8 +24,6 @@
 /*
 **	Just a regular libft, with doubly chained lists.
 */
-# include <stdbool.h>
-
 # include "../libft/libft.h"
 
 /*
@@ -39,7 +38,6 @@
 **	your own structures. All update to a structure definition should result in
 **	an update of its constructor and destructor.
 */
-
 # include "./newdel.h"
 
 /*
