@@ -9,7 +9,7 @@ char	*ft_cat3(char *s1, char *s2, char *s3)
 	ret = malloc(size);
 	if (!ret)
 		return (NULL);
-	ret[0] = 0;
+	*ret = 0;
 	ft_strlcat(ret, s1, size);
 	ft_strlcat(ret, s2, size);
 	ft_strlcat(ret, s3, size);
@@ -30,8 +30,8 @@ int	cnf_handler(t_sh *sh, t_cmd *cmd)
 	ft_strlcat(s, ": command not found\n", l);
 	write(2, s, l);
 	free(s);
-	sh->xt_stat = 128;
-	return (-1);
+	sh->xt_stat = 127;
+	return (0);
 }
 
 char	*search_path(char *path, char *name)
@@ -39,12 +39,12 @@ char	*search_path(char *path, char *name)
 	t_split	*dirs;
 	char	*temp;
 	int		i;
-	// int		l;
+	int		l;
 
 	dirs = ft_split(path, ':');
 	if (!dirs)
 		return (NULL);
-	// l = ft_strlen(name);
+	l = ft_strlen(name);
 	i = -1;
 	while (dirs->data[++i])
 	{
@@ -69,27 +69,26 @@ int	cmd_proc(t_sh *sh, t_cmd *cmd)
 		//TODO: search builtin
 		cmd_path = search_path(get_var(sh->envp, "PATH"), cmd_path);
 		if (!cmd_path)
-			return (cnf_handler(sh, cmd));
+			return (cnf_handler(sh, cmd) + 1);
 	}
-	printf("EXECVE %s:\n", cmd_path);
+	cmd->pid = fork();
+	if (cmd->pid)
+		return (0);
 	execve(cmd_path, cmd->av, sh->envp);
-	printf("\tFAILED !\nAV:\n");
-	for (int i = 0; i < cmd->ac; i++)
-		printf("\t%s\n", cmd->av[i]);
-	printf("CAUSE: %s\n", strerror(errno));
-	return (-1);
+	return (1);
 }
 
 int	main_part2(t_sh *sh)
 {
-	int		pid;
+	int	stat;
 
-	pid = fork();
-	if (!pid)
-		return (cmd_proc(sh, sh->cmd));
-	del_cmd(&sh->cmd);
-	if (pid < 0)
+	stat = cmd_proc(sh, sh->cmd);
+	if (stat)
+		return (stat < 0);
+	if (sh->cmd->pid < 0)
 		return (-1);
-	waitpid(pid, NULL, 0);
+	waitpid(sh->cmd->pid, &stat, 0);
+	del_cmd(&sh->cmd);
+	sh->xt_stat = WEXITSTATUS(stat);
 	return (0);
 }

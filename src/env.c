@@ -12,9 +12,7 @@ char	*get_var(char **envp, char *name)
 	while (envp[++i])
 		if (!ft_strncmp(envp[i], name, l))
 			break ;
-	printf("SEARCH IS OVER : %s\n", envp[i]);
 	if (!envp[i])
 		return (envp[i]);
-	printf("I SHOULD HAVE RETURNED NULL\n");
 	return (envp[i] + l + 1);
 }
