@@ -31,9 +31,8 @@ SRCS		=	ft_substr.c \
 				ft_strnstr.c \
 				ft_atoi.c \
 				ft_calloc.c \
-				ft_strdup.c
-
-BONUS_SRCS	=	ft_lstnew.c \
+				ft_strdup.c \
+				ft_lstnew.c \
 				ft_lstadd_front.c \
 				ft_lstsize.c \
 				ft_lstlast.c \
@@ -44,7 +43,6 @@ BONUS_SRCS	=	ft_lstnew.c \
 				ft_lstmap.c
 
 OBJS		= ${SRCS:.c=.o}
-BONUS_OBJS	= ${BONUS_SRCS:.c=.o}
 
 NAME		= libft.a
 CC			= clang -Wall -Wextra -Werror
@@ -69,9 +67,5 @@ fclean:		clean
 			${RM} ${NAME}
 
 re:			fclean all
-
-bonus:		${OBJS} ${BONUS_OBJS}
-			ar rcs ${NAME} ${OBJS} ${BONUS_OBJS}
-			ranlib ${NAME}
 
 .PHONY:		all clean fclean re bonus

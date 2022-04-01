@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlaneyri <mlaneyri@student42.fr>           +#+  +:+       +#+        */
+/*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 18:25:27 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/24 17:34:56 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/04/01 13:13:46 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,6 @@ void		ft_putstr_fd(char *s, int fd);
 void		ft_putendl_fd(char *s, int fd);
 
 void		ft_putnbr_fd(int n, int fd);
-
-/*
-**	Bonus functions
-*/
 
 t_list		*ft_lstnew(void *data);
 
