@@ -95,7 +95,7 @@ int	main_part1(t_sh *sh)
 
 	(void)sh;
 	ret = 0;
-	rdline = readline("Minishell MkI");
+	rdline = readline("[Minishell MkI] ");
 	if (rdline == NULL)
 		return (NULL_RDLINE);
 	if (count_quote(rdline) == -1)
