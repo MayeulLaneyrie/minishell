@@ -66,7 +66,29 @@ int		find_quote(char *rdline);
 int		ac_of_av(char **av);
 char	**ft_split_b(char const *s, char c);
 
+/*
+**	Étapes suivantes du fonctionnement du shell : fork(), recherche d'une
+**	builtin ou du chemin du binaire à exécuter, execve() dans le process fils
+**	et waitpid() dans le process père.
+*/
+
 int		main_part2(t_sh *sh);
+
+/*
+**	Valeur de retour de cmd_proc() :
+**		- !=0 : Process fils sans execve (command not found, execve fail ou
+**			builtin). Ne pas attendre de process fils et return directement,
+			le shell doit exit. L'exit_status aura été fixé à l'erreur.
+**		- 0 : Process père, attendre le statut d'exit.
+*/
+int		cmd_proc(t_sh *sh, t_cmd *cmd);
+
+/*
+**	Dans builtin_central.c :
+*/
+
+int		builtin_search(char *s);
+int		builtin_exec(t_sh *sh, t_cmd *cmd);
 
 # define NULL_RDLINE	1
 # define WRONG_NB_QUOTE	2

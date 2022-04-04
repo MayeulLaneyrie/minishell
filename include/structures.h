@@ -9,6 +9,7 @@
 typedef struct s_cmd
 {
 	int		pid;
+	int		builtin_id;
 	int		ac;
 	char	**av;
 }	t_cmd;
@@ -24,6 +25,8 @@ typedef struct s_sh
 	t_cmd	*cmd;
 	int		xt_stat;
 }	t_sh;
+
+typedef int	(*t_bi)(t_sh *sh, t_cmd *cmd);
 
 /*
 **	data : un void** pouvant pointer vers n'importe quel type de données.
