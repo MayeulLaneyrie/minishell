@@ -4,8 +4,9 @@ int	bi_exit(t_sh *sh, t_cmd *cmd)
 {
 	(void)sh;
 	(void)cmd;
-	printf("YOU CALLED EXIT\n");
-	sh->xt_stat = 0;
+	if (cmd->ac < 2)
+		return (-1);
+	sh->xt_stat = ft_atoi(cmd->av[1]);
 	return (-1);
 }
 

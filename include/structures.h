@@ -21,9 +21,9 @@ typedef struct s_cmd
 */
 typedef struct s_sh
 {
-	char	**envp;
-	t_cmd	*cmd;
-	int		xt_stat;
+	char			**envp;
+	t_cmd			*cmd;
+	unsigned char	xt_stat;
 }	t_sh;
 
 typedef int	(*t_bi)(t_sh *sh, t_cmd *cmd);
