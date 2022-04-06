@@ -64,7 +64,9 @@ int	cmd_proc(t_sh *sh, t_cmd *cmd)
 	cmd_path = cmd->av[0];
 	if (!ft_strchr(cmd_path, '/'))
 	{
-		//TODO: search builtin
+		cmd->builtin_id = builtin_search(cmd_path);
+		if (cmd->builtin_id >= 0)
+			return (builtin_exec(sh, cmd));
 		cmd_path = search_path(get_var(sh->envp, "PATH"), cmd_path);
 		if (!cmd_path)
 			return (cnf_handler(sh, cmd) + 1);
