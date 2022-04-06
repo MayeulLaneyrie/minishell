@@ -56,13 +56,13 @@
 
 int		main_part1(t_sh *sh);
 
-int		fill_cmd(t_sh *sh, char *rdline);
-int		word_cpy(t_sh *sh, int j, char *str, int i);
-int		word_len(char *str, int i);
+int		fill_cmd(t_sh *sh, t_rl *rl);
+void	word_cpy(t_sh *sh, t_rl *rl, int i, int j);
+int		word_len(t_rl *rl, int i);
 bool	is_meta(char c);
 
 int		count_quote(char *rdline);
-int		find_quote(char *rdline);
+bool	find_d_quote(char *rdline);
 int		ac_of_av(char **av);
 char	**ft_split_b(char const *s, char c);
 

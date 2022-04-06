@@ -6,6 +6,8 @@
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
+# include <stdbool.h>
+
 typedef struct s_cmd
 {
 	int		pid;
@@ -41,11 +43,27 @@ typedef struct s_split
 	int		len;
 }	t_split;
 
+/*
+**	s_list : liste doublement chainee contenant une data
+**	 ainsi que l'adresse de la donnee precedante et suivante.
+*/
 typedef struct s_list
 {
 	void			*data;
 	struct s_list	*next;
 	struct s_list	*prev;
 }	t_list;
+
+/*
+**	s_rl est une struc contennant le retour de readline dans rdline.
+**	Les 2 booleens servent a parser rdline dans les fonctions suivante.
+*/
+typedef struct s_rl
+{
+	char	*rdline;
+	bool	d_quote;
+	bool	quote;
+}	t_rl;
+
 
 #endif

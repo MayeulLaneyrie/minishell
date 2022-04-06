@@ -28,13 +28,27 @@ int	count_quote(char *rdline)
 	return (0);
 }
 
-int	find_quote(char *rdline)
+bool	find_d_quote(char *rdline)
 {
-	if (ft_strnstr(rdline, "\'", 1) == NULL
-		&& ft_strnstr(rdline, "\"", 1) == NULL)
-		return (0);
-	else
-		return (1);
+	int	i;
+
+	i = 0;
+	while (rdline[i])
+	{
+		if (rdline[i] == '\"')
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
+bool	is_meta(char c)
+{
+	if (c == '\t' || c == '\n' || c == '\r' || c == '\v' || c == '\f'
+		|| c == ' ' || c == '|' || c == '&' || c == ';' || c == '(' || c == ')'
+		|| c == '<' || c == '>')
+		return (true);
+	return (false);
 }
 
 int	ac_of_av(char **av)
