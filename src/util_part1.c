@@ -60,3 +60,26 @@ int	ac_of_av(char **av)
 		i++;
 	return (i);
 }
+
+char	**realloc_split(t_sh *sh)
+{
+	char	**tmp;
+	int		i;
+
+	i = 0;
+	tmp = sh->cmd->av;
+	free_split_b(sh->cmd->av);
+	sh->cmd->av = (char **)malloc(sizeof(char *) * (ac_of_av(tmp) + 1));
+	if (!sh->cmd->av)
+		return (NULL);
+	while (tmp[i])
+	{
+		sh->cmd->av[i] = ft_strdup(tmp[i]);
+		i++;
+	}
+	sh->cmd->av[i] = NULL;
+	sh->cmd->av[i + 1] = '\0';
+	sh->cmd->ac++;
+	free_split_b(tmp);
+	return (sh->cmd->av);
+}

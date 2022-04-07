@@ -11,6 +11,7 @@ int	main(int ac, char **av, char **envp)
 	sh = new_sh(envp);
 	if (!sh)
 		return (-1);
+	// printf("adress cmd->av : %p\n", sh->cmd->av[0]);
 	while (!main_part1(sh))
 	{
 		if (main_part2(sh))

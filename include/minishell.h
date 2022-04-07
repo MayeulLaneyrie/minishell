@@ -65,6 +65,8 @@ int		count_quote(char *rdline);
 bool	find_d_quote(char *rdline);
 int		ac_of_av(char **av);
 char	**ft_split_b(char const *s, char c);
+char	**free_split_b(char **array);
+char	**realloc_split(t_sh *sh);
 
 /*
 **	Étapes suivantes du fonctionnement du shell : fork(), recherche d'une

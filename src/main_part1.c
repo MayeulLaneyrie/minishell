@@ -143,7 +143,7 @@ int	fill_cmd(t_sh *sh, t_rl *rl)
 		word = (char *)malloc(sizeof(char) * (word_len(rl, i) + 1));
 		if (!word)
 			return (1);
-		//realloc de sh->cmd->av
+		sh->cmd->av = realloc_split(sh);
 		word_cpy(sh, rl, i, j);
 		printf("len : %d\n", word_len(rl, i));
 		i += word_len(rl, i);
