@@ -128,12 +128,9 @@ void	clean_d_quote(t_sh *sh)
 int	fill_cmd(t_sh *sh, t_rl *rl)
 {
 	char	*word;
-	t_list	*list;
 	int		i;
 	int		j;
 
-	write(1, "i'm in fill_cmd\n", 16);
-	list = NULL;
 	i = 0;
 	j = 0;
 	while (rl->rdline[i])
@@ -144,6 +141,7 @@ int	fill_cmd(t_sh *sh, t_rl *rl)
 		if (!word)
 			return (1);
 		sh->cmd->av = realloc_split(sh);
+		write(1, "i'm in fill_cmd\n", 16);
 		word_cpy(sh, rl, i, j);
 		printf("len : %d\n", word_len(rl, i));
 		i += word_len(rl, i);
@@ -174,6 +172,7 @@ int	main_part1(t_sh *sh)
 	else
 	{
 		sh->cmd = new_cmd();
+		printf("adress cmd : %p\n", sh->cmd);
 		if (find_d_quote(rl.rdline) == false)
 		{
 			sh->cmd->av = ft_split_b(rl.rdline, ' ');
