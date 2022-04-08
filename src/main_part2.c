@@ -1,21 +1,5 @@
 #include "../include/minishell.h"
 
-char	*ft_cat3(char *s1, char *s2, char *s3)
-{
-	char	*ret;
-	int		size;
-
-	size = ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3) + 1;
-	ret = malloc(size);
-	if (!ret)
-		return (NULL);
-	*ret = 0;
-	ft_strlcat(ret, s1, size);
-	ft_strlcat(ret, s2, size);
-	ft_strlcat(ret, s3, size);
-	return (ret);
-}
-
 int	cnf_handler(t_sh *sh, t_cmd *cmd)
 {
 	char	*s;

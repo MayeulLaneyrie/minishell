@@ -1,11 +1,26 @@
 #include "../include/minishell.h"
 
+int	exit_arg_checker(char *s)
+{
+	while (ft_strchr("\t \n", *s))
+		s++;
+	if (*s == '+' || *s == '-')
+		s++;
+	if (!ft_isdigit(*s))
+		return (-1);
+	while (ft_isdigit(*s))
+		s++;
+	while (ft_strchr("\t \n", *s))
+		s++;
+	return (*s);
+}
+
 int	bi_exit(t_sh *sh, t_cmd *cmd)
 {
-	(void)sh;
-	(void)cmd;
+	write(2, "exit\n", 5);
 	if (cmd->ac < 2)
 		return (-1);
+
 	sh->xt_stat = ft_atoi(cmd->av[1]);
 	return (-1);
 }
