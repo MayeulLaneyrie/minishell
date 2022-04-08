@@ -23,6 +23,7 @@ typedef struct s_cmd
 */
 typedef struct s_sh
 {
+	char			*exec_name;
 	char			**envp;
 	t_cmd			*cmd;
 	unsigned char	xt_stat;

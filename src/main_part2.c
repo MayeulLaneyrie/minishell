@@ -1,21 +1,5 @@
 #include "../include/minishell.h"
 
-char	*ft_cat3(char *s1, char *s2, char *s3)
-{
-	char	*ret;
-	int		size;
-
-	size = ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3) + 1;
-	ret = malloc(size);
-	if (!ret)
-		return (NULL);
-	*ret = 0;
-	ft_strlcat(ret, s1, size);
-	ft_strlcat(ret, s2, size);
-	ft_strlcat(ret, s3, size);
-	return (ret);
-}
-
 int	cnf_handler(t_sh *sh, t_cmd *cmd)
 {
 	char	*s;
@@ -31,6 +15,18 @@ int	cnf_handler(t_sh *sh, t_cmd *cmd)
 	write(2, s, l);
 	free(s);
 	sh->xt_stat = 127;
+	return (0);
+}
+
+int	excvefail_handler(char *path, t_sh *sh)
+{
+	char *prefix;
+
+	prefix = ft_cat3(sh->exec_name, ": ", path);
+	if (!prefix)
+		return (0);
+	perror(prefix);
+	free(prefix);
 	return (0);
 }
 
@@ -75,7 +71,10 @@ int	cmd_proc(t_sh *sh, t_cmd *cmd)
 	if (cmd->pid)
 		return (0);
 	execve(cmd_path, cmd->av, sh->envp);
-	return (1);
+	excvefail_handler(cmd_path, sh);
+	if (cmd_path != cmd->av[0])
+		free(cmd_path);
+	return (-1);
 }
 
 int	main_part2(t_sh *sh)
