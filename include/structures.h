@@ -69,5 +69,4 @@ typedef struct s_rl
 	bool	quote;
 }	t_rl;
 
-
 #endif

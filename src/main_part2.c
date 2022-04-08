@@ -20,7 +20,7 @@ int	cnf_handler(t_sh *sh, t_cmd *cmd)
 
 int	excvefail_handler(char *path, t_sh *sh)
 {
-	char *prefix;
+	char	*prefix;
 
 	prefix = ft_cat3(sh->exec_name, ": ", path);
 	if (!prefix)
