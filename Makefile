@@ -6,7 +6,8 @@ SRCS =	src/main.c \
 		src/util_part1.c \
 		src/ft_split_b.c \
 		src/split_utils.c \
-		src/builtin_central.c
+		src/builtin_central.c \
+		src/display_utils.c
 
 OBJS		= ${SRCS:.c=.o}
 

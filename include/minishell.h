@@ -76,9 +76,8 @@ int		main_part2(t_sh *sh);
 
 /*
 **	Valeur de retour de cmd_proc() :
-**		- !=0 : Process fils sans execve (command not found, execve fail ou
-**			builtin). Ne pas attendre de process fils et return directement,
-			le shell doit exit. L'exit_status aura été fixé à l'erreur.
+**		- <0 : Le shell doit exit (exit, erreur fatale ou execve fail)
+**		- >0 : Pas d'exit, mais pas de process fils à attendre (builtin).
 **		- 0 : Process père, attendre le statut d'exit.
 */
 int		cmd_proc(t_sh *sh, t_cmd *cmd);
@@ -95,7 +94,7 @@ int		builtin_exec(t_sh *sh, t_cmd *cmd);
 */
 
 char	*ft_cat3(char *s1, char *s2, char *s3);
-int		ft_error4(char *s1, char *s2, char *s3, char *s4);
+int		ft_err4(char *s1, char *s2, char *s3, char *s4);
 
 # define NULL_RDLINE	1
 # define WRONG_NB_QUOTE	2

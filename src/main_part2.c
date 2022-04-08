@@ -18,6 +18,18 @@ int	cnf_handler(t_sh *sh, t_cmd *cmd)
 	return (0);
 }
 
+int	excvefail_handler(char *path, t_sh *sh)
+{
+	char *prefix;
+
+	prefix = ft_cat3(sh->exec_name, ": ", path);
+	if (!prefix)
+		return (0);
+	perror(prefix);
+	free(prefix);
+	return (0);
+}
+
 char	*search_path(char *path, char *name)
 {
 	t_split	*dirs;
@@ -59,7 +71,10 @@ int	cmd_proc(t_sh *sh, t_cmd *cmd)
 	if (cmd->pid)
 		return (0);
 	execve(cmd_path, cmd->av, sh->envp);
-	return (1);
+	excvefail_handler(cmd_path, sh);
+	if (cmd_path != cmd->av[0])
+		free(cmd_path);
+	return (-1);
 }
 
 int	main_part2(t_sh *sh)

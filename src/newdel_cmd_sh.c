@@ -32,15 +32,17 @@ void	*del_cmd(t_cmd **cmd)
 	return (NULL);
 }
 
-t_sh	*new_sh(char **envp)
+t_sh	*new_sh(int ac, char **av, char **envp)
 {
 	t_sh	*ret;
 
+	(void)ac;
 	if (!envp)
 		return (NULL);
 	ret = malloc(sizeof(t_sh));
 	if (!ret)
 		return (NULL);
+	ret->exec_name = av[0];
 	ret->envp = envp;
 	ret->cmd = NULL;
 	ret->xt_stat = 0;
