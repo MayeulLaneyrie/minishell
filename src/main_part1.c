@@ -10,7 +10,8 @@ void	clean_d_quote(t_sh *sh)
 	while (sh->cmd->av[j])
 	{
 		i = 0;
-		if (sh->cmd->av[j][i] == '"')
+		if (sh->cmd->av[j][i] == '"'
+			&& sh->cmd->av[j][ft_strlen(sh->cmd->av[j])] == '"')
 		{
 			tmp = (char *)malloc(sizeof(char) * ft_strlen(sh->cmd->av[j]) - 2);
 			while (sh->cmd->av[j][i + 1])
@@ -19,6 +20,7 @@ void	clean_d_quote(t_sh *sh)
 				i++;
 			}
 			free(sh->cmd->av[j]);
+			sh->cmd->av[j] = NULL;
 			sh->cmd->av[j] = ft_strdup(tmp);
 			free(tmp);
 		}
@@ -120,17 +122,17 @@ int	fill_cmd(t_sh *sh, t_rl *rl)
 
 	i = 0;
 	j = 0;
+	write(1, "i'm in fill_cmd\n", 16);
 	while (rl->rdline[i])
 	{
 		while (is_meta(rl->rdline[i]) == true)
 			i++;
-		sh->cmd->av = realloc_split(sh);
-		write(1, "i'm in fill_cmd\n", 16);
+		realloc_split(sh, rl, i);
 		word_cpy(sh, rl, i, j);
 		i += word_len(rl, i);
 		j++;
-		clean_d_quote(sh);
 	}
+	clean_d_quote(sh);
 	return (0);
 }
 

@@ -66,7 +66,7 @@ bool	find_d_quote(char *rdline);
 int		ac_of_av(char **av);
 char	**ft_split_b(char const *s, char c);
 char	**free_split_b(char **array);
-char	**realloc_split(t_sh *sh);
+int		realloc_split(t_sh *sh, t_rl *rl, int i);
 
 /*
 **	Étapes suivantes du fonctionnement du shell : fork(), recherche d'une
@@ -92,8 +92,9 @@ int		cmd_proc(t_sh *sh, t_cmd *cmd);
 int		builtin_search(char *s);
 int		builtin_exec(t_sh *sh, t_cmd *cmd);
 
-# define NULL_RDLINE	1
+# define MALLOC_ERROR	1
 # define WRONG_NB_QUOTE	2
-# define BLANK_RDLINE	3
+# define NULL_RDLINE	3
+# define BLANK_RDLINE	4
 
 #endif
