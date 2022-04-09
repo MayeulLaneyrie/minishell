@@ -12,6 +12,7 @@ typedef struct s_cmd
 {
 	int		pid;
 	int		builtin_id;
+	char	*path;
 	int		ac;
 	char	**av;
 }	t_cmd;

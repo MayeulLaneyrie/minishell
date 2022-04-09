@@ -9,6 +9,7 @@ t_cmd	*new_cmd(void)
 		return (NULL);
 	ret->pid = 0;
 	ret->builtin_id = -1;
+	ret->path = NULL;
 	ret->ac = 0;
 	ret->av = NULL;
 	return (ret);
@@ -24,11 +25,11 @@ void	*del_cmd(t_cmd **cmd)
 	{
 		i = -1;
 		while (++i < (*cmd)->ac)
-			free((*cmd)->av[i]);
-		free((*cmd)->av);
+			ft_free((void **)&((*cmd)->av[i]));
+		ft_free((void **)&((*cmd)->av));
 	}
-	free(*cmd);
-	*cmd = NULL;
+	ft_free((void **)&((*cmd)->path));
+	ft_free((void **)cmd);
 	return (NULL);
 }
 

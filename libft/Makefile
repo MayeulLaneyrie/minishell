@@ -31,6 +31,7 @@ SRCS		=	ft_substr.c \
 				ft_strnstr.c \
 				ft_atoi.c \
 				ft_calloc.c \
+				ft_free.c \
 				ft_strdup.c \
 				ft_lstnew.c \
 				ft_lstadd_front.c \
