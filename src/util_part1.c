@@ -61,24 +61,27 @@ int	ac_of_av(char **av)
 	return (i);
 }
 
-char	**realloc_split(t_sh *sh)
+int	realloc_split(t_sh *sh, t_rl *rl, int i)
 {
 	char	**tmp;
-	int		i;
+	int		k;
 
-	i = 0;
+	k = 0;
 	tmp = sh->cmd->av;
 	free_split_b(sh->cmd->av);
-	sh->cmd->av = (char **)malloc(sizeof(char *) * (ac_of_av(tmp) + 1));
+	sh->cmd->av = (char **)malloc(sizeof(char *) * (ac_of_av(tmp) + 2));
 	if (!sh->cmd->av)
-		return (NULL);
-	while (tmp[i])
+		return (MALLOC_ERROR);
+	while (tmp[k])
 	{
-		sh->cmd->av[i] = ft_strdup(tmp[i]);
-		i++;
+		sh->cmd->av[k] = ft_strdup(tmp[k]);
+		k++;
 	}
-	sh->cmd->av[i] = NULL;
+	sh->cmd->av[k] = (char *)malloc(sizeof(char) * word_len(rl, i) + 1);
+	sh->cmd->av[k][0] = '\0';
+	sh->cmd->av[k + 1] = (char *)malloc(sizeof(char) * 1);
+	sh->cmd->av[k + 1][0] = '\0';
 	sh->cmd->ac++;
 	free_split_b(tmp);
-	return (sh->cmd->av);
+	return (0);
 }
