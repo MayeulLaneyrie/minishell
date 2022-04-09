@@ -10,7 +10,9 @@ t_cmd	*new_cmd(void)
 	ret->pid = 0;
 	ret->builtin_id = -1;
 	ret->ac = 0;
-	ret->av = NULL;
+	ret->av = (char **)malloc(sizeof(char *) * 1);
+	ret->av[0] = (char *)malloc(sizeof(char) * 1);
+	ret->av[0][0] = '\0';
 	return (ret);
 }
 

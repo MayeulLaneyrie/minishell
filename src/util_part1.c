@@ -78,7 +78,6 @@ char	**realloc_split(t_sh *sh)
 		i++;
 	}
 	sh->cmd->av[i] = NULL;
-	sh->cmd->av[i + 1] = NULL;
 	sh->cmd->ac++;
 	free_split_b(tmp);
 	return (sh->cmd->av);
