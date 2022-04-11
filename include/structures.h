@@ -12,6 +12,7 @@ typedef struct s_cmd
 {
 	int		pid;
 	int		builtin_id;
+	char	*path;
 	int		ac;
 	char	**av;
 }	t_cmd;
@@ -23,6 +24,7 @@ typedef struct s_cmd
 */
 typedef struct s_sh
 {
+	char			*exec_name;
 	char			**envp;
 	t_cmd			*cmd;
 	unsigned char	xt_stat;
@@ -67,6 +69,5 @@ typedef struct s_rl
 	bool	d_quote;
 	bool	quote;
 }	t_rl;
-
 
 #endif

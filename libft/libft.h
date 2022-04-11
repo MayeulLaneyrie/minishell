@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 18:25:27 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/04/05 04:12:56 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/04/09 18:37:44 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ char		*ft_strnstr(const char *s1, const char *s2, size_t n);
 int			ft_atoi(const char *str);
 
 void		*ft_calloc(size_t count, size_t size);
+
+int			ft_free(void **ptr);
 
 char		*ft_strdup(const char *s1);
 

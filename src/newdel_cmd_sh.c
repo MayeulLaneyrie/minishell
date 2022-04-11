@@ -21,8 +21,9 @@ t_cmd	*new_cmd(void)
 		return (NULL);
 	ret->pid = 0;
 	ret->builtin_id = -1;
-	ret->av = NULL;
+	ret->path = NULL;
 	ret->ac = 0;
+	ret->av = NULL;
 	return (ret);
 }
 
@@ -36,23 +37,25 @@ void	*del_cmd(t_cmd **cmd)
 	{
 		i = -1;
 		while (++i < (*cmd)->ac)
-			free((*cmd)->av[i]);
-		free((*cmd)->av);
+			ft_free((void **)&((*cmd)->av[i]));
+		ft_free((void **)&((*cmd)->av));
 	}
-	free(*cmd);
-	*cmd = NULL;
+	ft_free((void **)&((*cmd)->path));
+	ft_free((void **)cmd);
 	return (NULL);
 }
 
-t_sh	*new_sh(char **envp)
+t_sh	*new_sh(int ac, char **av, char **envp)
 {
 	t_sh	*ret;
 
+	(void)ac;
 	if (!envp)
 		return (NULL);
 	ret = malloc(sizeof(t_sh));
 	if (!ret)
 		return (NULL);
+	ret->exec_name = av[0];
 	ret->envp = envp;
 	ret->cmd = NULL;
 	ret->xt_stat = 0;

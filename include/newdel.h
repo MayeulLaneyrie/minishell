@@ -25,7 +25,7 @@ void	*del_cmd(t_cmd **cmd);
 **	xt_stat = 0
 */
 
-t_sh	*new_sh(char **envp);
+t_sh	*new_sh(int ac, char **av, char **envp);
 
 void	*del_sh(t_sh **sh);
 

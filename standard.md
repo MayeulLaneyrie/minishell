@@ -1,11 +1,11 @@
 # MkI :
 
-- [ ] Display a prompt and ask for a command line
+- [x] Display a prompt and ask for a command line
 - [ ] Manage unquoted, simple and double quoted strings
-- [ ] Find and launch the correct executable, passing the correct arguments
-- [ ] Wait for the job to end, and store its exit status
+- [x] Find and launch the correct executable, passing the correct arguments
+- [x] Wait for the job to end, and store its exit status
 
-- [ ] "exit" builtin
+- [x] "exit" builtin
 
 * No history
 * No expansion
