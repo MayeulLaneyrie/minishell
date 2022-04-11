@@ -151,17 +151,17 @@ int	main_part1(t_sh *sh)
 	else if (rl.rdline[0] == '\0')
 	{
 		sh->cmd = new_cmd();
-		sh->cmd->av[0][0] = '\0';
-		return (BLANK_RDLINE);
+		sh->cmd->av = new_av(sh->cmd);
+		free (rl.rdline);
 	}
 	else
 	{
 		sh->cmd = new_cmd();
-		printf("adress cmd : %p\n", sh->cmd);
 		if (find_d_quote(rl.rdline) == false)
 		{
 			sh->cmd->av = ft_split_b(rl.rdline, ' ');
 			sh->cmd->ac = ac_of_av(sh->cmd->av);
+			free (rl.rdline);
 		}
 		else
 		{
@@ -177,3 +177,4 @@ int	main_part1(t_sh *sh)
 **	En construcion, pour faire fonctionner le programme en attendant,
 **	Modifier la ligne 177 par "if (1)" pour eviter d'entrer dans le else.
 */
+		// printf("av[0] = %s\n", sh->cmd->av[0]);
