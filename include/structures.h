@@ -59,15 +59,4 @@ typedef struct s_list
 	struct s_list	*prev;
 }	t_list;
 
-/*
-**	s_rl est une struc contennant le retour de readline dans rdline.
-**	Les 2 booleens servent a parser rdline dans les fonctions suivante.
-*/
-typedef struct s_rl
-{
-	char	*rdline;
-	bool	d_quote;
-	bool	quote;
-}	t_rl;
-
 #endif
