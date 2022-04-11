@@ -157,7 +157,7 @@ int	main_part1(t_sh *sh)
 	else
 	{
 		sh->cmd = new_cmd();
-		if (find_d_quote(rl.rdline) == false)
+		if (find_d_quote(rl.rdline) == false && find_quote(rl.rdline) == false)
 		{
 			sh->cmd->av = ft_split_b(rl.rdline, ' ');
 			sh->cmd->ac = ac_of_av(sh->cmd->av);
@@ -177,4 +177,4 @@ int	main_part1(t_sh *sh)
 **	En construcion, pour faire fonctionner le programme en attendant,
 **	Modifier la ligne 177 par "if (1)" pour eviter d'entrer dans le else.
 */
-		// printf("av[0] = %s\n", sh->cmd->av[0]);
+			// printf("av[1] = %s\n", sh->cmd->av[1]);
