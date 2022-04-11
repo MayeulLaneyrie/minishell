@@ -28,91 +28,49 @@ void	clean_d_quote(t_sh *sh)
 	}
 }
 
-void	word_cpy(t_sh *sh, t_rl *rl, int i, int j)
+char	*word_cpy(t_rl *rl, int i)
 {
-	int	k;
 
-	k = 0;
-	rl->d_quote = false;
-	rl->quote = false;
-	if (rl->rdline[i] != '"' && rl->rdline[i] != '\'')
-	{
-		while (rl->rdline[i] && !(is_meta(rl->rdline[i]))
-			&& (rl->d_quote == false || rl->quote == false))
-		{
-			sh->cmd->av[j][k++] = rl->rdline[i++];
-			if (rl->rdline[i] == '"' && rl->d_quote == false
-				&& is_meta(rl->rdline[i - 1]))
-				rl->d_quote = true;
-			if (rl->rdline[i] == '\'' && rl->quote == false
-				&& is_meta(rl->rdline[i - 1]))
-				rl->quote = true;
-		}
-	}
-	else if (rl->d_quote == true && rl->d_quote == false && rl->quote == false)
-	{
-		rl->d_quote = true;
-		while (rl->rdline[i] != '"' && rl->d_quote == true)
-		{
-			sh->cmd->av[j][k++] = rl->rdline[i++];
-			if (rl->rdline[i] == '"')
-				rl->d_quote = false;
-		}
-	}
-	else if (rl->quote == true && rl->d_quote == false && rl->quote == false)
-	{
-		rl->quote = true;
-		while (rl->rdline[i] != '\'' && rl->quote == true)
-		{
-			sh->cmd->av[j][k++] = rl->rdline[i++];
-			if (rl->rdline[i] == '\'')
-				rl->quote = false;
-		}
-	}
 }
 
 int	word_len(t_rl *rl, int i)
 {
-	int		tmp;
+	int	tmp;
 
 	tmp = i;
 	rl->d_quote = false;
 	rl->quote = false;
-	if (rl->rdline[i] != '"' && rl->rdline[i] != '\'')
+	while (rl->rdline[i])
 	{
-		while (rl->rdline[i] && !(is_meta(rl->rdline[i]))
-			&& (rl->d_quote == false || rl->quote == false))
-		{
+		if (is_space(rl->rdline[i]))
 			i++;
-			if (rl->rdline[i] == '"' && rl->d_quote == false
-				&& is_meta(rl->rdline[i - 1]))
-				rl->d_quote = true;
-			if (rl->rdline[i] == '\'' && rl->quote == false
-				&& is_meta(rl->rdline[i - 1]))
-				rl->quote = true;
-		}
-	}
-	else if (rl->d_quote == true && rl->d_quote == false && rl->quote == false)
-	{
-		rl->d_quote = true;
-		while (rl->rdline[i] != '"' && rl->d_quote == true)
+		if (rl->rdline[i] == '"' && i > 0 && is_space(rl->rdline[i - 1]))
 		{
+			rl->d_quote = true;
 			i++;
-			if (rl->rdline[i] == '"')
+			while (rl->rdline[i] != '"')
+				i++;
+			if (rl->rdline[i] == '"' && rl->d_quote == true)
 				rl->d_quote = false;
+			return (i - tmp - 2);
 		}
-	}
-	else if (rl->quote == true && rl->d_quote == false && rl->quote == false)
-	{
-		rl->quote = true;
-		while (rl->rdline[i] != '\'' && rl->quote == true)
+		else if (rl->rdline[i] == '\'' && i > 0 && is_space(rl->rdline[i - 1]))
 		{
+			rl->quote = true;
 			i++;
-			if (rl->rdline[i] == '\'')
+			while (rl->rdline[i] != '\'')
+				i++;
+			if (rl->rdline[i] == '\'' && rl->quote == true)
 				rl->quote = false;
+			return (i - tmp - 2);
+		}
+		else
+		{
+			while (!is_meta(rl->rdline[i]))
+				i++;
+			return (i - tmp);
 		}
 	}
-	return (i - tmp);
 }
 
 int	fill_cmd(t_sh *sh, t_rl *rl)
@@ -122,14 +80,13 @@ int	fill_cmd(t_sh *sh, t_rl *rl)
 
 	i = 0;
 	j = 0;
-	write(1, "i'm in fill_cmd\n", 16);
 	while (rl->rdline[i])
 	{
-		while (is_meta(rl->rdline[i]) == true)
+		while (is_meta(rl->rdline[i]) == false)
 			i++;
-		realloc_split(sh, rl, i);
-		word_cpy(sh, rl, i, j);
-		i += word_len(rl, i);
+		word_cpy(sh, rl, i);
+		if (is_space(rl->rdline[i]))
+			i++;
 		j++;
 	}
 	clean_d_quote(sh);

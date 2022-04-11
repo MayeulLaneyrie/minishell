@@ -57,7 +57,7 @@
 int		main_part1(t_sh *sh);
 
 int		fill_cmd(t_sh *sh, t_rl *rl);
-char	*word_cpy(t_sh *sh, t_rl *rl, int i);
+char	*word_cpy(t_rl *rl, int i);
 int		word_len(t_rl *rl, int i);
 void	clean_d_quote(t_sh *sh);
 
