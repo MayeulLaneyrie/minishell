@@ -12,7 +12,7 @@ int	word_len(char *s)
 	int	ret;
 	int	quote;
 	int	d_quote;
-	
+
 	ret = 0;
 	quote = 0;
 	d_quote = 0;
@@ -47,7 +47,7 @@ int	word_cpy(char *dst, char *src)
 	int	ret;
 	int	quote;
 	int	d_quote;
-	
+
 	ret = 0;
 	quote = 0;
 	d_quote = 0;
@@ -118,7 +118,7 @@ int	parse_cmd(char *s, t_cmd **cmd)
 	return (0);
 }
 
-int main_part1(t_sh *sh)
+int	main_part1(t_sh *sh)
 {
 	char	*s;
 
