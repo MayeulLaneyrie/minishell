@@ -57,17 +57,31 @@
 int		main_part1(t_sh *sh);
 
 int		fill_cmd(t_sh *sh, t_rl *rl);
-void	word_cpy(t_sh *sh, t_rl *rl, int i, int j);
+char	*word_cpy(t_sh *sh, t_rl *rl, int i);
 int		word_len(t_rl *rl, int i);
-bool	is_meta(char c);
+void	clean_d_quote(t_sh *sh);
 
+/*
+**	util1_part1.c
+*/
 int		count_quote(char *rdline);
 bool	find_d_quote(char *rdline);
 bool	find_quote(char *rdline);
+bool	is_meta(char c);
+bool	is_space(char c);
+
+/*
+**	util2_part1.c
+*/
 int		ac_of_av(char **av);
+char	**create_tmp(char **av);
+bool	realloc_tab(t_sh *sh, t_rl *rl, int i);
+
+/*
+**	ft_split_b.c
+*/
 char	**ft_split_b(char const *s, char c);
 char	**free_split_b(char **array);
-int		realloc_split(t_sh *sh, t_rl *rl, int i);
 
 /*
 **	Étapes suivantes du fonctionnement du shell : fork(), recherche d'une
