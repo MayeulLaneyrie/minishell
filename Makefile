@@ -3,9 +3,6 @@ SRCS =	src/main.c \
 		src/parser_mlaneyri.c \
 		src/main_part2.c \
 		src/env.c \
-		src/util1_part1.c \
-		src/util2_part1.c \
-		src/ft_split_b.c \
 		src/split_utils.c \
 		src/builtin_central.c \
 		src/display_utils.c
