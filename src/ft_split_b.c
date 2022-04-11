@@ -6,11 +6,29 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 17:28:04 by bifrah            #+#    #+#             */
-/*   Updated: 2022/03/31 20:25:08 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/04/06 05:59:43 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+
+void	free_split_b(char **array)
+{
+	int	i;
+
+	i = 0;
+	if (array && *array)
+	{
+		while (array[i] != NULL)
+		{
+			if (array[i])
+				free(array[i]);
+			i++;
+		}
+	}
+	free(array);
+	array = NULL;
+}
 
 static int	ft_malloc_j(char const *s, char c)
 {

@@ -1,5 +1,17 @@
 #include "../include/minishell.h"
 
+char	**new_av(t_cmd *cmd)
+{
+	cmd->av = (char **)malloc(sizeof(char *) * 1);
+	if (!cmd->av)
+		return (NULL);
+	cmd->av[0] = (char *)malloc(sizeof(char) * 1);
+	if (!cmd->av[0])
+		return (NULL);
+	cmd->av[0][0] = '\0';
+	return (cmd->av);
+}
+
 t_cmd	*new_cmd(void)
 {
 	t_cmd	*ret;

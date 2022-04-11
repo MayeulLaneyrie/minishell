@@ -29,4 +29,11 @@ t_sh	*new_sh(int ac, char **av, char **envp);
 
 void	*del_sh(t_sh **sh);
 
+/*
+**	new_av initialize the char **av in sh->cmd
+**	av and av[0] are both malloced of 1 respectively char ** and char *.
+*/
+
+char	**new_av(t_cmd *cmd);
+
 #endif
