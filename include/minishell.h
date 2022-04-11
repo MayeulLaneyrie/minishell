@@ -21,6 +21,8 @@
 
 # include <signal.h>
 
+# define METACHAR "\t\n|&;<( )>"
+
 /*
 **	Juste une libft normale, avec des chaînes doublement chainées.
 */
@@ -56,6 +58,7 @@
 
 int		main_part1(t_sh *sh);
 
+/*
 int		fill_cmd(t_sh *sh, t_rl *rl);
 char	*word_cpy(t_rl *rl, int i);
 int		word_len(t_rl *rl, int i);
@@ -82,6 +85,7 @@ bool	realloc_tab(t_sh *sh, t_rl *rl, int i);
 */
 char	**ft_split_b(char const *s, char c);
 char	**free_split_b(char **array);
+int		realloc_split(t_sh *sh, t_rl *rl, int i);
 
 /*
 **	Étapes suivantes du fonctionnement du shell : fork(), recherche d'une
@@ -113,7 +117,6 @@ int		builtin_exec(t_sh *sh, t_cmd *cmd);
 char	*ft_cat3(char *s1, char *s2, char *s3);
 int		ft_err4(char *s1, char *s2, char *s3, char *s4);
 
-# define NULL_RDLINE	1
 # define MALLOC_ERROR	1
 # define WRONG_NB_QUOTE	2
 # define NULL_RDLINE	3
