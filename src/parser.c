@@ -140,7 +140,7 @@ int	main_part1(t_sh *sh)
 		free(s);
 		return (1);
 	}
-	if (parse_cmd(s, &(sh->cmd)))
+	if (parse_cmd(s, &(sh->cmd))) //free s ?
 		return (1);
 	add_history(s);
 	free(s);
