@@ -44,12 +44,12 @@ char	*search_path(char *path, char *name)
 	{
 		temp = ft_cat3(dirs->data[i], "/", name);
 		if (!temp)
-			return (del_split(&dirs));
+			return (del_split(dirs, &ft_free));
 		if (!access(temp, F_OK))
-			return (temp + (unsigned long)del_split(&dirs));
+			return (temp + (unsigned long)del_split(dirs, &ft_free));
 		free(temp);
 	}
-	del_split(&dirs);
+	del_split(dirs, &ft_free);
 	return (NULL);
 }
 

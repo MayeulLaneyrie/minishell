@@ -6,17 +6,16 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 18:40:04 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/04/09 19:00:21 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/04/13 23:39:43 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
 
-int	ft_free(void **ptr)
+void	*ft_free(void *ptr)
 {
-	if (!ptr || !*ptr)
+	if (!ptr)
 		return (0);
-	free(*ptr);
-	*ptr = NULL;
+	free(ptr);
 	return (0);
 }

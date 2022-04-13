@@ -16,7 +16,7 @@
 
 t_cmd	*new_cmd(void);
 
-void	*del_cmd(t_cmd **cmd);
+void	*del_cmd(void *cmd);
 
 /*
 **	t_sh (newdel_cmd_sh.c):

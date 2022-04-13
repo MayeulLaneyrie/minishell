@@ -106,12 +106,14 @@ int	parse_cmd(char *s, t_cmd **cmd)
 	t_split	*word_split;
 
 	*cmd = new_cmd();
+	if (!*cmd)
+		return (-1);
 	word_list = cut_words(s);
 	if (!word_list)
-		return (-1);
+		return (-2);
 	word_split = list_to_split(&word_list);
 	if (!word_split)
-		return (-2);
+		return (-3);
 	(*cmd)->ac = word_split->len;
 	(*cmd)->av = (char **)word_split->data;
 	free(word_split);
@@ -141,7 +143,7 @@ int	main_part1(t_sh *sh)
 		return (1);
 	}
 	if (parse_cmd(s, &(sh->cmd)))
-		return (ft_free((void **)&s) + 1);
+		return ((unsigned long)ft_free((void *)&s) + 1);
 	add_history(s);
 	free(s);
 	return (0);

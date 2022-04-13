@@ -56,7 +56,7 @@ int	builtin_exec(t_sh *sh, t_cmd *cmd)
 
 	if (cmd->builtin_id != 6)
 	{
-		printf("%s not implemented as of Mark 1\n", cmd->av[0]);
+		printf("%s not implemented as of Mark 2\n", cmd->av[0]);
 		sh->xt_stat = 127;
 		return (CMD_NOWAIT);
 	}

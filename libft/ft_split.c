@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 14:16:52 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/25 01:34:38 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/04/13 23:40:46 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_split	*ft_split(char const *s, char c)
 	if (!ret)
 		return (NULL);
 	if (ft_splitfill((char **)ret->data, s, c))
-		return (del_split(&ret));
+		return (del_split(ret, &ft_free));
 	ret->len = size;
 	return (ret);
 }

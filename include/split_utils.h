@@ -12,7 +12,7 @@
 
 t_split	*new_split(int n);
 
-void	*del_split(t_split **split);
+void	*del_split(t_split *split, void *(*del)(void *));
 
 /*
 **	list_to_split() et split_to_list() convertissent respectivement un t_list

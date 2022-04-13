@@ -8,30 +8,6 @@
 
 # include <stdbool.h>
 
-typedef struct s_cmd
-{
-	int		pid;
-	int		builtin_id;
-	char	*path;
-	int		ac;
-	char	**av;
-}	t_cmd;
-
-/*
-**	cmd : une commande simple parsée.
-**	xt_stat : Le statut de sortie de la dernière tache exécutée. xt_stat devrait
-**		être la valeur de retour de main().
-*/
-typedef struct s_sh
-{
-	char			*exec_name;
-	char			**envp;
-	t_cmd			*cmd;
-	unsigned char	xt_stat;
-}	t_sh;
-
-typedef int	(*t_bi)(t_sh *sh, t_cmd *cmd);
-
 /*
 **	data : un void** pouvant pointer vers n'importe quel type de données.
 **	size : la capacité maximale du split.
@@ -58,5 +34,34 @@ typedef struct s_list
 	struct s_list	*next;
 	struct s_list	*prev;
 }	t_list;
+
+
+typedef struct s_cmd
+{
+	int		pid;
+	int		builtin_id;
+	char	*path;
+	int		ac;
+	char	**av;
+}	t_cmd;
+
+/*
+**	cmd : une commande simple parsée.
+**	xt_stat : Le statut de sortie de la dernière tache exécutée. xt_stat devrait
+**		être la valeur de retour de main().
+*/
+typedef struct s_sh
+{
+	char			*exec_name;
+	char			**envp;
+	t_cmd			*cmd;
+	t_split			*pipeline;
+	unsigned char	xt_stat;
+}	t_sh;
+
+/*
+**	Type de données pour stocker les fonctions liées aux builtins.
+*/
+typedef int	(*t_bi)(t_sh *sh, t_cmd *cmd);
 
 #endif

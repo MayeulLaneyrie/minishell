@@ -27,21 +27,23 @@ t_cmd	*new_cmd(void)
 	return (ret);
 }
 
-void	*del_cmd(t_cmd **cmd)
+void	*del_cmd(void *ptr)
 {
-	int	i;
+	t_cmd	*cmd;
+	int		i;
 
-	if (!cmd || !*cmd)
+	cmd = (t_cmd *)ptr;
+	if (!cmd)
 		return (NULL);
-	if ((*cmd)->av)
+	if (cmd->av)
 	{
 		i = -1;
-		while (++i < (*cmd)->ac)
-			ft_free((void **)&((*cmd)->av[i]));
-		ft_free((void **)&((*cmd)->av));
+		while (++i < cmd->ac)
+			ft_free((void *)cmd->av[i]);
+		ft_free((void *)cmd->av);
 	}
-	ft_free((void **)&((*cmd)->path));
-	ft_free((void **)cmd);
+	ft_free((void *)cmd->path);
+	ft_free((void *)cmd);
 	return (NULL);
 }
 
@@ -53,6 +55,7 @@ int	new_sh(int ac, char **av, char **envp, t_sh *sh)
 	sh->exec_name = av[0];
 	sh->envp = envp;
 	sh->cmd = NULL;
+	sh->pipeline = NULL;
 	sh->xt_stat = 0;
 	return (0);
 }
@@ -61,6 +64,7 @@ void	*del_sh(t_sh *sh)
 {
 	if (!sh)
 		return (NULL);
-	del_cmd(&(sh->cmd));
+	del_cmd(sh->cmd);
+	del_split(sh->pipeline, &del_cmd);
 	return (NULL);
 }

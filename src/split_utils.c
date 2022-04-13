@@ -22,18 +22,17 @@ t_split	*new_split(int n)
 	return (ret);
 }
 
-void	*del_split(t_split **split)
+void	*del_split(t_split *split, void *(*del)(void *))
 {
 	int	i;
 
-	if (!split || !*split)
+	if (!split)
 		return (0);
 	i = -1;
-	while (++i < (*split)->len)
-		free((*split)->data[i]);
-	free((*split)->data);
-	free(*split);
-	*split = NULL;
+	while (++i < split->len)
+		free(split->data[i]);
+	del(split->data);
+	free(split);
 	return (0);
 }
 
