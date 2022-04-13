@@ -1,7 +1,7 @@
 # MkI :
 
 - [x] Display a prompt and ask for a command line
-- [ ] Manage unquoted, simple and double quoted strings
+- [x] Manage unquoted, simple and double quoted strings
 - [x] Find and launch the correct executable, passing the correct arguments
 - [x] Wait for the job to end, and store its exit status
 
@@ -19,7 +19,7 @@
 
 * All MkI functionalities, plus the following :
 
-- [ ] Manage history
+- [x] Manage history
 - [ ] Manage pipes
 
 * No expansion
