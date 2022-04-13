@@ -134,6 +134,11 @@ int	main_part1(t_sh *sh)
 			break ;
 		free(s);
 	}
+	if (!check_even_quote(s))
+	{
+		write(2, "Quotes must be even\n", 21);
+		return (1);
+	}
 	if (parse_cmd(s, &(sh->cmd)))
 		return (1);
 	free(s);

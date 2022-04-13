@@ -57,6 +57,7 @@
 */
 
 int		main_part1(t_sh *sh);
+int		check_even_quote(char *s);
 
 /*
 **	Étapes suivantes du fonctionnement du shell : fork(), recherche d'une
