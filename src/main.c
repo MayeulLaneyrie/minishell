@@ -17,5 +17,6 @@ int	main(int ac, char **av, char **envp)
 	}
 	ret = sh->xt_stat;
 	del_sh(&sh);
+	clear_history();
 	return (ret);
 }
