@@ -73,6 +73,11 @@ int		main_part2(t_sh *sh);
 **		- >0 : Pas d'exit, mais pas de process fils à attendre (builtin).
 **		- 0 : Process père, attendre le statut d'exit.
 */
+
+# define CMD_EXIT -1
+# define CMD_WAIT 0
+# define CMD_NOWAIT 1
+
 int		cmd_proc(t_sh *sh, t_cmd *cmd);
 
 /*

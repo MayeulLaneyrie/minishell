@@ -62,21 +62,21 @@ int	cmd_proc(t_sh *sh, t_cmd *cmd)
 			return (builtin_exec(sh, cmd));
 		cmd->path = search_path(get_var(sh->envp, "PATH"), cmd->av[0]);
 		if (!cmd->path)
-			return (cnf_handler(sh, cmd) + 1);
+			return (cnf_handler(sh, cmd) + CMD_NOWAIT);
 	}
 	else
 	{
 		cmd->path = ft_strdup(cmd->av[0]);
 		if (!cmd->path)
-			return (-1);
+			return (CMD_EXIT);
 	}
 	cmd->pid = fork();
 	if (cmd->pid)
-		return (0);
+		return (CMD_WAIT);
 	execve(cmd->path, cmd->av, sh->envp);
 	excvefail_handler(cmd->path, sh);
 	ft_free((void **)&(cmd->path));
-	return (-1);
+	return (CMD_EXIT);
 }
 
 int	main_part2(t_sh *sh)
@@ -85,7 +85,7 @@ int	main_part2(t_sh *sh)
 
 	stat = cmd_proc(sh, sh->cmd);
 	if (stat || sh->cmd->pid < 0)
-		return (stat <= 0);
+		return (stat != CMD_EXIT);
 	waitpid(sh->cmd->pid, &stat, 0);
 	sh->xt_stat = WEXITSTATUS(stat);
 	return (0);
