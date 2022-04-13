@@ -85,7 +85,7 @@ int	main_part2(t_sh *sh)
 
 	stat = cmd_proc(sh, sh->cmd);
 	if (stat || sh->cmd->pid < 0)
-		return (stat != CMD_EXIT);
+		return (stat == CMD_EXIT);
 	waitpid(sh->cmd->pid, &stat, 0);
 	sh->xt_stat = WEXITSTATUS(stat);
 	return (0);
