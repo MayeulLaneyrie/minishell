@@ -58,6 +58,12 @@
 
 int		main_part1(t_sh *sh);
 
+
+/*
+**	Dans utils.c
+*/
+int		check_quote(char *s);
+
 /*
 **	Étapes suivantes du fonctionnement du shell : fork(), recherche d'une
 **	builtin ou du chemin du binaire à exécuter, execve() dans le process fils
