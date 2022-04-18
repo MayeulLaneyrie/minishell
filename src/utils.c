@@ -9,7 +9,7 @@ int	check_quote(char *s)
 	ret = 0;
 	quote = 0;
 	d_quote = 0;
-	while (*s && (!ft_strchr(METACHAR, *s) || quote || d_quote))
+	while (*s)
 	{
 		if (*s == '"' && !quote && !d_quote)
 			d_quote = 1;

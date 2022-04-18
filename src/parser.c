@@ -136,7 +136,11 @@ int	main_part1(t_sh *sh)
 		free(s);
 	}
 	if (check_quote(s) == -1)
-		write(2, "Syntax error\n", 14);
+	{
+		add_history(s);
+		free(s);
+		return (write(2, "Syntax error\n", 14) * 0 + 1);
+	}
 	else if (parse_cmd(s, &(sh->cmd)))
 		return ((unsigned long)ft_free((void *)s) + 1);
 	add_history(s);
