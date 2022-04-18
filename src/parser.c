@@ -92,7 +92,7 @@ t_list	*cut_words(char *s)
 		while (ft_strchr(METACHAR, *s))
 			s++;
 		l = word_len(s);
-		if (word_len(s) == -1)
+		if (l == -1)
 			return (ft_lstclear(&ret, &free));
 		w = malloc(l + 1);
 		if (!w)
