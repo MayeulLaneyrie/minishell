@@ -43,7 +43,6 @@ int	word_len(char *s)
 **	Les quotes 'externes' ne sont pas copiées, mais sont décomptées
 **	La fin de la string marque systématiquement la fin du mot
 */
-
 int	word_cpy(char *dst, char *src)
 {
 	int	ret;
@@ -141,7 +140,7 @@ int	main_part1(t_sh *sh)
 		free(s);
 	}
 	if (parse_cmd(s, &(sh->cmd)))
-		return ((unsigned long)ft_free((void *)&s) + 1);
+		return ((unsigned long)ft_free((void *)s) + 1);
 	add_history(s);
 	free(s);
 	return (0);
