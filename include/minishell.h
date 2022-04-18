@@ -72,7 +72,6 @@ int		main_part2(t_sh *sh);
 **		- 0 : Process père, attendre le statut d'exit.
 **		- >0 : Pas d'exit, mais pas de process fils à attendre (builtin).
 */
-
 # define CMD_EXIT -1
 # define CMD_WAIT 0
 # define CMD_NOWAIT 1
@@ -82,14 +81,12 @@ int		cmd_proc(t_sh *sh, t_cmd *cmd);
 /*
 **	Dans builtin_central.c :
 */
-
 int		builtin_search(char *s);
 int		builtin_exec(t_sh *sh, t_cmd *cmd);
 
 /*
 **	Dans display_utils.c :
 */
-
 char	*ft_cat3(char *s1, char *s2, char *s3);
 int		ft_err4(char *s1, char *s2, char *s3, char *s4);
 
