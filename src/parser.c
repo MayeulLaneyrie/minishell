@@ -30,6 +30,8 @@ int	word_len(char *s)
 			ret++;
 		s++;
 	}
+	if (d_quote == 1 || quote == 1)
+		return (write(2, "Syntax error\n", 14) * 0 - 1);
 	return (ret);
 }
 
@@ -90,6 +92,8 @@ t_list	*cut_words(char *s)
 		while (ft_strchr(METACHAR, *s))
 			s++;
 		l = word_len(s);
+		if (word_len(s) == -1)
+			return (ft_lstclear(&ret, &free));
 		w = malloc(l + 1);
 		if (!w)
 			return (ft_lstclear(&ret, &free));
@@ -135,12 +139,6 @@ int	main_part1(t_sh *sh)
 		if (*s)
 			break ;
 		free(s);
-	}
-	if (!check_even_quote(s))
-	{
-		write(2, "Quotes must be even\n", 21);
-		free(s);
-		return (1);
 	}
 	if (parse_cmd(s, &(sh->cmd)))
 		return ((unsigned long)ft_free((void *)&s) + 1);
