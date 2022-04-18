@@ -69,8 +69,8 @@ int		main_part2(t_sh *sh);
 /*
 **	Valeur de retour de cmd_proc() :
 **		- <0 : Le shell doit exit (exit, erreur fatale ou execve fail)
-**		- >0 : Pas d'exit, mais pas de process fils à attendre (builtin).
 **		- 0 : Process père, attendre le statut d'exit.
+**		- >0 : Pas d'exit, mais pas de process fils à attendre (builtin).
 */
 
 # define CMD_EXIT -1
