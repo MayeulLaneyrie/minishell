@@ -24,6 +24,9 @@ int	check_quote(char *s)
 		s++;
 	}
 	if (d_quote == 1 || quote == 1)
-		return (-1);
+	{
+		g_xt_stat = 128;
+		return (write(2, "Syntax error\n", 14) * 0 - 1);
+	}
 	return (ret);
 }

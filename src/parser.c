@@ -132,18 +132,15 @@ int	main_part1(t_sh *sh)
 			return (1);
 		}
 		if (*s)
-			break ;
+		{
+			add_history(s);
+			if (check_quote(s) != -1)
+				break ;
+		}
 		free(s);
 	}
-	if (check_quote(s) == -1)
-	{
-		add_history(s);
-		free(s);
-		return (write(2, "Syntax error\n", 14) * 0 + 1);
-	}
-	else if (parse_cmd(s, &(sh->cmd)))
+	if (parse_cmd(s, &(sh->cmd)))
 		return ((unsigned long)ft_free((void *)s) + 1);
-	add_history(s);
 	free(s);
 	return (0);
 }
