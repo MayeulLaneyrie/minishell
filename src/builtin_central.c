@@ -22,17 +22,17 @@ int	bi_exit(t_sh *sh, t_cmd *cmd)
 		return (CMD_EXIT);
 	if (exit_arg_checker(cmd->av[1]))
 	{
-		sh->xt_stat = 2;
+		g_xt_stat = 2;
 		return (ft_err4(sh->exec_name, cmd->av[0], cmd->av[1],
 				"numeric argument required\n") + CMD_EXIT);
 	}
 	if (cmd->ac > 2)
 	{
-		sh->xt_stat = 1;
+		g_xt_stat = 1;
 		return (ft_err4(sh->exec_name, cmd->av[0], "too many arguments\n", NULL)
 			+ CMD_NOWAIT);
 	}
-	sh->xt_stat = ft_atoi(cmd->av[1]);
+	g_xt_stat = ft_atoi(cmd->av[1]);
 	return (CMD_EXIT);
 }
 
@@ -57,7 +57,7 @@ int	builtin_exec(t_sh *sh, t_cmd *cmd)
 	if (cmd->builtin_id != 6)
 	{
 		printf("%s not implemented as of Mark 2\n", cmd->av[0]);
-		sh->xt_stat = 127;
+		g_xt_stat = 127;
 		return (CMD_NOWAIT);
 	}
 	return (builtins[cmd->builtin_id](sh, cmd));

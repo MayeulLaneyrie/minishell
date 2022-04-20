@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-int	cnf_handler(t_sh *sh, t_cmd *cmd)
+int	cnf_handler(t_cmd *cmd)
 {
 	char	*s;
 	int		l;
@@ -14,7 +14,7 @@ int	cnf_handler(t_sh *sh, t_cmd *cmd)
 	ft_strlcat(s, ": command not found\n", l);
 	write(2, s, l);
 	free(s);
-	sh->xt_stat = 127;
+	g_xt_stat = 127;
 	return (0);
 }
 
@@ -62,7 +62,7 @@ int	cmd_proc(t_sh *sh, t_cmd *cmd)
 			return (builtin_exec(sh, cmd));
 		cmd->path = search_path(get_var(sh->envp, "PATH"), cmd->av[0]);
 		if (!cmd->path)
-			return (cnf_handler(sh, cmd) + CMD_NOWAIT);
+			return (cnf_handler(cmd) + CMD_NOWAIT);
 	}
 	else
 	{
@@ -87,6 +87,6 @@ int	main_part2(t_sh *sh)
 	if (stat || sh->cmd->pid < 0)
 		return (stat == CMD_EXIT);
 	waitpid(sh->cmd->pid, &stat, 0);
-	sh->xt_stat = WEXITSTATUS(stat);
+	g_xt_stat = WEXITSTATUS(stat);
 	return (0);
 }

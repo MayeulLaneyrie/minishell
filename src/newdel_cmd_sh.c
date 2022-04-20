@@ -56,7 +56,6 @@ int	new_sh(int ac, char **av, char **envp, t_sh *sh)
 	sh->envp = envp;
 	sh->cmd = NULL;
 	sh->pipeline = NULL;
-	sh->xt_stat = 0;
 	return (0);
 }
 

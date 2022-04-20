@@ -56,7 +56,6 @@ typedef struct s_sh
 	char			**envp;
 	t_cmd			*cmd;
 	t_split			*pipeline;
-	unsigned char	xt_stat;
 }	t_sh;
 
 /*

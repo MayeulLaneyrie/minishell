@@ -23,6 +23,8 @@
 
 # define METACHAR "\t\n|&;<( )>"
 
+extern int	g_xt_stat;
+
 /*
 **	Juste une libft normale, avec des chaînes doublement chainées.
 */
