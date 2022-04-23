@@ -60,7 +60,6 @@ extern int	g_xt_stat;
 */
 int		main_part1(t_sh *sh);
 
-
 /*
 **	Dans utils.c
 */
