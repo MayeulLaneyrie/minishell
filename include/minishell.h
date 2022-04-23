@@ -22,8 +22,7 @@
 # include <signal.h>
 
 # define METACHAR "\t\n|&;<( )>"
-
-extern int	g_xt_stat;
+# define SPACES "\t\n\r\v\f "
 
 /*
 **	Juste une libft normale, avec des chaînes doublement chainées.
@@ -49,6 +48,8 @@ extern int	g_xt_stat;
 */
 # include "./env.h"
 
+extern int	g_xt_stat;
+
 /*
 **	Premières étapes du fonctionnement du shell :  lire une ligne, la découper
 **	et la parser. Doit renvoyer 0 si une ligne de commande a été correctement
@@ -57,7 +58,6 @@ extern int	g_xt_stat;
 **	A l'appel, sh->cmd n'aura pas encore été initialisé. Au retour, cmd devra
 **	avoir été correctement initialisé, a moins qu'il faille quitter le shell.
 */
-
 int		main_part1(t_sh *sh);
 
 
@@ -65,13 +65,13 @@ int		main_part1(t_sh *sh);
 **	Dans utils.c
 */
 int		check_quote(char *s);
+int		check_pipe(char *s);
 
 /*
 **	Étapes suivantes du fonctionnement du shell : fork(), recherche d'une
 **	builtin ou du chemin du binaire à exécuter, execve() dans le process fils
 **	et waitpid() dans le process père.
 */
-
 int		main_part2(t_sh *sh);
 
 /*
