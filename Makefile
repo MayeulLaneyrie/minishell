@@ -6,6 +6,7 @@ SRCS =	src/main.c \
 		src/env.c \
 		src/split_utils.c \
 		src/builtin_central.c \
+		src/quote_split.c \
 		src/display_utils.c
 
 OBJS		= ${SRCS:.c=.o}
