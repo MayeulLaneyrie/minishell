@@ -63,7 +63,6 @@ void	*del_sh(t_sh *sh)
 {
 	if (!sh)
 		return (NULL);
-	del_cmd(sh->cmd);
 	del_split(sh->pipeline, &del_cmd);
 	return (NULL);
 }
