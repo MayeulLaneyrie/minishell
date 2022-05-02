@@ -60,6 +60,8 @@ extern int	g_xt_stat;
 */
 int		main_part1(t_sh *sh);
 
+t_split	*quote_split(char *s, char c);
+
 /*
 **	Dans utils.c
 */

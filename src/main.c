@@ -12,7 +12,8 @@ int	main(int ac, char **av, char **envp)
 	{
 		if (main_part2(&sh))
 			break ;
-		del_cmd(sh.cmd);
+		del_split(sh.pipeline, &ft_free);
+		sh.pipeline = NULL;
 	}
 	del_sh(&sh);
 	clear_history();

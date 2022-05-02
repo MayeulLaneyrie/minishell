@@ -30,8 +30,8 @@ void	*del_split(t_split *split, void *(*del)(void *))
 		return (0);
 	i = -1;
 	while (++i < split->len)
-		free(split->data[i]);
-	del(split->data);
+		del(split->data[i]);
+	free(split->data);
 	free(split);
 	return (0);
 }

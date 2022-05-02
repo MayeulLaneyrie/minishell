@@ -7,12 +7,13 @@ SRCS =	src/main.c \
 		src/env.c \
 		src/split_utils.c \
 		src/builtin_central.c \
+		src/quote_split.c \
 		src/display_utils.c
 
 OBJS		= ${SRCS:.c=.o}
 
 NAME		= minishell
-CC			= clang -Wall -Wextra -Werror -g3
+CC			= clang -Wall -Wextra -Werror
 RM			= rm -f
 AR			= ar rcs
 
