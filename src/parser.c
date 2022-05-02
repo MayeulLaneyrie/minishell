@@ -86,7 +86,7 @@ t_list	*cut_words(char *s)
 	ret = NULL;
 	while (*s)
 	{
-		while (*s && ft_strchr(METACHAR, *s))
+		while (ft_strchr(METACHAR, *s))
 			s++;
 		l = word_len(s);
 		w = malloc(l + 1);
@@ -95,8 +95,6 @@ t_list	*cut_words(char *s)
 		s += word_cpy(w, s);
 		if (!ft_lstadd_back(&ret, ft_lstnew(w)))
 			return (ft_lstclear(&ret, &free));
-		while (*s && ft_strchr(METACHAR, *s))
-			s++;
 	}
 	return (ret);
 }
@@ -119,29 +117,6 @@ int	parse_cmd(char *s, t_cmd **cmd)
 	(*cmd)->av = (char **)word_split->data;
 	free(word_split);
 	return (0);
-
-}
-
-int	parse_task(char *s, t_sh *sh)
-{
-	t_split	*pipe_split;
-	int		i;
-
-	pipe_split = quote_split(s, '|');
-	if (!pipe_split)
-		return (-1);
-	sh->pipeline = new_split(pipe_split->len);
-	if (!sh->pipeline)
-		return ((unsigned long long)del_split(pipe_split, &ft_free) - 2);
-	i = -1;
-	while (++i < pipe_split->len)
-	{
-		if (parse_cmd(pipe_split->data[i],
-					(t_cmd **)&(sh->pipeline->data[i])) < 0)
-			return ((unsigned long long)del_split(pipe_split, &ft_free) - 3);
-		sh->pipeline->len++;
-	}
-	return ((unsigned long long)del_split(pipe_split, &ft_free));
 }
 
 int	main_part1(t_sh *sh)
@@ -164,9 +139,8 @@ int	main_part1(t_sh *sh)
 		}
 		free(s);
 	}
-	if (parse_task(s, sh))
+	if (parse_cmd(s, &(sh->cmd)))
 		return ((unsigned long)ft_free((void *)s) + 1);
-	sh->cmd = (t_cmd *)sh->pipeline->data[0];
 	free(s);
 	return (0);
 }
