@@ -67,6 +67,15 @@ int		check_quote(char *s);
 int		check_pipe(char *s);
 
 /*
+**	Dans parser_pipe.c 
+*/
+void	parse_cmd02(char *s, t_cmd **cmd);
+t_list	*cut_pipe(char *s);
+int		pipe_cpy(char *dst, char *src);
+int		pipe_len(char *s);
+
+
+/*
 **	Étapes suivantes du fonctionnement du shell : fork(), recherche d'une
 **	builtin ou du chemin du binaire à exécuter, execve() dans le process fils
 **	et waitpid() dans le process père.
