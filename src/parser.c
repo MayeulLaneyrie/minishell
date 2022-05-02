@@ -43,33 +43,32 @@ int	word_len(char *s)
 */
 int	word_cpy(char *dst, char *src)
 {
-	int	ret;
+	int	i;
 	int	quote;
 	int	d_quote;
 
-	ret = 0;
+	i = 0;
 	quote = 0;
 	d_quote = 0;
-	while (*src && (!ft_strchr(METACHAR, *src) || quote || d_quote))
+	while (src[i] && (!ft_strchr(METACHAR, *src) || quote || d_quote))
 	{
-		if (*src == '"' && !quote && !d_quote)
+		if (src[i] == '"' && !quote && !d_quote)
 			d_quote = 1;
-		else if (*src == '"' && d_quote)
+		else if (src[i] == '"' && d_quote)
 			d_quote = 0;
-		else if (*src == '\'' && !quote && !d_quote)
+		else if (src[i] == '\'' && !quote && !d_quote)
 			quote = 1;
-		else if (*src == '\'' && quote)
+		else if (src[i] == '\'' && quote)
 			quote = 0;
 		else
 		{
-			*dst = *src;
+			*dst = src[i];
 			dst++;
 		}
-		ret++;
-		src++;
+		i++;
 	}
 	*dst = '\0';
-	return (ret);
+	return (i);
 }
 
 /*
@@ -107,18 +106,27 @@ int	parse_cmd(char *s, t_cmd **cmd)
 	*cmd = new_cmd();
 	if (!*cmd)
 		return (-1);
-	word_list = cut_words(s);
-	if (!word_list)
-		return (-2);
-	word_split = list_to_split(&word_list);
-	if (!word_split)
-		return (-3);
-	(*cmd)->ac = word_split->len;
-	(*cmd)->av = (char **)word_split->data;
-	free(word_split);
+	if (check_pipe > 0)
+		parse_cmd02(s, cmd);
+	else
+	{
+		word_list = cut_words(s);
+		if (!word_list)
+			return (-2);
+		word_split = list_to_split(&word_list);
+		if (!word_split)
+			return (-3);
+		(*cmd)->ac = word_split->len;
+		(*cmd)->av = (char **)word_split->data;
+		free(word_split);
+	}
 	return (0);
 }
 
+/*
+**	Parse le retour de readline :
+**	et stock les tokens dans un char ** (sh.cmd.av)
+*/
 int	main_part1(t_sh *sh)
 {
 	char	*s;
