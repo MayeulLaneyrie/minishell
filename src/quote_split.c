@@ -28,7 +28,7 @@ int	quote_split_setchar(char *s, char c)
 
 t_split	*quote_split(char *s, char c)
 {
-	t_split *ret;
+	t_split	*ret;
 
 	quote_split_setchar(s, c);
 	ret = ft_split(s, -1);

@@ -76,7 +76,6 @@ t_list	*cut_pipe(char *s);
 int		pipe_cpy(char *dst, char *src);
 int		pipe_len(char *s);
 
-
 /*
 **	Étapes suivantes du fonctionnement du shell : fork(), recherche d'une
 **	builtin ou du chemin du binaire à exécuter, execve() dans le process fils
