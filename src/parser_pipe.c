@@ -14,14 +14,14 @@ int	parse_cmd02(char *s, t_sh **sh)
 	tmp = quote_split(s, '|');
 	if (!tmp)
 		return (-1);
-	sh[0]->pipeline = new_split(tmp->len);
-	if (!sh[0]->pipeline)
+	(*sh)->pipeline = new_split(tmp->len);
+	if (!(*sh)->pipeline)
 		return (-2);
-	sh[0]->pipeline->len = tmp->len;
+	(*sh)->pipeline->len = tmp->len;
 	while (tmp->data[++n])
 	{
-		sh[0]->pipeline->data[n] = new_cmd();
-		if (!sh[0]->pipeline->data[n])
+		(*sh)->pipeline->data[n] = new_cmd();
+		if (!(*sh)->pipeline->data[n])
 			return (-3);
 		parse_cmd(tmp->data[n], sh);
 	}

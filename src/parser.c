@@ -103,8 +103,13 @@ int	parse_cmd(char *s, t_sh **sh)
 	t_list	*word_list;
 	t_split	*word_split;
 
+	write(1, "A\n", 2);
 	if (check_pipe(s) > 0)
+	{
+		write(1, "B\n", 2);
 		parse_cmd02(s, sh);
+		write(1, "B2\n", 3);
+	}
 	else
 	{
 		(*sh)->pipeline = new_split(1);
@@ -120,6 +125,7 @@ int	parse_cmd(char *s, t_sh **sh)
 		if (!word_split)
 			return (-3);
 		((t_cmd *)(*sh)->pipeline->data[0])->ac = word_split->len;
+		printf("%p\n", (*sh)->pipeline->data[0]);
 		((t_cmd *)(*sh)->pipeline->data[0])->av = (char **)word_split->data;
 		free(word_split);
 	}
