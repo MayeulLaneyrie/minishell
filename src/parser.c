@@ -98,26 +98,33 @@ t_list	*cut_words(char *s)
 	return (ret);
 }
 
-int	parse_cmd(char *s, t_cmd **cmd)
+int	parse_cmd(char *s, t_sh **sh)
 {
 	t_list	*word_list;
 	t_split	*word_split;
 
-	*cmd = new_cmd();
-	if (!*cmd)
+	write(1, "A\n", 2);
+	(t_cmd *)(sh[0]->pipeline->data[0]);
+	(sh[0]->pipeline->data[0]) = new_cmd();
+	if (!sh[0]->pipeline->data[0])
 		return (-1);
-	if (check_pipe > 0)
-		parse_cmd02(s, cmd);
+	write(1, "B\n", 2);
+	if (check_pipe(s) > 0)
+	{
+		write(1, "Y\n", 2);
+		parse_cmd02(s, sh);
+	}
 	else
 	{
+		write(1, "Z\n", 2);
 		word_list = cut_words(s);
 		if (!word_list)
 			return (-2);
 		word_split = list_to_split(&word_list);
 		if (!word_split)
 			return (-3);
-		(*cmd)->ac = word_split->len;
-		(*cmd)->av = (char **)word_split->data;
+		((t_cmd *)sh[0]->pipeline->data[0])->ac = word_split->len;
+		((t_cmd *)sh[0]->pipeline->data[0])->av = (char **)word_split->data;
 		free(word_split);
 	}
 	return (0);
@@ -147,7 +154,7 @@ int	main_part1(t_sh *sh)
 		}
 		free(s);
 	}
-	if (parse_cmd(s, &(sh->cmd)))
+	if (parse_cmd(s, &sh))
 		return ((unsigned long)ft_free((void *)s) + 1);
 	free(s);
 	return (0);

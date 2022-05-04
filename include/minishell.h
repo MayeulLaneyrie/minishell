@@ -59,7 +59,11 @@ extern int	g_xt_stat;
 **	avoir été correctement initialisé, a moins qu'il faille quitter le shell.
 */
 int		main_part1(t_sh *sh);
+int		parse_cmd(char *s, t_sh **sh);
 
+/*
+**	Dans quote_split.c
+*/
 t_split	*quote_split(char *s, char c);
 
 /*
@@ -71,10 +75,7 @@ int		check_pipe(char *s);
 /*
 **	Dans parser_pipe.c 
 */
-void	parse_cmd02(char *s, t_cmd **cmd);
-t_list	*cut_pipe(char *s);
-int		pipe_cpy(char *dst, char *src);
-int		pipe_len(char *s);
+int		parse_cmd02(char *s, t_sh **sh);
 
 /*
 **	Étapes suivantes du fonctionnement du shell : fork(), recherche d'une
