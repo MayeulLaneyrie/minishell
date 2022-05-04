@@ -103,28 +103,24 @@ int	parse_cmd(char *s, t_sh **sh)
 	t_list	*word_list;
 	t_split	*word_split;
 
-	write(1, "A\n", 2);
-	(t_cmd *)(sh[0]->pipeline->data[0]);
-	(sh[0]->pipeline->data[0]) = new_cmd();
-	if (!sh[0]->pipeline->data[0])
-		return (-1);
-	write(1, "B\n", 2);
 	if (check_pipe(s) > 0)
-	{
-		write(1, "Y\n", 2);
 		parse_cmd02(s, sh);
-	}
 	else
 	{
-		write(1, "Z\n", 2);
+		(*sh)->pipeline = new_split(1);
+		if (!(*sh)->pipeline)
+			return (-2);
+		((*sh)->pipeline->data[0]) = new_cmd();
+		if (!(*sh)->pipeline->data[0])
+			return (-1);
 		word_list = cut_words(s);
 		if (!word_list)
 			return (-2);
 		word_split = list_to_split(&word_list);
 		if (!word_split)
 			return (-3);
-		((t_cmd *)sh[0]->pipeline->data[0])->ac = word_split->len;
-		((t_cmd *)sh[0]->pipeline->data[0])->av = (char **)word_split->data;
+		((t_cmd *)(*sh)->pipeline->data[0])->ac = word_split->len;
+		((t_cmd *)(*sh)->pipeline->data[0])->av = (char **)word_split->data;
 		free(word_split);
 	}
 	return (0);
