@@ -83,6 +83,7 @@ int	main_part2(t_sh *sh)
 {
 	int	stat;
 
+	sh->cmd = (t_cmd *)sh->pipeline->data[0];
 	stat = cmd_proc(sh, sh->cmd);
 	if (stat || sh->cmd->pid < 0)
 		return (stat == CMD_EXIT);
