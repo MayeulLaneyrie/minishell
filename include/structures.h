@@ -42,6 +42,9 @@ typedef struct s_cmd
 	char	*path;
 	int		ac;
 	char	**av;
+	int		redirect[2];
+	int		pipe_in[2];
+	int		pipe_out[2];
 }	t_cmd;
 
 /*

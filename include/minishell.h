@@ -94,7 +94,11 @@ int		main_part2(t_sh *sh);
 # define CMD_WAIT 0
 # define CMD_NOWAIT 1
 
-int		cmd_proc(t_sh *sh, t_cmd *cmd);
+int		cmd_proc(t_sh *sh, t_cmd *cmd, int do_fork);
+
+# define STDIN 0
+# define STDOUT 1
+# define STDERR 2
 
 /*
 **	Dans builtin_central.c :

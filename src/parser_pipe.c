@@ -23,6 +23,7 @@ int	parse_cmd02(char *s, t_sh **sh)
 		(*sh)->pipeline->data[n] = new_cmd();
 		if (!(*sh)->pipeline->data[n])
 			return (-3);
+		printf("JE SUIS LA\n");
 		parse_cmd(tmp->data[n], sh);
 	}
 	del_split(tmp, &ft_free);

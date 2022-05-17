@@ -53,7 +53,7 @@ char	*search_path(char *path, char *name)
 	return (NULL);
 }
 
-int	cmd_proc(t_sh *sh, t_cmd *cmd)
+int	cmd_proc(t_sh *sh, t_cmd *cmd, int do_fork)
 {
 	if (!ft_strchr(cmd->av[0], '/'))
 	{
@@ -70,24 +70,80 @@ int	cmd_proc(t_sh *sh, t_cmd *cmd)
 		if (!cmd->path)
 			return (CMD_EXIT);
 	}
-	cmd->pid = fork();
-	if (cmd->pid)
-		return (CMD_WAIT);
+	if (do_fork)
+	{
+		cmd->pid = fork();
+		if (cmd->pid)
+			return (CMD_WAIT);
+	}
 	execve(cmd->path, cmd->av, sh->envp);
 	excvefail_handler(cmd->path, sh);
 	ft_free((void **)&(cmd->path));
 	return (CMD_EXIT);
 }
 
+int	spawn_pipe_cmd(t_sh *sh, t_cmd *cmd)
+{
+	close(cmd->pipe_in[STDOUT]);
+	close(cmd->pipe_out[STDIN]);
+	cmd_proc(sh, cmd, 0);
+	close(cmd->pipe_in[STDIN]);
+	close(cmd->pipe_out[STDOUT]);
+	exit(g_xt_stat);
+}
+
+int	pipeline_spawner(t_sh *sh)
+{
+	int		i;
+	int		pid;
+	t_cmd	**cmd;
+
+	cmd = (t_cmd **)sh->pipeline->data;
+	i = -1;
+	while (++i < sh->pipeline->len)
+	{
+		if (i)
+			cmd[i]->redirect[STDIN] = 1;
+		if (i != sh->pipeline->len - 1)
+		{
+			cmd[i]->redirect[STDOUT] = 1;
+			if (pipe(cmd[i]->pipe_out))
+				exit(EXIT_FAILURE);
+			cmd[i + 1]->pipe_in[STDIN] = cmd[i]->pipe_out[STDIN];
+			cmd[i + 1]->pipe_in[STDOUT] = cmd[i]->pipe_out[STDOUT];
+		}
+		pid = fork();
+		if (pid < 0)
+			exit(EXIT_FAILURE);
+		if (!pid)
+			spawn_pipe_cmd(sh, cmd[i]);
+		else if (i)
+		{
+			close(cmd[i]->pipe_in[STDIN]);
+			close(cmd[i]->pipe_in[STDOUT]);
+		}
+	}
+	return (0);
+}
+
 int	main_part2(t_sh *sh)
 {
-	int	stat;
+	int		stat;
+	t_cmd	**cmd;
 
-	sh->cmd = (t_cmd *)sh->pipeline->data[0];
-	stat = cmd_proc(sh, sh->cmd);
-	if (stat || sh->cmd->pid < 0)
+	printf("COUILLE\n");
+	cmd = (t_cmd **)sh->pipeline->data;
+	printf("%d\n", sh->pipeline->len);
+	if (sh->pipeline->len != 1)
+		stat = pipeline_spawner(sh);
+	else
+	{
+		printf("BITE\n");
+		stat = cmd_proc(sh, cmd[0], 1);
+	}
+	if (stat || cmd[sh->pipeline->len - 1]->pid < 0)
 		return (stat == CMD_EXIT);
-	waitpid(sh->cmd->pid, &stat, 0);
+	waitpid(cmd[sh->pipeline->len - 1]->pid, &stat, 0);
 	g_xt_stat = WEXITSTATUS(stat);
 	return (0);
 }
