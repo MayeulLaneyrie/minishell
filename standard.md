@@ -20,7 +20,7 @@
 * All MkI functionalities, plus the following :
 
 - [x] Manage history
-- [ ] Manage pipes
+- [x] Manage pipes
 
 * No expansion
 * No redirection
