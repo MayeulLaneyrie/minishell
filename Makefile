@@ -1,7 +1,6 @@
 SRCS =	src/main.c \
 		src/newdel_cmd_sh.c \
 		src/parser.c \
-		src/parser_pipe.c \
 		src/utils.c \
 		src/main_part2.c \
 		src/env.c \

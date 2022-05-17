@@ -2,7 +2,7 @@
 
 // Quote split, le split ultime, qui respecte vos règles de quoting !
 
-int	quote_split_setchar(char *s, char c)
+int	quote_split_setchar(char *s, char *set)
 {
 	int	quote;
 	int	d_quote;
@@ -19,23 +19,23 @@ int	quote_split_setchar(char *s, char c)
 			quote = 1;
 		else if (*s == '\'' && quote)
 			quote = 0;
-		else if (*s == c && !quote && !d_quote)
+		else if (ft_strchr(set, *s) && !quote && !d_quote)
 			*s = -1;
 		s++;
 	}
 	return (0);
 }
 
-t_split	*quote_split(char *s, char c)
+t_split	*quote_split(char *s, char *set)
 {
 	t_split	*ret;
 
-	quote_split_setchar(s, c);
+	quote_split_setchar(s, set);
 	ret = ft_split(s, -1);
 	while (*s)
 	{
 		if (*s == -1)
-			*s = c;
+			*s = *set;
 		s++;
 	}
 	return (ret);

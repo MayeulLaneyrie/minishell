@@ -17,7 +17,8 @@ int	exit_arg_checker(char *s)
 
 int	bi_exit(t_sh *sh, t_cmd *cmd)
 {
-	write(2, "exit\n", 5);
+	if (!(cmd->redirect[STDIN] + cmd->redirect[STDOUT]))
+		write(2, "exit\n", 5);
 	if (cmd->ac < 2)
 		return (CMD_EXIT);
 	if (exit_arg_checker(cmd->av[1]))

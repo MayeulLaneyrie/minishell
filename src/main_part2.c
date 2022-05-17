@@ -84,18 +84,27 @@ int	cmd_proc(t_sh *sh, t_cmd *cmd, int do_fork)
 
 int	spawn_pipe_cmd(t_sh *sh, t_cmd *cmd)
 {
-	close(cmd->pipe_in[STDOUT]);
-	close(cmd->pipe_out[STDIN]);
+	if (cmd->redirect[STDIN])
+	{
+		close(cmd->pipe_in[STDOUT]);
+		dup2(cmd->pipe_in[STDIN], STDIN);
+	}
+	if (cmd->redirect[STDOUT])
+	{
+		close(cmd->pipe_out[STDIN]);
+		dup2(cmd->pipe_out[STDOUT], STDOUT);
+	}
 	cmd_proc(sh, cmd, 0);
-	close(cmd->pipe_in[STDIN]);
-	close(cmd->pipe_out[STDOUT]);
+	if (cmd->redirect[STDIN])
+		close(cmd->pipe_in[STDIN]);
+	if (cmd->redirect[STDOUT])
+		close(cmd->pipe_out[STDOUT]);
 	exit(g_xt_stat);
 }
 
 int	pipeline_spawner(t_sh *sh)
 {
 	int		i;
-	int		pid;
 	t_cmd	**cmd;
 
 	cmd = (t_cmd **)sh->pipeline->data;
@@ -112,10 +121,10 @@ int	pipeline_spawner(t_sh *sh)
 			cmd[i + 1]->pipe_in[STDIN] = cmd[i]->pipe_out[STDIN];
 			cmd[i + 1]->pipe_in[STDOUT] = cmd[i]->pipe_out[STDOUT];
 		}
-		pid = fork();
-		if (pid < 0)
+		cmd[i]->pid = fork();
+		if (cmd[i]->pid < 0)
 			exit(EXIT_FAILURE);
-		if (!pid)
+		if (!cmd[i]->pid)
 			spawn_pipe_cmd(sh, cmd[i]);
 		else if (i)
 		{
@@ -130,20 +139,18 @@ int	main_part2(t_sh *sh)
 {
 	int		stat;
 	t_cmd	**cmd;
+	int		i;
 
-	printf("COUILLE\n");
 	cmd = (t_cmd **)sh->pipeline->data;
-	printf("%d\n", sh->pipeline->len);
 	if (sh->pipeline->len != 1)
 		stat = pipeline_spawner(sh);
 	else
-	{
-		printf("BITE\n");
 		stat = cmd_proc(sh, cmd[0], 1);
-	}
 	if (stat || cmd[sh->pipeline->len - 1]->pid < 0)
 		return (stat == CMD_EXIT);
-	waitpid(cmd[sh->pipeline->len - 1]->pid, &stat, 0);
+	i = -1;
+	while (++i < sh->pipeline->len)
+		waitpid(cmd[i]->pid, &stat, 0);
 	g_xt_stat = WEXITSTATUS(stat);
 	return (0);
 }
