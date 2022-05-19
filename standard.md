@@ -33,7 +33,9 @@
 - [ ] '<', '>' and '>>' redirections
 - [ ] Variable expansion
 
-- [ ] "env", "unset" and "export" builtins
+- [x] "env" builtin
+- [ ] "unset" builtin
+- [ ] "export" builtin
 
 * No heredoc implementation
 * No handling of ctrl-c, ctrl-d, ctrl-\

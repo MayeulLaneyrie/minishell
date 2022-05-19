@@ -73,11 +73,6 @@ int		check_quote(char *s);
 int		check_pipe(char *s);
 
 /*
-**	Dans parser_pipe.c 
-*/
-int		parse_cmd02(char *s, t_sh **sh);
-
-/*
 **	Étapes suivantes du fonctionnement du shell : fork(), recherche d'une
 **	builtin ou du chemin du binaire à exécuter, execve() dans le process fils
 **	et waitpid() dans le process père.
@@ -105,6 +100,14 @@ int		cmd_proc(t_sh *sh, t_cmd *cmd, int do_fork);
 */
 int		builtin_search(char *s);
 int		builtin_exec(t_sh *sh, t_cmd *cmd);
+
+int	bi_exit(t_sh *sh, t_cmd *cmd);
+
+/*
+**	Dans env_builtin.c :
+*/
+
+int	bi_env(t_sh *sh, t_cmd *cmd);
 
 /*
 **	Dans display_utils.c :

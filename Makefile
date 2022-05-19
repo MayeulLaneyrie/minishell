@@ -7,7 +7,8 @@ SRCS =	src/main.c \
 		src/split_utils.c \
 		src/builtin_central.c \
 		src/quote_split.c \
-		src/display_utils.c
+		src/display_utils.c \
+		src/env_builtin.c
 
 OBJS		= ${SRCS:.c=.o}
 
