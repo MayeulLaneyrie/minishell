@@ -24,8 +24,10 @@ t_cmd	*new_cmd(void)
 	ret->path = NULL;
 	ret->ac = 0;
 	ret->av = NULL;
-	ret->redirect[STDIN] = 0;
-	ret->redirect[STDOUT] = 0;
+	ret->is_piped[STDIN] = 0;
+	ret->is_piped[STDOUT] = 0;
+	ret->red_out = NULL;
+	ret->red_in = NULL;
 	return (ret);
 }
 
