@@ -55,7 +55,7 @@ typedef struct s_cmd
 typedef struct s_sh
 {
 	char			*exec_name;
-	char			**envp;
+	t_split			*env;
 	t_cmd			*cmd;
 	t_split			*pipeline;
 }	t_sh;

@@ -32,8 +32,9 @@ int	main(int ac, char **av, char **envp)
 {
 	t_sh	sh;
 
-	printf("Welcome to minishell \"MarkII\"!\n");
-	new_sh(ac, av, envp, &sh);
+	printf("Welcome to minishell \"MarkIII\"!\n");
+	if (new_sh(ac, av, envp, &sh) < 0)
+		return (-1);
 	while (!main_part1(&sh))
 	{
 		//sh_debug(&sh);

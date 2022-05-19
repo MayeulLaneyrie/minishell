@@ -60,7 +60,7 @@ int	cmd_proc(t_sh *sh, t_cmd *cmd, int do_fork)
 		cmd->builtin_id = builtin_search(cmd->av[0]);
 		if (cmd->builtin_id >= 0)
 			return (builtin_exec(sh, cmd));
-		cmd->path = search_path(get_var(sh->envp, "PATH"), cmd->av[0]);
+		cmd->path = search_path(get_var(sh->env, "PATH"), cmd->av[0]);
 		if (!cmd->path)
 			return (cnf_handler(cmd) + CMD_NOWAIT);
 	}
@@ -76,7 +76,7 @@ int	cmd_proc(t_sh *sh, t_cmd *cmd, int do_fork)
 		if (cmd->pid)
 			return (CMD_WAIT);
 	}
-	execve(cmd->path, cmd->av, sh->envp);
+	execve(cmd->path, cmd->av, (char **)sh->env->data);
 	excvefail_handler(cmd->path, sh);
 	ft_free((void **)&(cmd->path));
 	return (CMD_EXIT);
