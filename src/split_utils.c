@@ -1,4 +1,4 @@
-#include "../include/minishell.h"
+#include "../include/split_utils.h"
 
 t_split	*new_split(int n)
 {

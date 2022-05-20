@@ -24,6 +24,22 @@
 # define METACHAR "\t\n|&;<( )>"
 # define SPACES "\t\n\r\v\f "
 
+# define GNL_BUFFER_SIZE 256
+
+/*
+**	Valeur de retour de cmd_proc() :
+**		- <0 : Le shell doit exit (exit, erreur fatale ou execve fail)
+**		- 0 : Process père, attendre le statut d'exit.
+**		- >0 : Pas d'exit, mais pas de process fils à attendre (builtin).
+*/
+# define CMD_EXIT -1
+# define CMD_WAIT 0
+# define CMD_NOWAIT 1
+
+# define STDIN 0
+# define STDOUT 1
+# define STDERR 2
+
 /*
 **	Juste une libft normale, avec des chaînes doublement chainées.
 */
@@ -62,6 +78,12 @@ int		main_part1(t_sh *sh);
 int		parse_cmd(char *s, t_sh *sh);
 
 /*
+**	Dans gnl.c, juste un gnl :
+*/
+
+int		get_next_line(char **line);
+
+/*
 **	Dans quote_split.c
 */
 t_split	*quote_split(char *s, char *set);
@@ -79,35 +101,27 @@ int		check_pipe(char *s);
 */
 int		main_part2(t_sh *sh);
 
-/*
-**	Valeur de retour de cmd_proc() :
-**		- <0 : Le shell doit exit (exit, erreur fatale ou execve fail)
-**		- 0 : Process père, attendre le statut d'exit.
-**		- >0 : Pas d'exit, mais pas de process fils à attendre (builtin).
-*/
-# define CMD_EXIT -1
-# define CMD_WAIT 0
-# define CMD_NOWAIT 1
-
 int		cmd_proc(t_sh *sh, t_cmd *cmd, int do_fork);
-
-# define STDIN 0
-# define STDOUT 1
-# define STDERR 2
 
 /*
 **	Dans builtin_central.c :
 */
+
 int		builtin_search(char *s);
+
 int		builtin_exec(t_sh *sh, t_cmd *cmd);
 
-int	bi_exit(t_sh *sh, t_cmd *cmd);
+int		bi_exit(t_sh *sh, t_cmd *cmd);
 
 /*
 **	Dans env_builtin.c :
 */
 
-int	bi_env(t_sh *sh, t_cmd *cmd);
+int		bi_env(t_sh *sh, t_cmd *cmd);
+
+int		bi_export(t_sh *sh, t_cmd *cmd);
+
+int		bi_unset(t_sh *sh, t_cmd *cmd);
 
 /*
 **	Dans display_utils.c :

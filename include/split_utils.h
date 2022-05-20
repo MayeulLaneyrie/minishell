@@ -1,6 +1,10 @@
 #ifndef SPLIT_UTILS_H
 # define SPLIT_UTILS_H
 
+# include <stdlib.h>
+# include "../include/structures.h"
+# include "../libft/libft.h"
+
 /*
 **	Dans split_utils.c
 */
@@ -23,5 +27,9 @@ void	*del_split(t_split *split, void *(*del)(void *));
 t_split	*list_to_split(t_list **lst);
 
 t_list	*split_to_list(t_split **split);
+
+int		split_extend(t_split *split, int n);
+
+int		split_push(t_split *split, void *data, int index);
 
 #endif

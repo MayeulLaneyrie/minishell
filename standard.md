@@ -34,8 +34,8 @@
 - [ ] Variable expansion
 
 - [x] "env" builtin
-- [ ] "unset" builtin
-- [ ] "export" builtin
+- [x] "unset" builtin
+- [x] "export" builtin
 
 * No heredoc implementation
 * No handling of ctrl-c, ctrl-d, ctrl-\
@@ -47,7 +47,9 @@
 - [ ] Handling of ctrl-c, ctrl-d, ctrl-\
 - [ ] Handling of $? expansion
 - [ ] Heredoc implementation
-- [ ] "echo", "cd" and "pwd" implementation
+- [ ] "echo" builtin
+- [ ] "cd" builtin
+- [ ] "pwd" builtin
 
 > At that point, all the functionalities of the mandatory part should be implemented properly.
 

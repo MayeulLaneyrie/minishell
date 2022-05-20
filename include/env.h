@@ -12,7 +12,11 @@ t_split	*load_env(char **envp);
 **	qu'on pourrait vouloir les copier soi-même pour un usage sur le long terme,
 **	car des appels ultérieurs à set_var() et unset_var() pourraient modifier les
 **	données pointées.
+**	Renvoie NULL si la variable n'a pas été trouvée.
+**	env doit être correctement formatté.
 */
 char	*get_var(t_split *env, char *name);
+
+int		get_var_index(t_split *env, char *name);
 
 #endif

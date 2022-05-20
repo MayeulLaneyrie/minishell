@@ -4,7 +4,7 @@ int	g_xt_stat = 0;
 
 int	sh_debug(t_sh *sh)
 {
-	t_cmd **cmd;
+	t_cmd	**cmd;
 
 	if (!sh)
 		return (printf("SH IS NULL\n"));
@@ -35,8 +35,10 @@ int	main(int ac, char **av, char **envp)
 	printf("Welcome to minishell \"MarkIII\"!\n");
 	if (new_sh(ac, av, envp, &sh) < 0)
 		return (-1);
-	while (!main_part1(&sh))
+	while (1)
 	{
+		if (main_part1(&sh))
+			break ;
 		//sh_debug(&sh);
 		if (main_part2(&sh))
 			break ;

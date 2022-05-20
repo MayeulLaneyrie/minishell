@@ -35,6 +35,25 @@ char	*get_var(t_split *env, char *name)
 		if (!ft_strncmp(((char **)env->data)[i], name, l))
 			break ;
 	if (!((char **)env->data)[i])
-		return (((char **)env->data)[i]);
+		return (NULL);
 	return (((char **)env->data)[i] + l + 1);
+}
+
+int	get_var_index(t_split *env, char *name)
+{
+	int	i;
+	int	l;
+
+	if (!name || !env)
+		return (-42);
+	l = -1;
+	while (name[++l] != '=' && name[l])
+		;
+	i = -1;
+	while (++i < env->len)
+		if (!ft_strncmp(((char **)env->data)[i], name, l))
+			break ;
+	if (!((char **)env->data)[i])
+		return (-1);
+	return (i);
 }

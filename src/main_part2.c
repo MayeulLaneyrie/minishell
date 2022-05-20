@@ -36,6 +36,8 @@ char	*search_path(char *path, char *name)
 	char	*temp;
 	int		i;
 
+	if (!path)
+		return (NULL);
 	dirs = ft_split(path, ':');
 	if (!dirs)
 		return (NULL);
@@ -78,7 +80,6 @@ int	cmd_proc(t_sh *sh, t_cmd *cmd, int do_fork)
 	}
 	execve(cmd->path, cmd->av, (char **)sh->env->data);
 	excvefail_handler(cmd->path, sh);
-	ft_free((void **)&(cmd->path));
 	return (CMD_EXIT);
 }
 

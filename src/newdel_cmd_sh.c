@@ -39,6 +39,8 @@ void	*del_cmd(void *ptr)
 	cmd = (t_cmd *)ptr;
 	if (!cmd)
 		return (NULL);
+	if (cmd->path != cmd->av[0])
+		ft_free(cmd->path);
 	if (cmd->av)
 	{
 		i = -1;
@@ -46,7 +48,6 @@ void	*del_cmd(void *ptr)
 			ft_free((void *)cmd->av[i]);
 		ft_free((void *)cmd->av);
 	}
-	ft_free((void *)cmd->path);
 	ft_free((void *)cmd);
 	return (NULL);
 }
@@ -70,5 +71,6 @@ void	*del_sh(t_sh *sh)
 	if (!sh)
 		return (NULL);
 	del_split(sh->pipeline, &del_cmd);
+	del_split(sh->env, &ft_free);
 	return (NULL);
 }

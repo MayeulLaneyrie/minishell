@@ -139,16 +139,23 @@ int	parse_cmd(char *s, t_sh *sh)
 int	main_part1(t_sh *sh)
 {
 	char	*s;
+	int		i;
 
 	while (1)
 	{
-		s = readline("$ ");
+		if (isatty(0))
+			s = readline("$ ");
+		else
+			get_next_line(&s);
 		if (!s)
 		{
 			write(2, "exit\n", 5);
 			return (1);
 		}
-		if (*s)
+		i = -1;
+		while (ft_strchr(SPACES, s[++i]) && s[i])
+			;
+		if (*s && s[i])
 		{
 			add_history(s);
 			if (check_quote(s) != -1)

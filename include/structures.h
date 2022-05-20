@@ -42,7 +42,6 @@ typedef struct s_red
 	char	*word;
 }	t_red;
 
-
 typedef struct s_cmd
 {
 	int		pid;
