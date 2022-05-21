@@ -56,8 +56,7 @@ typedef struct s_cmd
 	int		is_piped[2];
 	int		pipe_in[2];
 	int		pipe_out[2];
-	t_list	*red_in;
-	t_list	*red_out;
+	t_list	*red;
 }	t_cmd;
 
 /*
