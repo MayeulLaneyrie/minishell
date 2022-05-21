@@ -8,7 +8,7 @@ int	bi_env(t_sh *sh, t_cmd *cmd)
 	i = -1;
 	while (++i < sh->env->len)
 		printf("%s\n", ((char **)sh->env->data)[i]);
-	return (CMD_WAIT);
+	return (CMD_NOWAIT);
 }
 
 int	check_identifier(char *s, t_sh *sh, t_cmd *cmd, int stop_at_eq)
@@ -60,7 +60,7 @@ int	bi_export(t_sh *sh, t_cmd *cmd)
 		i = -1;
 		while (++i < sh->env->len)
 			printf("%s\n", ((char **)sh->env->data)[i]);
-		return (CMD_WAIT);
+		return (CMD_NOWAIT);
 	}
 	i = 0;
 	xt = 0;
@@ -72,7 +72,7 @@ int	bi_export(t_sh *sh, t_cmd *cmd)
 		xt += n;
 	}
 	g_xt_stat = xt != 0;
-	return (CMD_WAIT);
+	return (CMD_NOWAIT);
 }
 
 int	bi_unset(t_sh *sh, t_cmd *cmd)
@@ -99,5 +99,5 @@ int	bi_unset(t_sh *sh, t_cmd *cmd)
 		else
 			g_xt_stat = 1;
 	}
-	return (CMD_WAIT);
+	return (CMD_NOWAIT);
 }
