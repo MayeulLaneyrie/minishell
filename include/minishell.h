@@ -40,6 +40,12 @@
 # define STDOUT 1
 # define STDERR 2
 
+# define RED_IN 0
+# define RED_OUT 1
+
+# define RED_TRUNC 0
+# define RED_APPEND 1
+
 /*
 **	Juste une libft normale, avec des chaînes doublement chainées.
 */

@@ -5,7 +5,7 @@ int	bi_pwd(t_sh *sh, t_cmd *cmd)
 	char	*buff;
 	int		size;
 
-	size = 256;
+	size = GNL_BUFFER_SIZE;
 	while (1)
 	{
 		buff = malloc(size);
