@@ -40,6 +40,12 @@
 # define STDOUT 1
 # define STDERR 2
 
+# define RED_IN 0
+# define RED_OUT 1
+
+# define RED_TRUNC 0
+# define RED_APPEND 1
+
 /*
 **	Juste une libft normale, avec des chaînes doublement chainées.
 */
@@ -128,6 +134,12 @@ int		bi_env(t_sh *sh, t_cmd *cmd);
 int		bi_export(t_sh *sh, t_cmd *cmd);
 
 int		bi_unset(t_sh *sh, t_cmd *cmd);
+
+/*
+**	Dans pwd_builtin.c :
+*/
+
+int		bi_pwd(t_sh *sh, t_cmd *cmd);
 
 /*
 **	Dans display_utils.c :

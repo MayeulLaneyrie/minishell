@@ -35,10 +35,14 @@ typedef struct s_list
 	struct s_list	*prev;
 }	t_list;
 
+/*
+**	'in_out' can be RED_IN or RED_OUT, 'mode' can be RED_TRUNC or RED_APPEND.
+*/
 typedef struct s_red
 {
 	int		fd;
-	int		append;
+	int		in_out;
+	int		mode;
 	char	*word;
 }	t_red;
 
@@ -52,8 +56,7 @@ typedef struct s_cmd
 	int		is_piped[2];
 	int		pipe_in[2];
 	int		pipe_out[2];
-	t_list	*red_in;
-	t_list	*red_out;
+	t_list	*red;
 }	t_cmd;
 
 /*
