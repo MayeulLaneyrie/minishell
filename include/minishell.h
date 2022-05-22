@@ -95,6 +95,12 @@ int		check_quote(char *s);
 int		check_pipe(char *s);
 
 /*
+**	Dans var_env.c
+*/
+int		check_var_exp(char *s);
+int		switch_var(t_sh *sh, char **s);
+
+/*
 **	Étapes suivantes du fonctionnement du shell : fork(), recherche d'une
 **	builtin ou du chemin du binaire à exécuter, execve() dans le process fils
 **	et waitpid() dans le process père.

@@ -163,6 +163,8 @@ int	main_part1(t_sh *sh)
 		}
 		free(s);
 	}
+	if (check_var_exp(s))
+		switch_var(sh, &s);
 	if (parse_cmd(s, sh))
 		return ((unsigned long)ft_free((void *)s) + 1);
 	free(s);
