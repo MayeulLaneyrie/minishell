@@ -36,6 +36,8 @@ char	*get_var(t_split *env, char *name)
 			break ;
 	if (!((char **)env->data)[i])
 		return (NULL);
+	if (((char **)env->data)[i][l] != '=')
+		return (NULL);
 	return (((char **)env->data)[i] + l + 1);
 }
 
