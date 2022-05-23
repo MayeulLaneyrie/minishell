@@ -101,12 +101,18 @@ int	switch_var(t_sh *sh, char **s)
 	int		i;
 	char	*stck_exp;
 	char	*tmp;
+	int		quoted;
 
 	i = 0;
+	quoted = 0;
 	tmp = ft_strdup(*s);
 	while (s[0][i])
 	{
-		if (s[0][i] == '$')
+		if (s[0][i] == '\'' && !quoted)
+			quoted = 1;
+		else if (s[0][i] == '\'' && quoted)
+			quoted = 0;
+		if (s[0][i] == '$' && !quoted)
 		{
 			stck_exp = create_tmp(*s, i);
 			free (*s);
