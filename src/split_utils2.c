@@ -28,11 +28,10 @@ int	split_push(t_split *split, void *data, int index)
 	if (index > split->len || index < 0)
 		return (-1);
 	if (index == split->size)
-	{
 		if (split_extend(split, index) < 0)
 			return (-2);
+	if (index == split->len)
 		split->len++;
-	}
 	((void **)split->data)[index] = data;
 	return (0);
 }
