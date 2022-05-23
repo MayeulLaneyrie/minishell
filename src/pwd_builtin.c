@@ -17,7 +17,7 @@ int	bi_pwd(t_sh *sh, t_cmd *cmd)
 		if (errno != ERANGE || size > 0x8000)
 		{
 			g_xt_stat = 1;
-			ft_err4(sh->exec_name, cmd->av[0], strerror(errno));
+			ft_err4(sh->exec_name, cmd->av[0], strerror(errno), NULL);
 			return (CMD_NOWAIT);
 		}
 		size *= 2;

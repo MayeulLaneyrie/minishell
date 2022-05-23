@@ -81,6 +81,7 @@ extern int	g_xt_stat;
 **	avoir été correctement initialisé, a moins qu'il faille quitter le shell.
 */
 int		main_part1(t_sh *sh);
+
 int		parse_cmd(char *s, t_sh *sh);
 
 /*
@@ -98,6 +99,7 @@ t_split	*quote_split(char *s, char *set);
 **	Dans utils.c
 */
 int		check_quote(char *s);
+
 int		check_pipe(char *s);
 
 /*
@@ -108,6 +110,12 @@ int		check_pipe(char *s);
 int		main_part2(t_sh *sh);
 
 int		cmd_proc(t_sh *sh, t_cmd *cmd, int do_fork);
+
+/*
+**	Dans search_path.c :
+*/
+
+char	*search_path(char *path, char *name, int mode);
 
 /*
 **	Dans builtin_central.c :

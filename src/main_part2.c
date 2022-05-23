@@ -30,31 +30,6 @@ int	excvefail_handler(char *path, t_sh *sh)
 	return (0);
 }
 
-char	*search_path(char *path, char *name)
-{
-	t_split	*dirs;
-	char	*temp;
-	int		i;
-
-	if (!path)
-		return (NULL);
-	dirs = ft_split(path, ':');
-	if (!dirs)
-		return (NULL);
-	i = -1;
-	while (dirs->data[++i])
-	{
-		temp = ft_cat3(dirs->data[i], "/", name);
-		if (!temp)
-			return (del_split(dirs, &ft_free));
-		if (!access(temp, F_OK))
-			return (temp + (unsigned long)del_split(dirs, &ft_free));
-		free(temp);
-	}
-	del_split(dirs, &ft_free);
-	return (NULL);
-}
-
 int	cmd_proc(t_sh *sh, t_cmd *cmd, int do_fork)
 {
 	if (!ft_strchr(cmd->av[0], '/'))
@@ -62,7 +37,7 @@ int	cmd_proc(t_sh *sh, t_cmd *cmd, int do_fork)
 		cmd->builtin_id = builtin_search(cmd->av[0]);
 		if (cmd->builtin_id >= 0)
 			return (builtin_exec(sh, cmd));
-		cmd->path = search_path(get_var(sh->env, "PATH"), cmd->av[0]);
+		cmd->path = search_path(get_var(sh->env, "PATH"), cmd->av[0], 0);
 		if (!cmd->path)
 			return (cnf_handler(cmd) + CMD_NOWAIT);
 	}
