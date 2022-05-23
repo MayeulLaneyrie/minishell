@@ -88,7 +88,10 @@ char	*create_new_rdl(char **old_rdl, char *stck_exp, int len)
 }
 
 /*
-**	Remplace toutes les variables d'environnement d'une string.
+**	Description - Remplace toutes les variables d'environnement d'une string.
+**	t_sh *sh - Structure avec l'env complet du projet
+**  char **s - Adresse du retour d'un readline
+**	Retour - 0 en cas de succes ou un code d'erreur le cas echeant 
 */
 int	switch_var(t_sh *sh, char **s)
 {
