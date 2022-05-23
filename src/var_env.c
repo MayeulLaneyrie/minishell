@@ -31,7 +31,7 @@ char	*create_tmp(char *s, int i)
 
 	j = 0;
 	i_tmp = i;
-	while (s[i] != ' ' && s[i])
+	while (s[i] != ' ' && s[i] != '"' && s[i])
 		i++;
 	dest = (char *)malloc(sizeof(char) * i);
 	if (!dest)
@@ -47,7 +47,7 @@ char	*create_tmp(char *s, int i)
 	// 	dest = ft_itoa(g_xt_stat);
 	// 	return (dest);
 	// }
-	while (s[i] != ' ' && s[i])
+	while (s[i] != ' ' && s[i] != '"' && s[i])
 		dest[j++] = s[i++];
 	dest[j] = '\0';
 	return (dest);
@@ -67,18 +67,21 @@ char	*create_new_rdl(char **old_rdl, char *stck_exp, int len)
 	i = 0;
 	j = 0;
 	k = 0;
-	dest = (char *)malloc(sizeof(char) * (ft_strlen(*old_rdl) - len
-				+ ft_strlen(stck_exp) + 1));
+	if (!stck_exp)
+		dest = (char *)malloc(sizeof(char) * (ft_strlen(*old_rdl) - len + 1));
+	else
+		dest = (char *)malloc(sizeof(char) * (ft_strlen(*old_rdl) - len
+					+ ft_strlen(stck_exp) + 1));
 	if (!dest)
 		return (NULL);
 	while (old_rdl[0][i] != '$' && old_rdl[0][i])
 		dest[j++] = old_rdl[0][i++];
-	if (old_rdl[0][i] == '$')
+	if (old_rdl[0][i] == '$' && stck_exp != NULL)
 	{
 		while (stck_exp[k])
 			dest[j++] = stck_exp[k++];
 	}
-	while (old_rdl[0][i] != ' ' && old_rdl[0][i])
+	while (old_rdl[0][i] != ' ' && old_rdl[0][i] != '"' && old_rdl[0][i])
 		i++;
 	while (old_rdl[0][i])
 		dest[j++] = old_rdl[0][i++];
@@ -107,14 +110,16 @@ int	switch_var(t_sh *sh, char **s)
 		{
 			stck_exp = create_tmp(*s, i);
 			free (*s);
-			if (!*s)
-				return (MALLOC_ERROR);
 			*s = create_new_rdl(&tmp, get_var(sh->env, stck_exp),
 					(ft_strlen(stck_exp) + 1));
+			if (!*s)
+				return (MALLOC_ERROR);
 			tmp = ft_strdup(*s);
+			free(stck_exp);
 			i = 0;
 		}
 		i++;
 	}
+	free(tmp);
 	return (0);
 }

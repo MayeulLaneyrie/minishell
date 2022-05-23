@@ -26,8 +26,6 @@ t_cmd	*new_cmd(void)
 	ret->av = NULL;
 	ret->is_piped[STDIN] = 0;
 	ret->is_piped[STDOUT] = 0;
-	ret->red_out = NULL;
-	ret->red_in = NULL;
 	return (ret);
 }
 
