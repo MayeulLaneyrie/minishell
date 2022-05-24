@@ -51,11 +51,11 @@ char	*create_tmp(char *s, int i)
 /*
 **	Remplace dans une string la premiere variable d'environnement rencontree.
 **	old_rdl : adresse de la string a modifier
-**	stck_exp : resultat de la variable d'environnement a modifier
-**	len : taille de stck_exp
+**	var_env : resultat de la variable d'environnement a modifier
+**	len : taille de var_env
 **	retour : string nouvellement modifiee ou NULL le cas echeant.
 */
-char	*create_new_rdl(char **old_rdl, char *stck_exp, int len)
+char	*create_new_rdl(char **old_rdl, char *var_env, int len)
 {
 	char	*dest;
 	int		i;
@@ -63,27 +63,23 @@ char	*create_new_rdl(char **old_rdl, char *stck_exp, int len)
 
 	i = 0;
 	j = 0;
-	if (!stck_exp)
+	if (!var_env)
 		dest = (char *)malloc(sizeof(char) * (ft_strlen(*old_rdl) - len + 1));
 	else
 		dest = (char *)malloc(sizeof(char) * (ft_strlen(*old_rdl) - len
-					+ ft_strlen(stck_exp) + 1));
+					+ ft_strlen(var_env) + 1));
 	if (!dest)
 		return (NULL);
 	while (old_rdl[0][i] != '$' && old_rdl[0][i])
 		dest[j++] = old_rdl[0][i++];
-	if (old_rdl[0][i] == '$' && stck_exp != NULL)
-	{
-		while (*stck_exp)
-			dest[j++] = *stck_exp++;
-	}
+	if (old_rdl[0][i] == '$' && var_env != NULL)
+		while (*var_env)
+			dest[j++] = *var_env++;
 	while (old_rdl[0][i] != ' ' && old_rdl[0][i] != '"' && old_rdl[0][i])
 		i++;
 	while (old_rdl[0][i])
 		dest[j++] = old_rdl[0][i++];
-	dest[j] = '\0';
-	free(*old_rdl);
-	return (dest);
+	return (dest[j] = '\0', free(*old_rdl), dest);
 }
 
 /*
