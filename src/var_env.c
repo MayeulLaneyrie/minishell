@@ -42,11 +42,6 @@ char	*create_tmp(char *s, int i)
 		dest[j] = '\0';
 		return (dest);
 	}
-	// if (s[i] == '?')
-	// {
-	// 	dest = ft_itoa(g_xt_stat);
-	// 	return (dest);
-	// }
 	while (s[i] != ' ' && s[i] != '"' && s[i])
 		dest[j++] = s[i++];
 	dest[j] = '\0';
