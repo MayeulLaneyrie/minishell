@@ -39,7 +39,7 @@ char	*create_tmp(char *s, int i)
 	i = i_tmp + 1;
 	if (s[i] == '$')
 	{
-		dest[j] = '\0';
+		dest[j] = '$';
 		return (dest);
 	}
 	while (s[i] != ' ' && s[i] != '"' && s[i])
