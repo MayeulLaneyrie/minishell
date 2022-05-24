@@ -83,6 +83,21 @@ char	*create_new_rdl(char **old_rdl, char *var_env, int len)
 }
 
 /*
+**	Fonction servant a passer la norme (nombre de lignes)...
+*/
+int	norm_win_lines(char *stck_var_env, char **s, char **tmp, t_sh *sh)
+{
+	free (*s);
+	*s = create_new_rdl(tmp, get_var(sh->env, stck_var_env),
+			(ft_strlen(stck_var_env) + 1));
+	if (!*s)
+		return (MALLOC_ERROR);
+	*tmp = ft_strdup(*s);
+	free(stck_var_env);
+	return (0);
+}
+
+/*
 **	Description - Remplace toutes les variables d'environnement d'une string.
 **	t_sh *sh - Structure avec l'env complet du projet
 **  char **s - Adresse du retour d'un readline
@@ -91,14 +106,14 @@ char	*create_new_rdl(char **old_rdl, char *var_env, int len)
 int	switch_var(t_sh *sh, char **s)
 {
 	int		i;
-	char	*stck_exp;
+	char	*stck_var_env;
 	char	*tmp;
 	int		quoted;
 
-	i = 0;
+	i = -1;
 	quoted = 0;
 	tmp = ft_strdup(*s);
-	while (s[0][i])
+	while (s[0][++i])
 	{
 		if (s[0][i] == '\'' && !quoted)
 			quoted = 1;
@@ -106,18 +121,11 @@ int	switch_var(t_sh *sh, char **s)
 			quoted = 0;
 		if (s[0][i] == '$' && !quoted)
 		{
-			stck_exp = create_tmp(*s, i);
-			free (*s);
-			*s = create_new_rdl(&tmp, get_var(sh->env, stck_exp),
-					(ft_strlen(stck_exp) + 1));
-			if (!*s)
+			stck_var_env = create_tmp(*s, i);
+			if (norm_win_lines(stck_var_env, s, &tmp, sh) == MALLOC_ERROR)
 				return (MALLOC_ERROR);
-			tmp = ft_strdup(*s);
-			free(stck_exp);
-			i = 0;
+			i = -1;
 		}
-		i++;
 	}
-	free(tmp);
-	return (0);
+	return (free(tmp), 0);
 }
