@@ -48,7 +48,7 @@
 - [ ] Handling of $? expansion
 - [ ] Heredoc implementation
 - [ ] "echo" builtin
-- [ ] "cd" builtin
+- [x] "cd" builtin
 - [x] "pwd" builtin
 
 > At that point, all the functionalities of the mandatory part should be implemented properly.
