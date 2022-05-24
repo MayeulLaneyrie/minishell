@@ -18,7 +18,7 @@ int	bi_pwd(t_sh *sh, t_cmd *cmd)
 		{
 			g_xt_stat = 1;
 			ft_err4(sh->exec_name, cmd->av[0], strerror(errno),
-					"(error retrieving current directory)\n");
+				"(error retrieving current directory)\n");
 			return (CMD_NOWAIT);
 		}
 		size *= 2;

@@ -67,8 +67,7 @@ int	word_cpy(char *dst, char *src)
 		}
 		i++;
 	}
-	*dst = '\0';
-	return (i);
+	return (*dst = '\0', i);
 }
 
 /*
@@ -167,6 +166,5 @@ int	main_part1(t_sh *sh)
 		switch_var(sh, &s);
 	if (parse_cmd(s, sh))
 		return ((unsigned long)ft_free((void *)s) + 1);
-	free(s);
-	return (0);
+	return (free(s), 0);
 }
