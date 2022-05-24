@@ -3,7 +3,7 @@
 /*
 **	Verifie le nombre de variable d'environnement a remplacer.
 */
-int	check_var_exp(char *s)
+int	check_env_var(char *s)
 {
 	int	i;
 	int	num_dollar;
@@ -103,7 +103,7 @@ int	norm_win_lines(char *stck_var_env, char **s, char **tmp, t_sh *sh)
 **  char **s - Adresse du retour d'un readline
 **	Retour - 0 en cas de succes ou un code d'erreur le cas echeant 
 */
-int	switch_var(t_sh *sh, char **s)
+int	convert_env_vars(t_sh *sh, char **s)
 {
 	int		i;
 	char	*stck_var_env;

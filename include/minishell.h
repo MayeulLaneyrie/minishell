@@ -103,8 +103,8 @@ int		check_pipe(char *s);
 /*
 **	Dans var_env.c
 */
-int		check_var_exp(char *s);
-int		switch_var(t_sh *sh, char **s);
+int		check_env_var(char *s);
+int		convert_env_vars(t_sh *sh, char **s);
 
 /*
 **	Étapes suivantes du fonctionnement du shell : fork(), recherche d'une
