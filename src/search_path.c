@@ -14,7 +14,10 @@ char	*search_path(char *path, char *name, int cd)
 	i = -1;
 	while (dirs->data[++i])
 	{
-		temp = ft_cat3(dirs->data[i], "/", name);
+		if (!dirs->data[i] && cd)
+			temp = ft_cat3(".", "/", name);
+		else
+			temp = ft_cat3(dirs->data[i], "/", name);
 		if (!temp)
 			exit(EXIT_FAILURE);
 		if (!access(temp, F_OK))

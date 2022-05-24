@@ -144,6 +144,12 @@ int		bi_unset(t_sh *sh, t_cmd *cmd);
 int		bi_pwd(t_sh *sh, t_cmd *cmd);
 
 /*
+**	Dans cd_builtin.c :
+*/
+
+int		bi_cd(t_sh *sh, t_cmd *cmd);
+
+/*
 **	Dans display_utils.c :
 */
 char	*ft_cat3(char *s1, char *s2, char *s3);

@@ -38,7 +38,12 @@ char	*get_var(t_split *env, char *name)
 		return (NULL);
 	return (((char **)env->data)[i] + l + 1);
 }
-
+/*
+int	set_var(t_split *env, char *name, char *value)
+{
+	return (0);
+}
+*/
 int	get_var_index(t_split *env, char *name)
 {
 	int	i;

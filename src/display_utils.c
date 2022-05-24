@@ -44,6 +44,7 @@ int	ft_err4(char *s1, char *s2, char *s3, char *s4)
 {
 	char	*s[4];
 	char	*display;
+	int		l;
 
 	s[0] = s1;
 	s[1] = s2;
@@ -52,7 +53,13 @@ int	ft_err4(char *s1, char *s2, char *s3, char *s4)
 	display = ft_catn((s1 != 0) + (s2 != 0) + (s3 != 0) + (s4 != 0), s, ": ");
 	if (!display)
 		return (-1);
-	write(2, display, ft_strlen(display));
+	l = ft_strlen(display);
+	if (l && display[l - 1] != '\n')
+	{
+		display[l] = '\n';
+		l++;
+	}
+	write(2, display, l);
 	free(display);
 	return (0);
 }

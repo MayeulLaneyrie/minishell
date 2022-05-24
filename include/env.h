@@ -19,4 +19,5 @@ char	*get_var(t_split *env, char *name);
 
 int		get_var_index(t_split *env, char *name);
 
+int	export_single(t_sh *sh, t_cmd *cmd, char *s);
 #endif
