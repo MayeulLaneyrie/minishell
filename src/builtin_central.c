@@ -52,10 +52,10 @@ int	builtin_search(char *s)
 
 int	builtin_exec(t_sh *sh, t_cmd *cmd)
 {
-	static const t_bi	builtins[8] = {NULL, NULL, &bi_pwd, &bi_export,
+	static const t_bi	builtins[8] = {NULL, &bi_cd, &bi_pwd, &bi_export,
 		&bi_unset, &bi_env, &bi_exit, NULL};
 
-	if (cmd->builtin_id < 2)
+	if (!cmd->builtin_id)
 	{
 		printf("%s not implemented as of Mark 2\n", cmd->av[0]);
 		g_xt_stat = 127;

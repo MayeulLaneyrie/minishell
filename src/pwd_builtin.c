@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-int	bi_pwd(t_sh *sh, t_cmd *cmd)
+char	*get_pwd()
 {
 	char	*buff;
 	int		size;
@@ -16,15 +16,28 @@ int	bi_pwd(t_sh *sh, t_cmd *cmd)
 		free(buff);
 		if (errno != ERANGE || size > 0x8000)
 		{
-			g_xt_stat = 1;
-			ft_err4(sh->exec_name, cmd->av[0], strerror(errno),
-				"(error retrieving current directory)\n");
-			return (CMD_NOWAIT);
+			ft_err4("minishell: pwd", strerror(errno), NULL, NULL);
+			return (NULL);
 		}
 		size *= 2;
 	}
-	printf("%s\n", buff);
-	free(buff);
-	g_xt_stat = 0;
+	return (buff);
+}
+
+int	bi_pwd(t_sh *sh, t_cmd *cmd)
+{
+	char	*s;
+
+	(void)sh;
+	(void)cmd;
+	s = get_pwd();
+	if (s)
+	{
+		printf("%s\n", s);
+		free(s);
+		g_xt_stat = 0;
+	}
+	else
+		g_xt_stat = 1;
 	return (CMD_NOWAIT);
 }

@@ -4,14 +4,16 @@ SRCS =	src/main.c \
 		src/var_env.c \
 		src/utils.c \
 		src/main_part2.c \
+		src/search_path.c \
 		src/env.c \
 		src/split_utils.c \
 		src/split_utils2.c \
-		src/builtin_central.c \
 		src/quote_split.c \
 		src/display_utils.c \
+		src/builtin_central.c \
 		src/env_builtin.c \
 		src/pwd_builtin.c \
+		src/cd_builtin.c \
 		src/gnl.c
 
 OBJS		= ${SRCS:.c=.o}

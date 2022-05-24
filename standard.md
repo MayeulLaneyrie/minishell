@@ -49,7 +49,7 @@
 - [ ] Heredoc implementation
 - [ ] "echo" builtin
 - [ ] "cd" builtin
-- [ ] "pwd" builtin
+- [x] "pwd" builtin
 
 > At that point, all the functionalities of the mandatory part should be implemented properly.
 

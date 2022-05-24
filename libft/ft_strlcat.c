@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 15:34:24 by mlaneyri          #+#    #+#             */
-/*   Updated: 2020/11/19 16:35:45 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/05/22 02:40:39 by lnr              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,15 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	size_t	j;
 	size_t	len;
 
+	if (!dst)
+		return (0);
 	i = 0;
 	while (i < size && dst[i])
 		i++;
 	j = 0;
 	len = ft_strlen(dst);
+	if (!src)
+		return (len);
 	if (size > 0)
 	{
 		while (i < (size - 1) && src[j])
