@@ -113,9 +113,11 @@ int	bi_cd(t_sh *sh, t_cmd *cmd)
 	char	*operand;
 	char	*curpath;
 	int		malloced;
+	int		display;
 
 	g_xt_stat = 0;
 	malloced = 0;
+	display = 0;
 	curpath = NULL;
 	if (cmd->ac == 1)
 	{
@@ -125,6 +127,17 @@ int	bi_cd(t_sh *sh, t_cmd *cmd)
 			g_xt_stat = 1;
 			return (CMD_WAIT
 				+ ft_err4(sh->exec_name, cmd->av[0], "HOME not set\n", NULL));
+		}
+	}
+	else if (cmd->av[1][0] == '-' && !cmd->av[1][1])
+	{
+		operand = get_var(sh->env, "OLDPWD");
+		display = 1;
+		if (!operand)
+		{
+			g_xt_stat = 1;
+			write(2, "minishell: cd: OLDPWD not set\n", 30);
+			return (CMD_NOWAIT);
 		}
 	}
 	else
@@ -137,6 +150,8 @@ int	bi_cd(t_sh *sh, t_cmd *cmd)
 				&& (operand[1] == '/' || !operand[1] || (operand[1] == '.'
 						&& (operand[2] == '/' || !operand[2])))))
 			curpath = search_path(get_var(sh->env, "CDPATH"), operand, 1);
+		if (curpath)
+			display = (curpath[0] == '/');
 		if (!curpath)
 			curpath = ft_cat3(get_var(sh->env, "PWD"), "/", operand);
 		if (!curpath)
@@ -156,7 +171,8 @@ int	bi_cd(t_sh *sh, t_cmd *cmd)
 	}
 	else
 	{
-		printf("%s\n", curpath);
+		if (display)
+			printf("%s\n", curpath);
 		export_single(sh, cmd,
 			ft_cat3("OLDPWD=", get_var(sh->env, "PWD"), NULL));
 		export_single(sh, cmd, ft_cat3("PWD=", curpath, NULL));

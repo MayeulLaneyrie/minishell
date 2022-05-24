@@ -62,5 +62,7 @@ int	get_var_index(t_split *env, char *name)
 			break ;
 	if (!((char **)env->data)[i])
 		return (-1);
+	if (((char **)env->data)[i][l] != '=')
+		return (-1);
 	return (i);
 }

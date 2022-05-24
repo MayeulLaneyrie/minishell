@@ -91,8 +91,11 @@ int	bi_unset(t_sh *sh, t_cmd *cmd)
 			{
 				free(((void **)sh->env->data)[n]);
 				while (++n < sh->env->len)
+				{
 					((char **)sh->env->data)[n - 1]
 						= ((char **)sh->env->data)[n];
+					((char **)sh->env->data)[n] = NULL;
+				}
 				sh->env->len--;
 			}
 		}
