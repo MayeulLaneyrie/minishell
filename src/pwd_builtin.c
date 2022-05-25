@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-char	*get_pwd()
+char	*get_pwd(void)
 {
 	char	*buff;
 	int		size;

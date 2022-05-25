@@ -156,6 +156,12 @@ int		bi_pwd(t_sh *sh, t_cmd *cmd);
 int		bi_cd(t_sh *sh, t_cmd *cmd);
 
 /*
+**	Dans make_canonical.c :
+*/
+
+int		make_canonical(char *s);
+
+/*
 **	Dans display_utils.c :
 */
 char	*ft_cat3(char *s1, char *s2, char *s3);

@@ -14,6 +14,7 @@ SRCS =	src/main.c \
 		src/env_builtin.c \
 		src/pwd_builtin.c \
 		src/cd_builtin.c \
+		src/make_canonical.c \
 		src/gnl.c
 
 OBJS		= ${SRCS:.c=.o}
