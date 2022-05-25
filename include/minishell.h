@@ -46,6 +46,11 @@
 # define RED_TRUNC 0
 # define RED_APPEND 1
 
+# define MALLOC_ERROR 1
+# define WRONG_NB_QUOTE 2
+# define NULL_RDLINE 3
+# define BLANK_RDLINE 4
+
 /*
 **	Juste une libft normale, avec des chaînes doublement chainées.
 */
@@ -70,6 +75,11 @@
 */
 # include "./env.h"
 
+/*
+**	builtins.h contient les définitions des builtins.
+*/
+# include "./builtins.h"
+
 extern int	g_xt_stat;
 
 /*
@@ -81,101 +91,55 @@ extern int	g_xt_stat;
 **	avoir été correctement initialisé, a moins qu'il faille quitter le shell.
 */
 int		main_part1(t_sh *sh);
-
 int		parse_cmd(char *s, t_sh *sh);
 
 /*
 **	Dans gnl.c, juste un gnl :
 */
-
 int		get_next_line(char **line);
 
 /*
-**	Dans quote_split.c
+**	Dans quote_split.c : (Un split qui suit les règles de quoting)
 */
 t_split	*quote_split(char *s, char *set);
 
 /*
-**	Dans utils.c
+**	Dans utils.c :
 */
 int		check_quote(char *s);
-
 int		check_pipe(char *s);
 
 /*
-**	Dans var_env.c
+**	Dans var_env.c :
 */
 int		check_env_var(char *s);
 int		convert_env_vars(t_sh *sh, char **s);
 
 /*
-**	Étapes suivantes du fonctionnement du shell : fork(), recherche d'une
-**	builtin ou du chemin du binaire à exécuter, execve() dans le process fils
-**	et waitpid() dans le process père.
+**	Dans cmd_launcher.c : (Lancement d'une commande)
 */
 int		main_part2(t_sh *sh);
-
 int		cmd_proc(t_sh *sh, t_cmd *cmd, int do_fork);
 
 /*
-**	Dans pipe_stuff.c
+**	Dans pipe_stuff.c : (Prépare l'exécution d'un pipeline)
 */
-
 int		pipeline_spawner(t_sh *sh);
 
 /*
-**	Dans search_path.c :
+**	Dans search_path.c : (Permet une recherche dans une variable de type $PATH)
 */
-
 char	*search_path(char *path, char *name, int mode);
 
 /*
-**	Dans builtin_central.c :
+**	Dans make_canonical.c : (utilisée par cd pour simplifier un path)
 */
-
-int		builtin_search(char *s);
-
-int		builtin_exec(t_sh *sh, t_cmd *cmd);
-
-int		bi_exit(t_sh *sh, t_cmd *cmd);
-
-/*
-**	Dans env_builtin.c :
-*/
-
-int		bi_env(t_sh *sh, t_cmd *cmd);
-
-int		bi_export(t_sh *sh, t_cmd *cmd);
-
-int		bi_unset(t_sh *sh, t_cmd *cmd);
-
-/*
-**	Dans pwd_builtin.c :
-*/
-
-int		bi_pwd(t_sh *sh, t_cmd *cmd);
-
-/*
-**	Dans cd_builtin.c :
-*/
-
-int		bi_cd(t_sh *sh, t_cmd *cmd);
-
-/*
-**	Dans make_canonical.c :
-*/
-
 int		make_canonical(char *s);
 
 /*
-**	Dans display_utils.c :
+**	Dans display_utils.c : (affichages divers)
 */
 char	*ft_cat3(char *s1, char *s2, char *s3);
 int		ft_err4(char *s1, char *s2, char *s3, char *s4);
-
-# define MALLOC_ERROR	1
-# define WRONG_NB_QUOTE	2
-# define NULL_RDLINE	3
-# define BLANK_RDLINE	4
 
 #endif

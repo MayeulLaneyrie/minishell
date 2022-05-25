@@ -3,7 +3,7 @@ SRCS =	src/main.c \
 		src/parser.c \
 		src/var_env.c \
 		src/utils.c \
-		src/main_part2.c \
+		src/cmd_launcher.c \
 		src/pipe_stuff.c \
 		src/search_path.c \
 		src/env.c \
