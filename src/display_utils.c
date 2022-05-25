@@ -52,7 +52,7 @@ int	ft_err4(char *s1, char *s2, char *s3, char *s4)
 	s[3] = s4;
 	display = ft_catn((s1 != 0) + (s2 != 0) + (s3 != 0) + (s4 != 0), s, ": ");
 	if (!display)
-		return (-1);
+		exit(EXIT_FAILURE);
 	l = ft_strlen(display);
 	if (l && display[l - 1] != '\n')
 	{

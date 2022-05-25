@@ -4,6 +4,7 @@ SRCS =	src/main.c \
 		src/var_env.c \
 		src/utils.c \
 		src/main_part2.c \
+		src/pipe_stuff.c \
 		src/search_path.c \
 		src/env.c \
 		src/split_utils.c \

@@ -1,40 +1,40 @@
 #include "../include/minishell.h"
 
-int	bi_cd(t_sh *sh, t_cmd *cmd)
+char	*set_operand(t_sh *sh, t_cmd *cmd, int *display)
 {
 	char	*operand;
-	char	*curpath;
-	int		malloced;
-	int		display;
-	char	*temp;
 
-	g_xt_stat = 0;
-	malloced = 0;
-	display = 0;
-	curpath = NULL;
+	*display = 0;
 	if (cmd->ac == 1)
 	{
 		operand = get_var(sh->env, "HOME");
 		if (!operand || !operand[0])
 		{
-			g_xt_stat = 1;
-			return (CMD_WAIT
-				+ ft_err4(sh->exec_name, cmd->av[0], "HOME not set\n", NULL));
+			ft_err4(sh->exec_name, cmd->av[0], "HOME not set\n", NULL);
+			return (NULL);
 		}
 	}
 	else if (cmd->av[1][0] == '-' && !cmd->av[1][1])
 	{
 		operand = get_var(sh->env, "OLDPWD");
-		display = 1;
+		*display = 1;
 		if (!operand)
 		{
-			g_xt_stat = 1;
 			write(2, "minishell: cd: OLDPWD not set\n", 30);
-			return (CMD_NOWAIT);
+			return (NULL);
 		}
 	}
 	else
 		operand = cmd->av[1];
+	return (operand);
+}
+
+char	*set_curpath(t_split *env, char *operand, int *display, int *mallocced)
+{
+	char	*curpath;
+
+	mallocced = 0;
+	curpath = NULL;
 	if (operand[0] == '/')
 		curpath = operand;
 	else
@@ -42,45 +42,61 @@ int	bi_cd(t_sh *sh, t_cmd *cmd)
 		if (!(operand[0] == '.'
 				&& (operand[1] == '/' || !operand[1] || (operand[1] == '.'
 						&& (operand[2] == '/' || !operand[2])))))
-			curpath = search_path(get_var(sh->env, "CDPATH"), operand, 1);
+			curpath = search_path(get_var(env, "CDPATH"), operand, 1);
 		if (curpath)
-			display = (curpath[0] == '/');
+			*display = (curpath[0] == '/');
 		if (!curpath)
-			curpath = ft_cat3(get_var(sh->env, "PWD"), "/", operand);
-		if (!curpath)
-			exit(EXIT_FAILURE);
-		malloced = 1;
+			curpath = ft_cat3(get_var(env, "PWD"), "/", operand);
+		*mallocced = 1;
 	}
-	if (!make_canonical(curpath))
+	return (curpath);
+}
+
+int	set_pwd(t_sh *sh, t_cmd *cmd, char *dir)
+{
+	char	*tmp;
+
+	/*
+	**	TODO : implement set_var() to cleanup the mess that follows :
+	*/
+	tmp = ft_cat3("OLDPWD=", get_var(sh->env, "PWD"), NULL);
+	if (!tmp)
+		return (-1);
+	export_single(sh, cmd, tmp);
+	free(tmp);
+	tmp = ft_cat3("PWD=", dir, NULL);
+	if (!tmp)
+		return (-1);
+	export_single(sh, cmd, tmp);
+	free(tmp);
+	return (0);
+}
+
+int	bi_cd(t_sh *sh, t_cmd *cmd)
+{
+	char	*dir;
+	int		mallocced;
+	int		display;
+	int		n;
+
+	dir = set_operand(sh, cmd, &display);
+	g_xt_stat = (dir != NULL);
+	if (!dir)
+		return (CMD_NOWAIT);
+	dir = set_curpath(sh->env, dir, &display, &mallocced);
+	if (!dir)
+		exit(EXIT_FAILURE);
+	if (make_canonical(dir))
 	{
-		if (malloced)
-			free(curpath);
-		return (CMD_WAIT);
-	}
-	if (chdir(curpath))
-	{
-		ft_err4("minishell: cd", curpath, strerror(errno), NULL);
-		g_xt_stat = 1;
-	}
-	else
-	{
-		if (display)
-			printf("%s\n", curpath);
-		/*
-		**	TODO : implement set_var() to cleanup the mess that follows :
-		*/
-		temp = ft_cat3("OLDPWD=", get_var(sh->env, "PWD"), NULL);
-		if (!temp)
+		n = chdir(dir);
+		if (n)
+			g_xt_stat = 1 + ft_err4("minishell: cd", dir, strerror(errno), 0);
+		if (!n && display)
+			printf("%s\n", dir);
+		if (!n && set_pwd(sh, cmd, dir))
 			exit(EXIT_FAILURE);
-		export_single(sh, cmd, temp);
-		free(temp);
-		temp = ft_cat3("PWD=", curpath, NULL);
-		if (!temp)
-			exit(EXIT_FAILURE);
-		export_single(sh, cmd, temp);
-		free(temp);
 	}
-	if (malloced)
-		free(curpath);
-	return (CMD_WAIT);
+	if (mallocced)
+		free(dir);
+	return (CMD_NOWAIT);
 }

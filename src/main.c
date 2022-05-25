@@ -5,21 +5,23 @@ int	g_xt_stat = 0;
 int	sh_debug(t_sh *sh)
 {
 	t_cmd	**cmd;
+	int		i;
+	int		j;
 
 	if (!sh)
 		return (printf("SH IS NULL\n"));
 	if (!sh->pipeline)
 		return (printf("PIPELINE IS NULL\n"));
 	cmd = (t_cmd **)sh->pipeline->data;
-	printf
-	(
+	printf(
 		"================\n\"%s\" DEBUG INFO (%d CMD)\n================\n",
-		sh->exec_name, sh->pipeline->len
-	);
-	for (int i = 0; i < sh->pipeline->len; i++)
+		sh->exec_name, sh->pipeline->len);
+	i = -1;
+	while (++i < sh->pipeline->len)
 	{
 		printf("CMD #%d: [%s]\n", i, cmd[i]->av[0]);
-		for (int j = 1; j < cmd[i]->ac; j++)
+		j = 0;
+		while (++j < cmd[i]->ac)
 			printf("    AV[%d]: %s\n", j, cmd[i]->av[j]);
 		if (i != sh->pipeline->len - 1)
 			printf("----------------\n");
@@ -39,7 +41,6 @@ int	main(int ac, char **av, char **envp)
 	{
 		if (main_part1(&sh))
 			break ;
-		//sh_debug(&sh);
 		if (main_part2(&sh))
 			break ;
 		del_split(sh.pipeline, &del_cmd);

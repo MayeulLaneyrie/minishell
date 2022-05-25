@@ -118,6 +118,12 @@ int		main_part2(t_sh *sh);
 int		cmd_proc(t_sh *sh, t_cmd *cmd, int do_fork);
 
 /*
+**	Dans pipe_stuff.c
+*/
+
+int		pipeline_spawner(t_sh *sh);
+
+/*
 **	Dans search_path.c :
 */
 
