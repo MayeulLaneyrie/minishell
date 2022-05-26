@@ -32,6 +32,8 @@ int	excvefail_handler(char *path, t_sh *sh)
 
 int	cmd_proc(t_sh *sh, t_cmd *cmd, int do_fork)
 {
+	if (!cmd)
+		return (CMD_NOWAIT);
 	if (!ft_strchr(cmd->av[0], '/'))
 	{
 		cmd->builtin_id = builtin_search(cmd->av[0]);
@@ -64,8 +66,10 @@ int	main_part2(t_sh *sh)
 	t_cmd	**cmd;
 	int		i;
 
+	if (!sh->pipeline || !sh->pipeline->data)
+		return (0);
 	cmd = (t_cmd **)sh->pipeline->data;
-	if (sh->pipeline->len != 1)
+	if (sh->pipeline->len > 1)
 		stat = pipeline_spawner(sh);
 	else
 		stat = cmd_proc(sh, cmd[0], 1);
