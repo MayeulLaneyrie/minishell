@@ -163,7 +163,8 @@ int	main_part1(t_sh *sh)
 		free(s);
 	}
 	if (check_env_var(s))
-		convert_env_vars(sh, &s);
+		if (convert_env_vars(sh, &s) != 0)
+			return ((unsigned long)ft_free((void *)s) + 1);
 	if (parse_cmd(s, sh))
 		return ((unsigned long)ft_free((void *)s) + 1);
 	return (free(s), 0);
