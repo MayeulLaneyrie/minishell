@@ -29,28 +29,6 @@ int	check_quote(char *s)
 	return (i);
 }
 
-int	check_no_blank(char *s)
-{
-	int	i;
-	int	diff_space;
-
-	i = 0;
-	diff_space = 0;
-	while (s[i])
-	{
-		if (ft_strchr(SPACES, s[i]) != NULL)
-			i++;
-		if (ft_strchr(SPACES, s[i]) == NULL)
-		{
-			diff_space++;
-			i++;
-		}
-	}
-	if (diff_space == 0)
-		return (-1);
-	return (diff_space);
-}
-
 int	check_pipe(char *s)
 {
 	int	i;
