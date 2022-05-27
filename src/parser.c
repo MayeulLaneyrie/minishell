@@ -147,10 +147,7 @@ int	main_part1(t_sh *sh)
 		else
 			get_next_line(&s);
 		if (!s)
-		{
-			write(2, "exit\n", 5);
-			return (1);
-		}
+			return (write(2, "exit\n", 5) * 0 + 1);
 		i = -1;
 		while (ft_strchr(SPACES, s[++i]) && s[i])
 			;
