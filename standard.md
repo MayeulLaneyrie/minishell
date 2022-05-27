@@ -31,7 +31,7 @@
 * All MkII functionalities, plus the following :
 
 - [ ] '<', '>' and '>>' redirections
-- [ ] Variable expansion
+- [x] Variable expansion
 
 - [x] "env" builtin
 - [x] "unset" builtin
