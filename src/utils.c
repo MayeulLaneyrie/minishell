@@ -44,3 +44,19 @@ int	check_pipe(char *s)
 	}
 	return (nb_pipe);
 }
+
+int	check_redirect(char *s)
+{
+	int	i;
+	int	count_redir;
+
+	i = 0;
+	count_redir = 0;
+	while (s[i])
+	{
+		if (s[i] == '>' || s[i] == '<')
+			count_redir++;
+		i++;
+	}
+	return (count_redir);
+}

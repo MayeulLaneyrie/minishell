@@ -164,5 +164,8 @@ int	main_part1(t_sh *sh)
 			return ((unsigned long)ft_free((void *)s) + 1);
 	if (parse_cmd(s, sh))
 		return ((unsigned long)ft_free((void *)s) + 1);
+	if (check_redirect(s))
+		if (fill_struct_redir(sh, s))
+			return ((unsigned long)ft_free((void *)s) + 1);
 	return (free(s), 0);
 }
