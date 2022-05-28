@@ -47,7 +47,7 @@
 - [ ] Handling of ctrl-c, ctrl-d, ctrl-\
 - [ ] Handling of $? expansion
 - [ ] Heredoc implementation
-- [ ] "echo" builtin
+- [x] "echo" builtin
 - [x] "cd" builtin
 - [x] "pwd" builtin
 

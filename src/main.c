@@ -35,6 +35,8 @@ int	main(int ac, char **av, char **envp)
 	t_sh	sh;
 
 	printf("Welcome to minishell \"MarkIII\"!\n");
+	if (!envp || !envp[0])
+		exit (1); // a check ce qu'on fait par la suite
 	if (new_sh(ac, av, envp, &sh) < 0)
 		return (-1);
 	while (1)

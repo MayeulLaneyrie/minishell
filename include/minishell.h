@@ -108,12 +108,18 @@ t_split	*quote_split(char *s, char *set);
 */
 int		check_quote(char *s);
 int		check_pipe(char *s);
+int		check_redirect(char *s);
 
 /*
 **	Dans var_env.c :
 */
 int		check_env_var(char *s);
 int		convert_env_vars(t_sh *sh, char **s);
+
+/*
+**	Dans redirect.c :
+*/
+int	fill_struct_redir(t_sh *sh, char *s);
 
 /*
 **	Dans cmd_launcher.c : (Lancement d'une commande)

@@ -61,7 +61,6 @@ int	new_sh(int ac, char **av, char **envp, t_sh *sh)
 	sh->exec_name = av[0];
 	sh->cmd = NULL;
 	sh->pipeline = NULL;
-	sh->cmd->red = NULL;
 	return (0);
 }
 
