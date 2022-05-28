@@ -41,7 +41,6 @@ int	main(int ac, char **av, char **envp)
 	{
 		if (main_part1(&sh))
 			break ;
-		write(1, "A\n", 2);
 		if (main_part2(&sh))
 			break ;
 		del_split(sh.pipeline, &del_cmd);
