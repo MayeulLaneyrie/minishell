@@ -164,9 +164,9 @@ int	main_part1(t_sh *sh)
 			return ((unsigned long)ft_free((void *)s) + 1);
 	if (parse_cmd(s, sh))
 		return ((unsigned long)ft_free((void *)s) + 1);
-	if (check_redirect(s) >= 0)
-		if (fill_struct_redir(sh, s))
-			return ((unsigned long)ft_free((void *)s) + 1);
+	// if (check_redirect(s) >= 0)
+	// 	if (fill_struct_redir(sh, s))
+	// 		return ((unsigned long)ft_free((void *)s) + 1);
 	// else
 		//syntax redir mauvaise
 	return (free(s), 0);
