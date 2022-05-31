@@ -41,12 +41,19 @@ char	*get_var(t_split *env, char *name)
 	return (((char **)env->data)[i] + l + 1);
 }
 
-/*
 int	set_var(t_split *env, char *name, char *value)
 {
+	char	*tmp;
+
+	if (check_identifier(name, env, 0))
+		return (-1);
+	tmp = ft_cat3(name, "=", value);
+	if (!tmp)
+		exit(EXIT_FAILURE);
+	export_single(env, tmp);
+	free(tmp);
 	return (0);
 }
-*/
 
 int	get_var_index(t_split *env, char *name)
 {

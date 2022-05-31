@@ -35,7 +35,6 @@ int	bi_echo(t_sh *sh, t_cmd *cmd)
 		ft_strlcat(display, " ", size);
 	}
 	display[size - 1] = '\n';
-	//printf("ECHO (%d) [ %.2x%.2x%.2x ]\n", opt, display[size - 2], display[size - 1], display[size]);
 	write(1, display, size - opt);
 	g_xt_stat = 0;
 	return (0);

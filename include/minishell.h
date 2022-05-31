@@ -71,14 +71,14 @@
 # include "./newdel.h"
 
 /*
-**	env.h contient la définition de fonctions de gestion de l'environnement.
-*/
-# include "./env.h"
-
-/*
 **	builtins.h contient les définitions des builtins.
 */
 # include "./builtins.h"
+
+/*
+**	env.h contient la définition de fonctions de gestion de l'environnement.
+*/
+# include "./env.h"
 
 extern int	g_xt_stat;
 
@@ -119,7 +119,7 @@ int		convert_env_vars(t_sh *sh, char **s);
 /*
 **	Dans redirect.c :
 */
-int	fill_struct_redir(t_sh *sh, char *s);
+int		fill_struct_redir(t_sh *sh, char *s);
 
 /*
 **	Dans cmd_launcher.c : (Lancement d'une commande)

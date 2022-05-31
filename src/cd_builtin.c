@@ -52,23 +52,10 @@ char	*set_curpath(t_split *env, char *operand, int *display, int *mallocced)
 	return (curpath);
 }
 
-int	set_pwd(t_sh *sh, t_cmd *cmd, char *dir)
+int	set_pwd(t_split *env, char *dir)
 {
-	char	*tmp;
-
-	/*
-	**	TODO : implement set_var() to cleanup the mess that follows :
-	*/
-	tmp = ft_cat3("OLDPWD=", get_var(sh->env, "PWD"), NULL);
-	if (!tmp)
-		return (-1);
-	export_single(sh, cmd, tmp);
-	free(tmp);
-	tmp = ft_cat3("PWD=", dir, NULL);
-	if (!tmp)
-		return (-1);
-	export_single(sh, cmd, tmp);
-	free(tmp);
+	set_var(env, "OLDPWD", get_var(env, "PWD"));
+	set_var(env, "PWD", dir);
 	return (0);
 }
 
@@ -78,6 +65,7 @@ int	bi_cd(t_sh *sh, t_cmd *cmd)
 	int		mallocced;
 	int		display;
 	int		n;
+
 
 	dir = set_operand(sh, cmd, &display);
 	g_xt_stat = (dir != NULL);
@@ -93,7 +81,7 @@ int	bi_cd(t_sh *sh, t_cmd *cmd)
 			g_xt_stat = 1 + ft_err4("minishell: cd", dir, strerror(errno), 0);
 		if (!n && display)
 			printf("%s\n", dir);
-		if (!n && set_pwd(sh, cmd, dir))
+		if (!n && set_pwd(sh->env, dir))
 			exit(EXIT_FAILURE);
 	}
 	if (mallocced)
