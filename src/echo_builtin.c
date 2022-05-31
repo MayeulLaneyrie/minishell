@@ -39,5 +39,6 @@ int	bi_echo(t_sh *sh, t_cmd *cmd)
 	}
 	display[size - 1] = '\n';
 	write(1, display, size - opt);
+	free(display);
 	return (0);
 }

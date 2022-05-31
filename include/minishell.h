@@ -154,4 +154,12 @@ int		make_canonical(char *s);
 char	*ft_cat3(char *s1, char *s2, char *s3);
 int		ft_err4(char *s1, char *s2, char *s3, char *s4);
 
+/*
+**	Dans tmp_utils.c : (créqation de fichiers temporaires)
+*/
+
+char	*tmp_name(char *path);
+
+int		heredoc(t_red *red);
+
 #endif

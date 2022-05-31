@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 18:25:27 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/04/13 23:39:34 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/05/31 21:27:26 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 void		ft_putchar_fd(char c, int fd);
 
-void		ft_putstr_fd(char *s, int fd);
+int			ft_puts(char *s, int fd);
 
 void		ft_putendl_fd(char *s, int fd);
 

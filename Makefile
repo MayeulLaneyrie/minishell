@@ -12,6 +12,7 @@ SRCS =	src/main.c \
 		src/split_utils2.c \
 		src/quote_split.c \
 		src/display_utils.c \
+		src/heredoc.c \
 		src/builtin_central.c \
 		src/env_builtin.c \
 		src/pwd_builtin.c \
@@ -23,13 +24,14 @@ SRCS =	src/main.c \
 OBJS		= ${SRCS:.c=.o}
 
 NAME		= minishell
-CC			= clang -Wall -Wextra -Werror -g -fsanitize=address
+CC			= clang -Wall -Wextra -Werror
+ASAN		= -g -fsanitize=address
 RM			= rm -f
 AR			= ar rcs
 
 ${NAME}:	$(OBJS) libft.a
 	@ echo -n "\033[1mCompiling ${NAME}...\033[0m"
-	@ ${CC} ${OBJS} ./libft/libft.a -o ${NAME} -lreadline && echo " [DONE]"
+	@ ${CC} ${ASAN} ${OBJS} ./libft/libft.a -o ${NAME} -lreadline && echo " [DONE]"
 
 libft.a:
 	@ echo -n "\033[1mMaking libft...\033[0m"

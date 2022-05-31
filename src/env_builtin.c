@@ -37,7 +37,7 @@ int	export_single(t_split *env, char *s)
 
 	if (check_identifier(s, 1))
 		return (-1);
-	n = get_var_index(env, s);
+	n = get_var_index(env, s, 1);
 	if (n >= 0 && !ft_strchr(s, '='))
 		return (0);
 	cpy = ft_strdup(s);
@@ -86,10 +86,11 @@ int	bi_unset(t_sh *sh, t_cmd *cmd)
 	{
 		if (!check_identifier(cmd->av[i], 0))
 		{
-			n = get_var_index(sh->env, cmd->av[i]);
+			n = get_var_index(sh->env, cmd->av[i], 1);
 			if (n >= 0)
 			{
 				free(((void **)sh->env->data)[n]);
+				((void **)sh->env->data)[n] = NULL;
 				while (++n < sh->env->len)
 				{
 					((char **)sh->env->data)[n - 1]

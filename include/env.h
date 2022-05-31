@@ -19,7 +19,7 @@ char	*get_var(t_split *env, char *name);
 
 int		set_var(t_split *env, char *name, char *value);
 
-int		get_var_index(t_split *env, char *name);
+int		get_var_index(t_split *env, char *name, int even_unset);
 
 int		export_single(t_split *env, char *s);
 
