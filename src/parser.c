@@ -85,17 +85,27 @@ t_split	*cut_words(char *s)
 	tmp = NULL;
 	while (*s)
 	{
-		while (*s && ft_strchr(METACHAR, *s))
+		while (*s && ft_strchr(SPACES, *s))
 			s++;
 		if (!*s)
 			break ;
-		l = word_len(s);
-		w = malloc(l + 1);
-		if (!w)
-			return (ft_lstclear(&tmp, &free));
-		s += word_cpy(w, s);
-		if (!ft_lstadd_back(&tmp, ft_lstnew(w)))
-			return (ft_lstclear(&tmp, &free));
+		if (*s == '>' || *s == '<')
+		{
+			l = check_redirect(s);
+			if (l < 0)
+				return (-1); //syntax error;
+			//parse
+		}
+		else
+		{
+			l = word_len(s);
+			w = malloc(l + 1);	
+			if (!w)
+				return (ft_lstclear(&tmp, &free));
+			s += word_cpy(w, s);
+			if (!ft_lstadd_back(&tmp, ft_lstnew(w)))
+				return (ft_lstclear(&tmp, &free));
+		}
 	}
 	ret = list_to_split(&tmp);
 	if (!ret)

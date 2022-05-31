@@ -45,18 +45,51 @@ int	check_pipe(char *s)
 	return (nb_pipe);
 }
 
+int	check_redirect_operator(char *s)
+{
+	int	red;
+	int	i;
+
+	i = 0;
+	if (s[i] && s[i] == '>')
+		red = RIGHT;
+	else if (s[i] && s[i] == '<')
+		red = LEFT;
+	i++;
+	if (red == RIGHT && s[i] == '<')
+		return (0);
+	else if (red == LEFT && s[i] == '>')
+		return (0);
+	else
+		return (1);
+}
+
 int	check_redirect(char *s)
 {
 	int	i;
-	int	count_redir;
+	int	quote;
+	int	d_quote;
 
 	i = 0;
-	count_redir = 0;
+	quote = 0;
+	d_quote = 0;
+	if (!check_redirect_operator(s))
+		return (-1);
+	i++;
+	if (s[i] == '<' || s[i] == '>')
+		i++;
 	while (s[i])
 	{
-		if (s[i] == '>' || s[i] == '<')
-			count_redir++;
-		i++;
+		in_out_quotes(s[i], &quote, &d_quote);
+		while (quote == 1 || d_quote == 1)
+		{
+			i++;
+			in_out_quotes(s[i], &quote, &d_quote);
+		}
+		while (ft_strchr(s, SPACES))
+			i++;
+		while (!ft_strchr(s, "<>"))
+			i++;
 	}
-	return (count_redir);
+	return (i);
 }

@@ -23,6 +23,8 @@
 
 # define METACHAR "\t\n|&;<( )>"
 # define SPACES "\t\n\r\v\f "
+# define LEFT 1
+# define RIGHT 2
 
 # define GNL_BUFFER_SIZE 256
 
@@ -119,7 +121,8 @@ int		convert_env_vars(t_sh *sh, char **s);
 /*
 **	Dans redirect.c :
 */
-int	fill_struct_redir(t_sh *sh, char *s);
+void	in_out_quotes(char c, int *quote, int *d_quote);
+int		fill_struct_redir(t_sh *sh, char *s);
 
 /*
 **	Dans cmd_launcher.c : (Lancement d'une commande)
