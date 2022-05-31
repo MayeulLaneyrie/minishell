@@ -133,6 +133,12 @@ int		cmd_proc(t_sh *sh, t_cmd *cmd, int do_fork);
 int		pipeline_spawner(t_sh *sh);
 
 /*
+**	Dans pwd_builtin.c : (Renvoie le pwd, doit etre free) :
+*/
+
+char	*get_pwd(void);
+
+/*
 **	Dans search_path.c : (Permet une recherche dans une variable de type $PATH)
 */
 char	*search_path(char *path, char *name, int mode);

@@ -33,7 +33,7 @@ char	*set_curpath(t_split *env, char *operand, int *display, int *mallocced)
 {
 	char	*curpath;
 
-	mallocced = 0;
+	*mallocced = 0;
 	curpath = NULL;
 	if (operand[0] == '/')
 		curpath = operand;
@@ -65,7 +65,6 @@ int	bi_cd(t_sh *sh, t_cmd *cmd)
 	int		mallocced;
 	int		display;
 	int		n;
-
 
 	dir = set_operand(sh, cmd, &display);
 	g_xt_stat = (dir != NULL);

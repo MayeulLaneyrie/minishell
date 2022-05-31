@@ -45,7 +45,7 @@ int	set_var(t_split *env, char *name, char *value)
 {
 	char	*tmp;
 
-	if (check_identifier(name, env, 0))
+	if (check_identifier(name, 0))
 		return (-1);
 	tmp = ft_cat3(name, "=", value);
 	if (!tmp)

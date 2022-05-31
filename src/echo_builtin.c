@@ -8,6 +8,7 @@ int	bi_echo(t_sh *sh, t_cmd *cmd)
 	int		i;
 
 	(void)sh;
+	g_xt_stat = 0;
 	i = 1;
 	opt = 0;
 	if (cmd->ac > 1 && cmd->av[1][0] == '-')
@@ -17,6 +18,8 @@ int	bi_echo(t_sh *sh, t_cmd *cmd)
 		if (i > 1 && !cmd->av[1][i])
 			opt = 1;
 	}
+	if (cmd->ac == 1 || (cmd->ac == 2 && opt))
+		return (0 * write(1, "\n", 1 - opt));
 	i = opt;
 	size = 0;
 	while (++i < cmd->ac)
@@ -36,6 +39,5 @@ int	bi_echo(t_sh *sh, t_cmd *cmd)
 	}
 	display[size - 1] = '\n';
 	write(1, display, size - opt);
-	g_xt_stat = 0;
 	return (0);
 }

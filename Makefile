@@ -23,7 +23,7 @@ SRCS =	src/main.c \
 OBJS		= ${SRCS:.c=.o}
 
 NAME		= minishell
-CC			= clang -Wall -Wextra -Werror
+CC			= clang -Wall -Wextra -Werror -g -fsanitize=address
 RM			= rm -f
 AR			= ar rcs
 

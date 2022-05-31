@@ -8,7 +8,7 @@ int	split_extend(t_split *split, int n)
 
 	if (n < split->size)
 		return (0);
-	new = new_split(3 * n / 2);
+	new = new_split(1 + 3 * n / 2);
 	if (!new)
 		return (-1);
 	i = -1;
