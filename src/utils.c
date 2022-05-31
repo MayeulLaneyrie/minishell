@@ -45,23 +45,25 @@ int	check_pipe(char *s)
 	return (nb_pipe);
 }
 
-int	check_redirect_operator(char *s)
+int	check_redirect_operator(char *s, int *i)
 {
 	int	red;
-	int	i;
 
-	i = 0;
-	if (s[i] && s[i] == '>')
+	if (s[*i] && s[*i] == '>')
 		red = RIGHT;
-	else if (s[i] && s[i] == '<')
+	else if (s[*i] && s[*i] == '<')
 		red = LEFT;
-	i++;
-	if (red == RIGHT && s[i] == '<')
+	*i++;
+	if (red == RIGHT && s[*i] == '<')
 		return (0);
-	else if (red == LEFT && s[i] == '>')
+	else if (red == LEFT && s[*i] == '>')
 		return (0);
 	else
+	{
+		if (s[*i] == '<' || s[*i] == '>')
+			*i++;
 		return (1);
+	}
 }
 
 int	check_redirect(char *s)
@@ -73,11 +75,8 @@ int	check_redirect(char *s)
 	i = 0;
 	quote = 0;
 	d_quote = 0;
-	if (!check_redirect_operator(s))
+	if (!check_redirect_operator(s, &i))
 		return (-1);
-	i++;
-	if (s[i] == '<' || s[i] == '>')
-		i++;
 	while (s[i])
 	{
 		in_out_quotes(s[i], &quote, &d_quote);
@@ -86,9 +85,9 @@ int	check_redirect(char *s)
 			i++;
 			in_out_quotes(s[i], &quote, &d_quote);
 		}
-		while (ft_strchr(s, SPACES))
+		while (ft_strchr(s[i], SPACES))
 			i++;
-		while (!ft_strchr(s, "<>"))
+		while (!ft_strchr(s[i], "<>"))
 			i++;
 	}
 	return (i);
