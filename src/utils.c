@@ -49,11 +49,12 @@ int	check_redirect_operator(char *s, int *i)
 {
 	int	red;
 
+	red = 0;
 	if (s[*i] && s[*i] == '>')
 		red = RIGHT;
 	else if (s[*i] && s[*i] == '<')
 		red = LEFT;
-	*i++;
+	(*i)++;
 	if (red == RIGHT && s[*i] == '<')
 		return (0);
 	else if (red == LEFT && s[*i] == '>')
@@ -61,7 +62,7 @@ int	check_redirect_operator(char *s, int *i)
 	else
 	{
 		if (s[*i] == '<' || s[*i] == '>')
-			*i++;
+			(*i)++;
 		return (1);
 	}
 }
@@ -85,9 +86,9 @@ int	check_redirect(char *s)
 			i++;
 			in_out_quotes(s[i], &quote, &d_quote);
 		}
-		while (ft_strchr(s[i], SPACES))
+		while (ft_strchr(SPACES, s[i]))
 			i++;
-		while (!ft_strchr(s[i], "<>"))
+		while (!ft_strchr("<>", s[i]))
 			i++;
 	}
 	return (i);
