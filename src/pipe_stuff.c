@@ -6,11 +6,13 @@ int	spawn_pipe_cmd(t_sh *sh, t_cmd *cmd)
 	{
 		close(cmd->pipe_in[STDOUT]);
 		dup2(cmd->pipe_in[STDIN], STDIN);
+		close(cmd->pipe_in[STDIN]);
 	}
 	if (cmd->is_piped[STDOUT])
 	{
 		close(cmd->pipe_out[STDIN]);
 		dup2(cmd->pipe_out[STDOUT], STDOUT);
+		close(cmd->pipe_out[STDOUT]);
 	}
 	cmd_proc(sh, cmd, 0);
 	if (cmd->is_piped[STDIN])

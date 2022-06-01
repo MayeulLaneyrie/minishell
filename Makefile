@@ -13,6 +13,7 @@ SRCS =	src/main.c \
 		src/quote_split.c \
 		src/display_utils.c \
 		src/heredoc.c \
+		src/apply_redir.c \
 		src/builtin_central.c \
 		src/env_builtin.c \
 		src/pwd_builtin.c \

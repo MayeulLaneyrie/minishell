@@ -162,4 +162,10 @@ char	*tmp_name(char *path);
 
 int		heredoc(t_red *red);
 
+/*
+**	Dans apply_redir.c :
+*/
+
+int		apply_redir(t_cmd *cmd);
+
 #endif

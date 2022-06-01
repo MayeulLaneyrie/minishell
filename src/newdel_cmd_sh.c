@@ -26,6 +26,7 @@ t_cmd	*new_cmd(void)
 	ret->av = NULL;
 	ret->is_piped[STDIN] = 0;
 	ret->is_piped[STDOUT] = 0;
+	ret->red = NULL;
 	return (ret);
 }
 
@@ -66,7 +67,6 @@ int	new_sh(int ac, char **av, char **envp, t_sh *sh)
 	set_var(sh->env, "PWD", tmp);
 	free(tmp);
 	sh->exec_name = av[0];
-	sh->cmd = NULL;
 	sh->pipeline = NULL;
 	return (0);
 }
