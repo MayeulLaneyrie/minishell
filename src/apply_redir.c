@@ -15,6 +15,8 @@ int	apply_single_redir(t_red *red)
 	fd = open(red->word, flags, 0644);
 	if (fd < 0)
 		return (ft_err4("minishell", red->word, strerror(errno), NULL) - 1);
+	if (red->in_out == RED_IN && red->mode == RED_APPEND)
+		unlink(red->word);
 	red->fd = red->in_out == RED_OUT;
 	if (dup2(fd, red->fd) < 0)
 		return (-1);
