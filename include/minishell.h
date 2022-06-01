@@ -21,10 +21,8 @@
 
 # include <signal.h>
 
-# define METACHAR "\t\n|&;<( )>"
+# define METACHAR "\t\n|< >"
 # define SPACES "\t\n\r\v\f "
-# define LEFT 1
-# define RIGHT 2
 
 # define GNL_BUFFER_SIZE 256
 
@@ -42,11 +40,11 @@
 # define STDOUT 1
 # define STDERR 2
 
-# define RED_IN 0
-# define RED_OUT 1
+# define RED_IN 1
+# define RED_OUT 2
 
-# define RED_TRUNC 0
-# define RED_APPEND 1
+# define RED_TRUNC 1
+# define RED_APPEND 2
 
 # define MALLOC_ERROR 1
 # define WRONG_NB_QUOTE 2
@@ -110,7 +108,7 @@ t_split	*quote_split(char *s, char *set);
 */
 int		check_quote(char *s);
 int		check_pipe(char *s);
-int		check_redirect(char *s);
+int		check_redirect(char *s, t_cmd *cmd);
 
 /*
 **	Dans var_env.c :

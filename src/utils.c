@@ -51,33 +51,48 @@ int	check_redirect_operator(char *s, int *i)
 
 	red = 0;
 	if (s[*i] && s[*i] == '>')
-		red = RIGHT;
+		red = RED_OUT;
 	else if (s[*i] && s[*i] == '<')
-		red = LEFT;
+		red = RED_IN;
 	(*i)++;
-	if (red == RIGHT && s[*i] == '<')
+	if (red == RED_OUT && s[*i] == '<')
 		return (0);
-	else if (red == LEFT && s[*i] == '>')
+	else if (red == RED_IN && s[*i] == '>')
 		return (0);
 	else
 	{
-		if (s[*i] == '<' || s[*i] == '>')
+		if (s[*i] == '<' && red == RED_IN)
+		{
 			(*i)++;
-		return (1);
+			return (RED_APPEND);
+		}
+		if (s[*i] == '>' && red == RED_OUT)
+		{
+			(*i)++;
+			return (RED_APPEND);
+		}
+		return (RED_TRUNC);
 	}
 }
 
-int	check_redirect(char *s)
+int	check_redirect(char *s, t_cmd *cmd)
 {
-	int	i;
-	int	quote;
-	int	d_quote;
+	int		i;
+	int		quote;
+	int		d_quote;
+	int		mode;
+	t_red	*tmp;
 
 	i = 0;
 	quote = 0;
 	d_quote = 0;
-	if (!check_redirect_operator(s, &i))
+	tmp->mode = check_redirect_operator(s, &i);
+	if (!tmp->mode)
 		return (-1);
+	if (s[i] == '>')
+		tmp->in_out = RED_OUT;
+	else if (s[i] == '<')
+		tmp->in_out = RED_IN;
 	while (s[i])
 	{
 		in_out_quotes(s[i], &quote, &d_quote);
@@ -90,6 +105,9 @@ int	check_redirect(char *s)
 			i++;
 		while (!ft_strchr("<>", s[i]))
 			i++;
+		
+		if (!ft_lstadd_back(cmd->red, ft_lstnew(tmp)))
+			return (ft_lstclear(&cmd, &free));
 	}
 	return (i);
 }
