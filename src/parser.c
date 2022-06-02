@@ -75,7 +75,7 @@ int	word_cpy(char *dst, char *src)
 **	un t_split contenant les mots qu'elle contient, découpés selon les
 **	règles de quoting de bash.
 */
-t_split	*cut_words(char *s)
+t_split	*cut_words(char *s, t_cmd *cmd)
 {
 	int		l;
 	char	*w;
@@ -85,17 +85,27 @@ t_split	*cut_words(char *s)
 	tmp = NULL;
 	while (*s)
 	{
-		while (*s && ft_strchr(METACHAR, *s))
+		while (*s && ft_strchr(SPACES, *s))
 			s++;
 		if (!*s)
 			break ;
-		l = word_len(s);
-		w = malloc(l + 1);
-		if (!w)
-			return (ft_lstclear(&tmp, &free));
-		s += word_cpy(w, s);
-		if (!ft_lstadd_back(&tmp, ft_lstnew(w)))
-			return (ft_lstclear(&tmp, &free));
+		if (ft_strchr("<>", *s))
+		{
+			l = check_redirect(s, cmd);
+			if (l < 0)
+				return (ft_lstclear(&tmp, &free));
+			s += l;
+		}
+		else
+		{
+			l = word_len(s);
+			w = malloc(l + 1);
+			if (!w)
+				return (ft_lstclear(&tmp, &free));
+			s += word_cpy(w, s);
+			if (!ft_lstadd_back(&tmp, ft_lstnew(w)))
+				return (ft_lstclear(&tmp, &free));
+		}
 	}
 	ret = list_to_split(&tmp);
 	if (!ret)
@@ -119,7 +129,8 @@ int	parse_cmd(char *s, t_sh *sh)
 		sh->pipeline->data[i] = new_cmd();
 		if (!sh->pipeline->data[i])
 			return (-2);
-		words = cut_words((char *)commands->data[i]);
+		words = cut_words((char *)commands->data[i],
+				(t_cmd *)sh->pipeline->data[i]);
 		if (!words)
 			return ((unsigned long long)del_split(commands, &ft_free) - 3);
 		((t_cmd *)sh->pipeline->data[i])->av = (char **)words->data;
@@ -164,12 +175,5 @@ int	main_part1(t_sh *sh)
 		return (1);
 	if (parse_cmd(s, sh))
 		return ((unsigned long)ft_free((void *)s) + 1);
-	/*
-	if (check_redirect(s) >= 0)
-	if (fill_struct_redir(sh, s))
-		return ((unsigned long)ft_free((void *)s) + 1);
-	else
-		syntax redir mauvaise
-	*/
 	return (free(s), 0);
 }
