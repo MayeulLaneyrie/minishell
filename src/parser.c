@@ -85,7 +85,6 @@ t_split	*cut_words(char *s, t_cmd *cmd)
 	tmp = NULL;
 	while (*s)
 	{
-		printf("str = %s\n", s);
 		while (*s && ft_strchr(SPACES, *s))
 			s++;
 		if (!*s)
