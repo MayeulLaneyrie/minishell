@@ -34,7 +34,7 @@ int	main(int ac, char **av, char **envp)
 {
 	t_sh	sh;
 
-	printf("Welcome to minishell \"MarkIII\"!\n");
+	printf("Welcome to minishell \"Endgame\"!\n");
 	if (!envp)
 		exit (EXIT_FAILURE);
 	if (new_sh(ac, av, envp, &sh) < 0)
