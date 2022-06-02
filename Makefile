@@ -2,7 +2,6 @@ SRCS =	src/main.c \
 		src/newdel_cmd_sh.c \
 		src/parser.c \
 		src/redirect.c \
-		src/var_env.c \
 		src/dollar_subst.c \
 		src/utils.c \
 		src/cmd_launcher.c \
@@ -15,11 +14,11 @@ SRCS =	src/main.c \
 		src/display_utils.c \
 		src/heredoc.c \
 		src/apply_redir.c \
-		src/builtin_central.c \
-		src/env_builtin.c \
-		src/pwd_builtin.c \
-		src/cd_builtin.c \
-		src/echo_builtin.c \
+		src/bi_central.c \
+		src/bi_env.c \
+		src/bi_pwd.c \
+		src/bi_cd.c \
+		src/bi_echo.c \
 		src/make_canonical.c \
 		src/gnl.c
 
