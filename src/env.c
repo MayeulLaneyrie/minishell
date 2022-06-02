@@ -6,7 +6,7 @@
 /*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:46:23 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/02 16:46:24 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/02 21:45:19 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ char	*get_var(t_split *env, char *name)
 	l = ft_strlen(name);
 	i = -1;
 	while (++i < env->len)
-		if (!ft_strncmp(((char **)env->data)[i], name, l))
+		if (!ft_strncmp(((char **)env->data)[i], name, l)
+			&& ((char **)env->data)[i][l] == '=')
 			break ;
 	if (!((char **)env->data)[i])
 		return (NULL);

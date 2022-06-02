@@ -159,9 +159,12 @@ int	main_part1(t_sh *sh)
 		}
 		free(s);
 	}
+	s = all_dollar_subst(sh->env, s);
+	/*
 	if (check_env_var(s))
 		if (convert_env_vars(sh, &s) != 0)
 			return ((unsigned long)ft_free((void *)s) + 1);
+	*/
 	if (parse_cmd(s, sh))
 		return ((unsigned long)ft_free((void *)s) + 1);
 	/*

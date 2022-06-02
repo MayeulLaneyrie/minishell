@@ -31,9 +31,11 @@ char	*create_tmp(char *s, int i)
 
 	j = 0;
 	i_tmp = i;
+	if (s[i] == '$')
+		return (NULL);
 	while (s[i] != ' ' && s[i] != '"' && s[i])
 		i++;
-	dest = (char *)malloc(sizeof(char) * i);
+	dest = malloc(i);
 	if (!dest)
 		exit(EXIT_FAILURE);
 	i = i_tmp + 1;

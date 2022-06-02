@@ -94,6 +94,12 @@ int		main_part1(t_sh *sh);
 int		parse_cmd(char *s, t_sh *sh);
 
 /*
+**	Dans dollar_subst.c :
+*/
+
+char	*all_dollar_subst(t_split *env, char *s);
+
+/*
 **	Dans gnl.c, juste un gnl :
 */
 int		get_next_line(char **line);
