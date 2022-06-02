@@ -90,7 +90,7 @@ t_split	*cut_words(char *s, t_cmd *cmd)
 			s++;
 		if (!*s)
 			break ;
-		if (*s == '<' || *s == '>')
+		if (check_redir(s) > 0)
 		{
 			l = check_redirect(s, cmd);
 			if (l < 0)

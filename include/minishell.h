@@ -108,6 +108,7 @@ t_split	*quote_split(char *s, char *set);
 */
 int		check_quote(char *s);
 int		check_pipe(char *s);
+int		check_redir(char *s);
 int		check_redirect(char *s, t_cmd *cmd);
 
 /*
