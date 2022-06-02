@@ -68,7 +68,6 @@ typedef struct s_sh
 {
 	char			*exec_name;
 	t_split			*env;
-	t_cmd			*cmd;
 	t_split			*pipeline;
 }	t_sh;
 
