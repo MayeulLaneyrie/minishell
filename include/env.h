@@ -17,8 +17,12 @@ t_split	*load_env(char **envp);
 */
 char	*get_var(t_split *env, char *name);
 
-int		get_var_index(t_split *env, char *name);
+int		set_var(t_split *env, char *name, char *value);
 
-int		export_single(t_sh *sh, t_cmd *cmd, char *s);
+int		get_var_index(t_split *env, char *name, int even_unset);
+
+int		export_single(t_split *env, char *s);
+
+int		check_identifier(char *s, int stop_at_eq);
 
 #endif

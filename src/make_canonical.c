@@ -93,7 +93,7 @@ int	make_canonical(char *s)
 	i = 0;
 	while (s[i + gap])
 	{
-		i += jump_noslash(s, gap);
+		i += jump_noslash(s + i, gap);
 		if (!s[i + gap])
 			break ;
 		i++;

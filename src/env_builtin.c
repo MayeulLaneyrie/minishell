@@ -11,7 +11,7 @@ int	bi_env(t_sh *sh, t_cmd *cmd)
 	return (CMD_NOWAIT);
 }
 
-int	check_identifier(char *s, t_sh *sh, t_cmd *cmd, int stop_at_eq)
+int	check_identifier(char *s, int stop_at_eq)
 {
 	int	i;
 	int	failed;
@@ -26,27 +26,27 @@ int	check_identifier(char *s, t_sh *sh, t_cmd *cmd, int stop_at_eq)
 	if (s[i] == '=' && !stop_at_eq)
 		failed -= 3;
 	if (failed)
-		ft_err4(sh->exec_name, cmd->av[0], s, "not a valid identifier\n");
+		ft_err4("minishell", "export", s, "not a valid identifier\n");
 	return (failed);
 }
 
-int	export_single(t_sh *sh, t_cmd *cmd, char *s)
+int	export_single(t_split *env, char *s)
 {
 	int		n;
 	char	*cpy;
 
-	if (check_identifier(s, sh, cmd, 1))
+	if (check_identifier(s, 1))
 		return (-1);
-	n = get_var_index(sh->env, s);
+	n = get_var_index(env, s, 1);
 	if (n >= 0 && !ft_strchr(s, '='))
 		return (0);
 	cpy = ft_strdup(s);
 	if (!cpy)
 		exit(EXIT_FAILURE);
 	if (n < 0)
-		return (3 * split_push(sh->env, cpy, sh->env->len));
-	free(((void **)sh->env->data)[n]);
-	return (3 * split_push(sh->env, cpy, n));
+		return (3 * split_push(env, cpy, env->len));
+	free(((void **)env->data)[n]);
+	return (3 * split_push(env, cpy, n));
 }
 
 int	bi_export(t_sh *sh, t_cmd *cmd)
@@ -66,7 +66,7 @@ int	bi_export(t_sh *sh, t_cmd *cmd)
 	xt = 0;
 	while (++i < cmd->ac)
 	{
-		n = export_single(sh, cmd, cmd->av[i]);
+		n = export_single(sh->env, cmd->av[i]);
 		if (n < -2)
 			exit(EXIT_FAILURE);
 		xt += n;
@@ -84,12 +84,13 @@ int	bi_unset(t_sh *sh, t_cmd *cmd)
 	i = 0;
 	while (++i < cmd->ac)
 	{
-		if (!check_identifier(cmd->av[i], sh, cmd, 0))
+		if (!check_identifier(cmd->av[i], 0))
 		{
-			n = get_var_index(sh->env, cmd->av[i]);
+			n = get_var_index(sh->env, cmd->av[i], 1);
 			if (n >= 0)
 			{
 				free(((void **)sh->env->data)[n]);
+				((void **)sh->env->data)[n] = NULL;
 				while (++n < sh->env->len)
 				{
 					((char **)sh->env->data)[n - 1]

@@ -6,14 +6,14 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 18:29:56 by mlaneyri          #+#    #+#             */
-/*   Updated: 2020/11/18 23:54:36 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/05/31 21:27:56 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+int	ft_puts(char *s, int fd)
 {
 	size_t	len;
 
@@ -21,4 +21,5 @@ void	ft_putstr_fd(char *s, int fd)
 	while (s[len])
 		len++;
 	write(fd, s, len);
+	return (0);
 }

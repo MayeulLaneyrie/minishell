@@ -71,14 +71,14 @@
 # include "./newdel.h"
 
 /*
-**	env.h contient la définition de fonctions de gestion de l'environnement.
-*/
-# include "./env.h"
-
-/*
 **	builtins.h contient les définitions des builtins.
 */
 # include "./builtins.h"
+
+/*
+**	env.h contient la définition de fonctions de gestion de l'environnement.
+*/
+# include "./env.h"
 
 extern int	g_xt_stat;
 
@@ -139,6 +139,12 @@ int		cmd_proc(t_sh *sh, t_cmd *cmd, int do_fork);
 int		pipeline_spawner(t_sh *sh);
 
 /*
+**	Dans pwd_builtin.c : (Renvoie le pwd, doit etre free) :
+*/
+
+char	*get_pwd(void);
+
+/*
 **	Dans search_path.c : (Permet une recherche dans une variable de type $PATH)
 */
 char	*search_path(char *path, char *name, int mode);
@@ -153,5 +159,19 @@ int		make_canonical(char *s);
 */
 char	*ft_cat3(char *s1, char *s2, char *s3);
 int		ft_err4(char *s1, char *s2, char *s3, char *s4);
+
+/*
+**	Dans tmp_utils.c : (créqation de fichiers temporaires)
+*/
+
+char	*tmp_name(char *path);
+
+int		heredoc(t_red *red);
+
+/*
+**	Dans apply_redir.c :
+*/
+
+int		apply_redir(t_cmd *cmd);
 
 #endif

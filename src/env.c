@@ -41,14 +41,21 @@ char	*get_var(t_split *env, char *name)
 	return (((char **)env->data)[i] + l + 1);
 }
 
-/*
 int	set_var(t_split *env, char *name, char *value)
 {
+	char	*tmp;
+
+	if (check_identifier(name, 0))
+		return (-1);
+	tmp = ft_cat3(name, "=", value);
+	if (!tmp)
+		exit(EXIT_FAILURE);
+	export_single(env, tmp);
+	free(tmp);
 	return (0);
 }
-*/
 
-int	get_var_index(t_split *env, char *name)
+int	get_var_index(t_split *env, char *name, int even_unset)
 {
 	int	i;
 	int	l;
@@ -64,7 +71,7 @@ int	get_var_index(t_split *env, char *name)
 			break ;
 	if (!((char **)env->data)[i])
 		return (-1);
-	if (((char **)env->data)[i][l] != '=')
+	if (((char **)env->data)[i][l] != '=' && !even_unset)
 		return (-1);
 	return (i);
 }

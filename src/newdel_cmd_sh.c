@@ -26,6 +26,7 @@ t_cmd	*new_cmd(void)
 	ret->av = NULL;
 	ret->is_piped[STDIN] = 0;
 	ret->is_piped[STDOUT] = 0;
+	ret->red = NULL;
 	return (ret);
 }
 
@@ -52,14 +53,20 @@ void	*del_cmd(void *ptr)
 
 int	new_sh(int ac, char **av, char **envp, t_sh *sh)
 {
+	char	*tmp;
+
 	(void)ac;
 	if (!envp)
 		return (-1);
 	sh->env = load_env(envp);
 	if (!sh->env)
 		return (-1);
+	tmp = get_pwd();
+	if (!tmp)
+		exit(EXIT_FAILURE);
+	set_var(sh->env, "PWD", tmp);
+	free(tmp);
 	sh->exec_name = av[0];
-	// sh->cmd = NULL;
 	sh->pipeline = NULL;
 	return (0);
 }

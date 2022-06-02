@@ -34,6 +34,8 @@ int	cmd_proc(t_sh *sh, t_cmd *cmd, int do_fork)
 {
 	if (!cmd)
 		return (CMD_NOWAIT);
+	if (apply_redir(cmd))
+		return (CMD_NOWAIT + 0 * (g_xt_stat = 1));
 	if (!ft_strchr(cmd->av[0], '/'))
 	{
 		cmd->builtin_id = builtin_search(cmd->av[0]);
