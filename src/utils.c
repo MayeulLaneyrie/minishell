@@ -119,11 +119,11 @@ int	check_redirect(char *s, t_cmd *cmd)
 	quote = 0;
 	d_quote = 0;
 	tmp = malloc(sizeof(t_red));
-	tmp->mode = check_redirect_operator(s, &i);
 	if (s[i] == '>')
 		tmp->in_out = RED_OUT;
 	else if (s[i] == '<')
-	tmp->in_out = RED_IN;
+		tmp->in_out = RED_IN;
+	tmp->mode = check_redirect_operator(s, &i);
 	in_out_quotes(s[i], &quote, &d_quote);
 	while (quote == 1 || d_quote == 1)
 	{
@@ -134,11 +134,13 @@ int	check_redirect(char *s, t_cmd *cmd)
 		i++;
 	if (ft_strchr("<>", s[i]))
 		return (-1);
-	new_word = malloc(word_len(s) + 1);
+	new_word = malloc(word_len(s + i) + 1);
 	if (!new_word)
 		return (-1);
 	i += word_cpy(new_word, s + i);
 	tmp->word = new_word;
+	if(heredoc(tmp) < 0)
+		return (-1);
 	if (!ft_lstadd_back(&(cmd->red), ft_lstnew(tmp)))
 	{
 		ft_lstclear(&cmd->red, &free);
