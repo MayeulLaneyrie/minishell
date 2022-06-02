@@ -6,7 +6,7 @@
 /*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:46:46 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/02 16:46:50 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/03 01:02:07 by lnr              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,11 @@ int	heredoc(t_red *red)
 
 	tmp_file = tmp_name("/tmp");
 	if (!tmp_file)
-		return (ft_puts("minishell: heredoc tmp file can't be created", 2) - 1);
+		return (
+			ft_puts("minishell: heredoc tmp file can't be created\n", 2) - 1);
 	fd = open(tmp_file, O_WRONLY | O_CREAT, 0666);
 	if (!fd)
-		return (ft_puts("minishell: heredoc tmp file can't be created", 2)
+		return (ft_puts("minishell: heredoc tmp file can't be created\n", 2)
 			- 1 + (long)ft_free(tmp_file));
 	line = NULL;
 	l = ft_strlen(red->word);

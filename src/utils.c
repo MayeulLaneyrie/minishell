@@ -119,7 +119,7 @@ int	set_red_fd(int in_out, t_list *lst)
 	i = -1;
 	while (s[++i])
 		if (!ft_isdigit(s[i]))
-			break;
+			break ;
 	if (s[i] || i > 10)
 		return (in_out == RED_OUT);
 	ret = ft_atoi(s);
