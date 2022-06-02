@@ -6,11 +6,21 @@
 /*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:49:21 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/02 16:49:22 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/02 23:32:57 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+void	del_red(void *ptr)
+{
+	t_red	*red;
+
+	red = (t_red *)ptr;
+	if (red->word)
+		free(red->word);
+	free(red);
+}
 
 int	apply_single_redir(t_red *red)
 {
@@ -29,7 +39,6 @@ int	apply_single_redir(t_red *red)
 		return (ft_err4("minishell", red->word, strerror(errno), NULL) - 1);
 	if (red->in_out == RED_IN && red->mode == RED_APPEND)
 		unlink(red->word);
-	red->fd = red->in_out == RED_OUT;
 	if (dup2(fd, red->fd) < 0)
 		return (-1);
 	return (0);

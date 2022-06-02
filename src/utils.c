@@ -105,7 +105,36 @@ int	check_redirect_operator(char *s, int *i)
 	}
 }
 
-int	check_redirect(char *s, t_cmd *cmd)
+int	set_red_fd(int in_out, t_list *lst)
+{
+	t_list			*head;
+	int				i;
+	char			*s;
+	unsigned long	ret;
+
+	head = ft_lstlast(lst);
+	if (!head)
+		return (in_out == RED_OUT);
+	s = head->data;
+	i = -1;
+	while (s[++i])
+		if (!ft_isdigit(s[i]))
+			break;
+	if (s[i] || i > 10)
+		return (in_out == RED_OUT);
+	ret = ft_atoi(s);
+	if (ret > 2147483647)
+		return (in_out == RED_OUT);
+	free(s);
+	if (head->next)
+		head->next->prev = NULL;
+	if (head->prev)
+		head->prev->next = NULL;
+	free(head);
+	return (ret);
+}
+
+int	check_redirect(char *s, t_cmd *cmd, t_list *lst)
 {
 	int		i;
 	int		quote;
@@ -124,12 +153,17 @@ int	check_redirect(char *s, t_cmd *cmd)
 	else if (s[i] == '<')
 		tmp->in_out = RED_IN;
 	tmp->mode = check_redirect_operator(s, &i);
+	if (!tmp->mode)
+		return (-1);
+	tmp->fd = set_red_fd(tmp->in_out, lst);
+	/*
 	in_out_quotes(s[i], &quote, &d_quote);
 	while (quote == 1 || d_quote == 1)
 	{
 		i++;
 		in_out_quotes(s[i], &quote, &d_quote);
 	}
+	*/
 	while (ft_strchr(SPACES, s[i]))
 		i++;
 	if (ft_strchr("<>", s[i]))
@@ -139,12 +173,9 @@ int	check_redirect(char *s, t_cmd *cmd)
 		return (-1);
 	i += word_cpy(new_word, s + i);
 	tmp->word = new_word;
-	if(heredoc(tmp) < 0)
+	if (tmp->mode == RED_APPEND && tmp->in_out == RED_IN && heredoc(tmp) < 0)
 		return (-1);
 	if (!ft_lstadd_back(&(cmd->red), ft_lstnew(tmp)))
-	{
-		ft_lstclear(&cmd->red, &free);
-		return (-1);
-	}
+		return ((long)ft_lstclear(&cmd->red, &free) - 1);
 	return (i);
 }

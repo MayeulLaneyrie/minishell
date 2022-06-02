@@ -6,7 +6,7 @@
 /*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:49:00 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/02 16:49:01 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/02 22:40:10 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	*del_cmd(void *ptr)
 			ft_free((void *)cmd->av[i]);
 		ft_free((void *)cmd->av);
 	}
+	ft_lstclear(&(cmd->red), &del_red);
 	ft_free((void *)cmd);
 	return (NULL);
 }

@@ -81,17 +81,25 @@ t_split	*cut_words(char *s, t_cmd *cmd)
 	char	*w;
 	t_list	*tmp;
 	t_split	*ret;
+	int		jump;
 
 	tmp = NULL;
 	while (*s)
 	{
+		jump = 0;
 		while (*s && ft_strchr(SPACES, *s))
+		{
+			jump = 1;
 			s++;
+		}
 		if (!*s)
 			break ;
 		if (ft_strchr("<>", *s))
 		{
-			l = check_redirect(s, cmd);
+			if (!jump)
+				l = check_redirect(s, cmd, tmp);
+			else
+				l = check_redirect(s, cmd, NULL);
 			if (l < 0)
 				return (ft_lstclear(&tmp, &free));
 			s += l;

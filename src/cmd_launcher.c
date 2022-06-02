@@ -6,7 +6,7 @@
 /*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:09:15 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/02 17:09:17 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/02 22:23:33 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	cmd_fork_and_after(t_sh *sh, t_cmd *cmd, int do_fork)
 		if (cmd->pid)
 			return (CMD_WAIT);
 	}
+	if (apply_redir(cmd))
+		return (CMD_NOWAIT + 0 * (g_xt_stat = 1));
 	execve(cmd->path, cmd->av, (char **)sh->env->data);
 	excvefail_handler(cmd->path, sh);
 	return (CMD_EXIT);
@@ -59,8 +61,6 @@ int	cmd_proc(t_sh *sh, t_cmd *cmd, int do_fork)
 {
 	if (!cmd)
 		return (CMD_NOWAIT);
-	if (apply_redir(cmd))
-		return (CMD_NOWAIT + 0 * (g_xt_stat = 1));
 	if (!ft_strchr(cmd->av[0], '/'))
 	{
 		cmd->builtin_id = builtin_search(cmd->av[0]);

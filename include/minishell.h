@@ -96,7 +96,6 @@ int		word_len(char *s);
 int		word_cpy(char *dst, char *src);
 t_split	*cut_words(char *s, t_cmd *cmd);
 
-
 /*
 **	Dans dollar_subst.c :
 */
@@ -119,7 +118,7 @@ t_split	*quote_split(char *s, char *set);
 int		check_quote(char *s);
 int		check_pipe(char *s);
 int		check_redir(char *s);
-int		check_redirect(char *s, t_cmd *cmd);
+int		check_redirect(char *s, t_cmd *cmd, t_list *lst);
 
 /*
 **	Dans var_env.c :

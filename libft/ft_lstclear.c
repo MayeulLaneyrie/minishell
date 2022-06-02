@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 23:10:23 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/03/23 03:13:15 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/02 23:18:34 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,17 @@ static void	ft_lstclearall(t_list *lst, void (*del)(void *))
 	cpy1 = cpy->next;
 	while (cpy1)
 	{
+		cpy = cpy1->next;
 		ft_lstdelone(cpy1, del);
-		cpy = cpy1;
-		cpy1 = cpy1->next;
-		free(cpy);
+		cpy1 = cpy;
 	}
 	cpy = lst;
 	cpy1 = cpy->prev;
 	while (cpy1)
 	{
+		cpy = cpy1->prev;
 		ft_lstdelone(cpy1, del);
-		cpy = cpy1;
-		cpy1 = cpy1->prev;
-		free(cpy);
+		cpy1 = cpy;
 	}
 }
 
@@ -43,7 +41,6 @@ void	*ft_lstclear(t_list **lst, void (*del)(void *))
 		return (NULL);
 	ft_lstclearall(*lst, del);
 	ft_lstdelone(*lst, del);
-	free(*lst);
 	*lst = NULL;
 	return (NULL);
 }

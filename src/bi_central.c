@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_central.c                                  :+:      :+:    :+:   */
+/*   bi_central.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:47:01 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/02 16:47:05 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/02 22:23:36 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	bi_exit(t_sh *sh, t_cmd *cmd)
 
 int	builtin_search(char *s)
 {
-	static const char	*builtins[8] = {"echo", "cd", "pwd", "export",
+	static const char	*builtins[8] = {"echololo", "cd", "pwd", "export",
 		"unset", "env", "exit", NULL};
 	int					i;
 

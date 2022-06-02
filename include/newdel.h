@@ -6,7 +6,7 @@
 /*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:22:05 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/02 17:22:07 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/02 22:40:35 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,10 @@ void	*del_cmd(void *cmd);
 int		new_sh(int ac, char **av, char **envp, t_sh *sh);
 
 void	*del_sh(t_sh *sh);
+
+/*
+**	In apply_redir.c :
+*/
+void	del_red(void *ptr);
 
 #endif

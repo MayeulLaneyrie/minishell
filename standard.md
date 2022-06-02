@@ -30,7 +30,7 @@
 
 * All MkII functionalities, plus the following :
 
-- [ ] '<', '>' and '>>' redirections
+- [x] '<', '>' and '>>' redirections
 - [x] Variable expansion
 
 - [x] "env" builtin
@@ -46,7 +46,7 @@
 
 - [ ] Handling of ctrl-c, ctrl-d, ctrl-\
 - [x] Handling of $? expansion
-- [ ] Heredoc implementation
+- [x] Heredoc implementation
 - [x] "echo" builtin
 - [x] "cd" builtin
 - [x] "pwd" builtin
