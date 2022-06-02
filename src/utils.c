@@ -105,46 +105,44 @@ int	check_redirect_operator(char *s, int *i)
 	}
 }
 
-t_list	check_redirect(char *s, t_cmd *cmd)
+int	check_redirect(char *s, t_cmd *cmd)
 {
 	int		i;
 	int		quote;
 	int		d_quote;
 	t_red	*tmp;
-	char	new_word[1000];
+	char	*new_word;
 	int		j;
 
 	i = 0;
 	j = 0;
 	quote = 0;
 	d_quote = 0;
-	tmp = malloc(sizeof(t_red) + 1);
+	tmp = malloc(sizeof(t_red));
 	tmp->mode = check_redirect_operator(s, &i);
 	if (s[i] == '>')
 		tmp->in_out = RED_OUT;
 	else if (s[i] == '<')
-		tmp->in_out = RED_IN;
-	while (s[i])
+	tmp->in_out = RED_IN;
+	in_out_quotes(s[i], &quote, &d_quote);
+	while (quote == 1 || d_quote == 1)
 	{
+		i++;
 		in_out_quotes(s[i], &quote, &d_quote);
-		while (quote == 1 || d_quote == 1)
-		{
-			i++;
-			in_out_quotes(s[i], &quote, &d_quote);
-		}
-		while (ft_strchr(SPACES, s[i]))
-			i++;
-		while (!ft_strchr("<>", s[i]))
-			new_word[j++] = s[i++];
-		new_word[j] = '\0';
-		tmp->word = ft_strdup(new_word);
-		if (!ft_lstadd_back(&cmd->red, ft_lstnew(tmp)))
-		{
-			ft_lstclear(&cmd->red, &free);
-			return (NULL);
-		}
-		while (ft_strchr(SPACES, s[i]))
-			i++;
 	}
-	return (NULL);
+	while (ft_strchr(SPACES, s[i]))
+		i++;
+	if (ft_strchr("<>", s[i]))
+		return (-1);
+	new_word = malloc(word_len(s) + 1);
+	if (!new_word)
+		return (-1);
+	i += word_cpy(new_word, s + i);
+	tmp->word = new_word;
+	if (!ft_lstadd_back(&(cmd->red), ft_lstnew(tmp)))
+	{
+		ft_lstclear(&cmd->red, &free);
+		return (-1);
+	}
+	return (i);
 }
