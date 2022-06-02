@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipe_stuff.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/02 17:09:48 by mlaneyri          #+#    #+#             */
+/*   Updated: 2022/06/02 17:12:32 by mlaneyri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 int	spawn_pipe_cmd(t_sh *sh, t_cmd *cmd)
@@ -22,6 +34,16 @@ int	spawn_pipe_cmd(t_sh *sh, t_cmd *cmd)
 	exit(g_xt_stat);
 }
 
+int	pipe_gen(t_cmd **cmd, int i)
+{
+	cmd[i]->is_piped[STDOUT] = 1;
+	if (pipe(cmd[i]->pipe_out))
+		exit(EXIT_FAILURE);
+	cmd[i + 1]->pipe_in[STDIN] = cmd[i]->pipe_out[STDIN];
+	cmd[i + 1]->pipe_in[STDOUT] = cmd[i]->pipe_out[STDOUT];
+	return (0);
+}
+
 int	pipeline_spawner(t_sh *sh)
 {
 	int		i;
@@ -34,13 +56,7 @@ int	pipeline_spawner(t_sh *sh)
 		if (i)
 			cmd[i]->is_piped[STDIN] = 1;
 		if (i != sh->pipeline->len - 1)
-		{
-			cmd[i]->is_piped[STDOUT] = 1;
-			if (pipe(cmd[i]->pipe_out))
-				exit(EXIT_FAILURE);
-			cmd[i + 1]->pipe_in[STDIN] = cmd[i]->pipe_out[STDIN];
-			cmd[i + 1]->pipe_in[STDOUT] = cmd[i]->pipe_out[STDOUT];
-		}
+			pipe_gen(cmd, i);
 		cmd[i]->pid = fork();
 		if (cmd[i]->pid < 0)
 			exit(EXIT_FAILURE);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd_launcher.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/02 17:09:15 by mlaneyri          #+#    #+#             */
+/*   Updated: 2022/06/02 17:09:17 by mlaneyri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 int	cnf_handler(t_cmd *cmd)
@@ -30,6 +42,19 @@ int	excvefail_handler(char *path, t_sh *sh)
 	return (0);
 }
 
+int	cmd_fork_and_after(t_sh *sh, t_cmd *cmd, int do_fork)
+{
+	if (do_fork)
+	{
+		cmd->pid = fork();
+		if (cmd->pid)
+			return (CMD_WAIT);
+	}
+	execve(cmd->path, cmd->av, (char **)sh->env->data);
+	excvefail_handler(cmd->path, sh);
+	return (CMD_EXIT);
+}
+
 int	cmd_proc(t_sh *sh, t_cmd *cmd, int do_fork)
 {
 	if (!cmd)
@@ -51,15 +76,7 @@ int	cmd_proc(t_sh *sh, t_cmd *cmd, int do_fork)
 		if (!cmd->path)
 			return (CMD_EXIT);
 	}
-	if (do_fork)
-	{
-		cmd->pid = fork();
-		if (cmd->pid)
-			return (CMD_WAIT);
-	}
-	execve(cmd->path, cmd->av, (char **)sh->env->data);
-	excvefail_handler(cmd->path, sh);
-	return (CMD_EXIT);
+	return (cmd_fork_and_after(sh, cmd, do_fork));
 }
 
 int	main_part2(t_sh *sh)

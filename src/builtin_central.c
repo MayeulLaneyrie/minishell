@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_central.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/02 16:47:01 by mlaneyri          #+#    #+#             */
+/*   Updated: 2022/06/02 16:47:05 by mlaneyri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 int	exit_arg_checker(char *s)
@@ -55,5 +67,6 @@ int	builtin_exec(t_sh *sh, t_cmd *cmd)
 	static const t_bi	builtins[8] = {&bi_echo, &bi_cd, &bi_pwd, &bi_export,
 		&bi_unset, &bi_env, &bi_exit, NULL};
 
+	g_xt_stat = 0;
 	return (builtins[cmd->builtin_id](sh, cmd));
 }

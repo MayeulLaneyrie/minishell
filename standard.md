@@ -45,7 +45,7 @@
 * All MkIII functionalities, plus the following :
 
 - [ ] Handling of ctrl-c, ctrl-d, ctrl-\
-- [ ] Handling of $? expansion
+- [x] Handling of $? expansion
 - [ ] Heredoc implementation
 - [x] "echo" builtin
 - [x] "cd" builtin

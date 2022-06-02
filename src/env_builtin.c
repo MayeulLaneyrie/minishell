@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_builtin.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/02 16:26:37 by mlaneyri          #+#    #+#             */
+/*   Updated: 2022/06/02 16:39:27 by mlaneyri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 int	bi_env(t_sh *sh, t_cmd *cmd)
@@ -80,7 +92,6 @@ int	bi_unset(t_sh *sh, t_cmd *cmd)
 	int	i;
 	int	n;
 
-	g_xt_stat = 0;
 	i = 0;
 	while (++i < cmd->ac)
 	{
@@ -90,12 +101,11 @@ int	bi_unset(t_sh *sh, t_cmd *cmd)
 			if (n >= 0)
 			{
 				free(((void **)sh->env->data)[n]);
-				((void **)sh->env->data)[n] = NULL;
-				while (++n < sh->env->len)
+				while (n < sh->env->len)
 				{
-					((char **)sh->env->data)[n - 1]
-						= ((char **)sh->env->data)[n];
-					((char **)sh->env->data)[n] = NULL;
+					((char **)sh->env->data)[n]
+						= ((char **)sh->env->data)[n + 1];
+					((char **)sh->env->data)[++n] = NULL;
 				}
 				sh->env->len--;
 			}

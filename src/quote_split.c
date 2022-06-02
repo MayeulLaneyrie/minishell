@@ -1,6 +1,16 @@
-#include "../include/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   quote_split.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/02 16:47:41 by mlaneyri          #+#    #+#             */
+/*   Updated: 2022/06/02 16:47:47 by mlaneyri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// Quote split, le split ultime, qui respecte vos règles de quoting !
+#include "../include/minishell.h"
 
 int	quote_split_setchar(char *s, char *set)
 {

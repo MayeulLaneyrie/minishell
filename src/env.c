@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/02 16:46:23 by mlaneyri          #+#    #+#             */
+/*   Updated: 2022/06/02 16:46:24 by mlaneyri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 t_split	*load_env(char **envp)
@@ -71,7 +83,9 @@ int	get_var_index(t_split *env, char *name, int even_unset)
 			break ;
 	if (!((char **)env->data)[i])
 		return (-1);
-	if (((char **)env->data)[i][l] != '=' && !even_unset)
+	if ((((char **)env->data)[i][l] != '=' && !even_unset)
+			|| (((char **)env->data)[i][l] != '='
+				&& ((char **)env->data)[i][l]))
 		return (-1);
 	return (i);
 }

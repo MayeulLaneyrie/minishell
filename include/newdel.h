@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   newdel.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/02 17:22:05 by mlaneyri          #+#    #+#             */
+/*   Updated: 2022/06/02 17:22:07 by mlaneyri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /*
 **	newdel.h contient les prototypes de tous les constructeurs et destructeurs.
 **	Ne pas hésiter a y rajouter les constructeurs et destructeurs de ses propres

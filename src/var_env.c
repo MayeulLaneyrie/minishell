@@ -35,7 +35,7 @@ char	*create_tmp(char *s, int i)
 		i++;
 	dest = (char *)malloc(sizeof(char) * i);
 	if (!dest)
-		return (NULL);
+		exit(EXIT_FAILURE);
 	i = i_tmp + 1;
 	if (s[i] == '$')
 		return (dest[0] = '$', dest[1] = '\0', dest);
@@ -82,11 +82,24 @@ char	*create_new_rdl(char **old_rdl, char *var_env, int len)
 /*
 **	Fonction servant a passer la norme (nombre de lignes)...
 */
-int	norm_win_lines(char *stck_var_env, char **s, char **tmp, t_sh *sh)
+int	norm_win_lines(char **s, char **tmp, t_sh *sh, int i)
 {
+	char	*stck_var_env;
+	char	c;
+
+	c = s[0][i + 1];
 	free (*s);
-	*s = create_new_rdl(tmp, get_var(sh->env, stck_var_env),
-			(ft_strlen(stck_var_env) + 1));
+	if (c == '?')
+	{
+		stck_var_env = ft_itoa(g_xt_stat);
+		*s = create_new_rdl(tmp, stck_var_env, ft_strlen(stck_var_env) + 1);
+	}
+	else
+	{
+		stck_var_env = create_tmp(*s, i);
+		*s = create_new_rdl(tmp, get_var(sh->env, stck_var_env),
+				ft_strlen(stck_var_env) + 1);
+	}
 	if (!*s)
 		return (MALLOC_ERROR);
 	*tmp = ft_strdup(*s);
@@ -103,7 +116,6 @@ int	norm_win_lines(char *stck_var_env, char **s, char **tmp, t_sh *sh)
 int	convert_env_vars(t_sh *sh, char **s)
 {
 	int		i;
-	char	*stck_var_env;
 	char	*tmp;
 	int		quoted;
 
@@ -118,8 +130,7 @@ int	convert_env_vars(t_sh *sh, char **s)
 			quoted = 0;
 		if (s[0][i] == '$' && !quoted)
 		{
-			stck_var_env = create_tmp(*s, i);
-			if (norm_win_lines(stck_var_env, s, &tmp, sh) == MALLOC_ERROR)
+			if (norm_win_lines(s, &tmp, sh, i) == MALLOC_ERROR)
 				return (MALLOC_ERROR);
 			i = -1;
 		}
