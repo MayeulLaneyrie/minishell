@@ -15,9 +15,7 @@ int	check_redirect_operator(char *s, int *i)
 	else if (s[*i] && s[*i] == '<')
 		red = RED_IN;
 	(*i)++;
-	if (red == RED_OUT && s[*i] == '<')
-		return (0);
-	else if (red == RED_IN && s[*i] == '>')
+	if ((red == RED_OUT && s[*i] == '<') || (red == RED_IN && s[*i] == '>'))
 		return (0);
 	else
 	{
