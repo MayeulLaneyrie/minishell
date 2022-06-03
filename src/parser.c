@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:26:06 by bifrah            #+#    #+#             */
-/*   Updated: 2022/06/03 17:11:59 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/06/03 18:04:37 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,12 @@ int	cut_words(char *s, t_cmd *cmd, t_split	**ret)
 				l = check_redirect(s, cmd, tmp);
 			else
 				l = check_redirect(s, cmd, NULL);
-			if (l == -1 || l == -3)
+			if (l == -1)
 				return (ft_lstclear(&tmp, &free), -1);
 			if (l == -2)
 				return (ft_lstclear(&tmp, &free), -4);
+			if (l == -3)
+				return (ft_lstclear(&tmp, &free), -6);
 			s += l;
 		}
 		else
@@ -134,11 +136,16 @@ int	cut_words(char *s, t_cmd *cmd, t_split	**ret)
 	return (0);
 }
 
+/*
+**	Parse le retour de readline :
+**	et stock les tokens dans un char ** (sh.pipeline.data.av)
+*/
 int	parse_cmd(char *s, t_sh *sh)
 {
 	t_split	*words;
 	t_split	*commands;
 	int		i;
+	int		cutword_ret;
 
 	commands = quote_split(s, "|");
 	if (!commands)
@@ -152,10 +159,11 @@ int	parse_cmd(char *s, t_sh *sh)
 		sh->pipeline->data[i] = new_cmd();
 		if (!sh->pipeline->data[i])
 			return (-2);
-		if (cut_words((char *)commands->data[i],
-				(t_cmd *)sh->pipeline->data[i], &words) == -4)
-			return (free(sh->pipeline->data[i]),
-				(unsigned long long)del_split(commands, &ft_free) - 4);
+		cutword_ret = cut_words((char *)commands->data[i], (t_cmd *)sh->pipeline->data[i], &words);
+		if (cutword_ret == -4)
+			return (free(sh->pipeline->data[i]), (unsigned long long)del_split(commands, &ft_free) - 4);
+		if (cutword_ret == -6)
+			return (free(sh->pipeline->data[i]), (unsigned long long)del_split(commands, &ft_free) - 6);
 		if (!words)
 			return (free(sh->pipeline->data[i]),
 				(unsigned long long)del_split(commands, &ft_free) - 3);
@@ -168,10 +176,6 @@ int	parse_cmd(char *s, t_sh *sh)
 	return (0);
 }
 
-/*
-**	Parse le retour de readline :
-**	et stock les tokens dans un char ** (sh.pipeline.data.av)
-*/
 int	main_part1(t_sh *sh)
 {
 	char	*s;
@@ -209,10 +213,12 @@ int	main_part1(t_sh *sh)
 	if (!s)
 		return (1);
 	parse_ret = parse_cmd(s, sh);
-	if (parse_ret != 0 && parse_ret != -4)
+	if (parse_ret != 0 && parse_ret != -4 && parse_ret != -6)
 		return ((unsigned long)ft_free((void *)s) + 1);
 	if (parse_ret == -4)
 		return (write(2, "Syntax error\n", 13),
 			(unsigned long)ft_free((void *)s) - 4);
+	if (parse_ret == -6)
+		return ((unsigned long)ft_free((void *)s) - 6);
 	return (free(s), 0);
 }
