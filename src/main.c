@@ -33,6 +33,7 @@ int	sh_debug(t_sh *sh)
 int	main(int ac, char **av, char **envp)
 {
 	t_sh	sh;
+	int		ret_main1;
 
 	printf("Welcome to minishell \"Endgame\"!\n");
 	if (!envp)
@@ -41,9 +42,10 @@ int	main(int ac, char **av, char **envp)
 		return (-1);
 	while (1)
 	{
-		if (main_part1(&sh))
+		ret_main1 = main_part1(&sh);
+		if (ret_main1 > -4 && ret_main1 < 0)
 			break ;
-		if (main_part2(&sh))
+		if (ret_main1 != -4 && main_part2(&sh))
 			break ;
 		del_split(sh.pipeline, &del_cmd);
 		sh.pipeline = NULL;

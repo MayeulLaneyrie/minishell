@@ -94,7 +94,7 @@ int		main_part1(t_sh *sh);
 int		parse_cmd(char *s, t_sh *sh);
 int		word_len(char *s);
 int		word_cpy(char *dst, char *src);
-t_split	*cut_words(char *s, t_cmd *cmd);
+int		cut_words(char *s, t_cmd *cmd, t_split **ret);
 
 /*
 **	Dans dollar_subst.c :

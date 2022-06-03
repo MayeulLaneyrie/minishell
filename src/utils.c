@@ -152,7 +152,7 @@ int	check_redirect(char *s, t_cmd *cmd, t_list *lst)
 		tmp->in_out = RED_IN;
 	tmp->mode = check_redirect_operator(s, &i);
 	if (!tmp->mode)
-		return (free(tmp), -1);
+		return (free(tmp), -2);
 	tmp->fd = set_red_fd(tmp->in_out, lst);
 	while (ft_strchr(SPACES, s[i]))
 		i++;

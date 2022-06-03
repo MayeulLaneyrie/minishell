@@ -75,12 +75,11 @@ int	word_cpy(char *dst, char *src)
 **	un t_split contenant les mots qu'elle contient, découpés selon les
 **	règles de quoting de bash.
 */
-t_split	*cut_words(char *s, t_cmd *cmd)
+int	cut_words(char *s, t_cmd *cmd, t_split	**ret)
 {
 	int		l;
 	char	*w;
 	t_list	*tmp;
-	t_split	*ret;
 	int		jump;
 
 	tmp = NULL;
@@ -100,8 +99,10 @@ t_split	*cut_words(char *s, t_cmd *cmd)
 				l = check_redirect(s, cmd, tmp);
 			else
 				l = check_redirect(s, cmd, NULL);
-			if (l < 0)
-				return (ft_lstclear(&tmp, &free));
+			if (l == -1)
+				return (ft_lstclear(&tmp, &free), -1);
+			if (l == -2)
+				return (ft_lstclear(&tmp, &free), -4);
 			s += l;
 		}
 		else
@@ -109,16 +110,16 @@ t_split	*cut_words(char *s, t_cmd *cmd)
 			l = word_len(s);
 			w = malloc(l + 1);
 			if (!w)
-				return (ft_lstclear(&tmp, &free));
+				return (ft_lstclear(&tmp, &free), -1);
 			s += word_cpy(w, s);
 			if (!ft_lstadd_back(&tmp, ft_lstnew(w)))
-				return (ft_lstclear(&tmp, &free));
+				return (ft_lstclear(&tmp, &free), -1);
 		}
 	}
-	ret = list_to_split(&tmp);
-	if (!ret)
-		return (ft_lstclear(&tmp, &free));
-	return (ret);
+	(*ret) = list_to_split(&tmp);
+	if (!(*ret))
+		return (ft_lstclear(&tmp, &free), -1);
+	return (0);
 }
 
 int	parse_cmd(char *s, t_sh *sh)
@@ -137,8 +138,10 @@ int	parse_cmd(char *s, t_sh *sh)
 		sh->pipeline->data[i] = new_cmd();
 		if (!sh->pipeline->data[i])
 			return (-2);
-		words = cut_words((char *)commands->data[i],
-				(t_cmd *)sh->pipeline->data[i]);
+		if (cut_words((char *)commands->data[i],
+				(t_cmd *)sh->pipeline->data[i], &words) == -4)
+			return (free(sh->pipeline->data[i]),
+				(unsigned long long)del_split(commands, &ft_free) - 4);
 		if (!words)
 			return (free(sh->pipeline->data[i]),
 				(unsigned long long)del_split(commands, &ft_free) - 3);
@@ -159,6 +162,7 @@ int	main_part1(t_sh *sh)
 {
 	char	*s;
 	int		i;
+	int		parse_ret;
 
 	while (1)
 	{
@@ -182,7 +186,11 @@ int	main_part1(t_sh *sh)
 	s = all_dollar_subst(sh->env, s);
 	if (!s)
 		return (1);
-	if (parse_cmd(s, sh))
+	parse_ret = parse_cmd(s, sh);
+	if (parse_ret != 0 && parse_ret != -4)
 		return ((unsigned long)ft_free((void *)s) + 1);
+	if (parse_ret == -4)
+		return (write(2, "Syntax error\n", 13),
+			(unsigned long)ft_free((void *)s) - 4);
 	return (free(s), 0);
 }
