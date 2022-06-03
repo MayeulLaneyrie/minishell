@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structures.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lnr <mayeul.lnr@gmail.com>                 +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/03 18:29:18 by lnr               #+#    #+#             */
+/*   Updated: 2022/06/03 18:29:20 by lnr              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /*
 **	structures.h est le lieu dedié pour définir des structures custom,
 **	en particulier si d'autres fichiers .h y font référence
