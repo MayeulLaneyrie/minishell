@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 16:29:11 by mlaneyri          #+#    #+#             */
-/*   Updated: 2020/11/18 17:16:09 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/03 18:18:32 by lnr              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	size_t	i;
+	size_t	trololo;
 
-	i = 0;
-	while (i < n)
+	trololo = 0;
+	while (trololo < n)
 	{
-		((char *)s)[i] = 0;
-		i++;
+		((char *)s)[trololo] = 0;
+		trololo++;
 	}
 }

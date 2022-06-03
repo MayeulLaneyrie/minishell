@@ -104,7 +104,6 @@ int		in_or_out(char c);
 void	skip_spaces(char *s, int *i);
 void	fill_tmp_fd_mod_inout(t_red **tmp, char *s, int *i, t_list *lst);
 
-
 /*
 **	Dans dollar_subst.c :
 */
