@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:46:46 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/03 17:23:24 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/03 18:05:14 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,31 @@ int	rw_line(int fd, char *word, int l)
 	return (0);
 }
 
+int	heredoc_fork(int fd, char *word)
+{
+	int		l;
+	char	*line;
+	int		pid;
+
+	pid = fork();
+	if (pid < 0)
+		exit(EXIT_FAILURE);
+	else if (!pid)
+	{
+		sig_init(SIGINT, sa_child_handler);
+		line = NULL;
+		l = ft_strlen(word);
+		while (!rw_line(fd, word, l))
+			;
+	}
+	return (pid);
+}
+
 int	heredoc(t_red *red)
 {
 	char	*tmp_file;
-	char	*line;
-	int		l;
 	int		fd;
+	int		pid;
 
 	tmp_file = tmp_name("/tmp");
 	if (!tmp_file)
@@ -85,12 +104,15 @@ int	heredoc(t_red *red)
 	if (!fd)
 		return (ft_puts("minishell: heredoc tmp file can't be created\n", 2)
 			- 1 + (long)ft_free(tmp_file));
-	line = NULL;
-	l = ft_strlen(red->word);
-	while (!rw_line(fd, red->word, l))
-		;
+
+	pid = heredoc_fork(fd, red->word);
+
 	free(red->word);
 	red->word = tmp_file;
 	close(fd);
-	return (0);
+	if (!pid)
+		exit(0);
+	waitpid(pid, &fd, 0);
+	g_xt_stat = WEXITSTATUS(fd);
+	return (0 - (g_xt_stat != 0));
 }

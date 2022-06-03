@@ -6,7 +6,7 @@
 /*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:20:58 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/03 16:59:17 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/03 18:05:57 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	sa_stuff_handler(int x)
 
 void	sa_child_handler(int x)
 {
+	write(1, "\n", 1);
 	exit(x + 128);
 }
 

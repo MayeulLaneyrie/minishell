@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:26:06 by bifrah            #+#    #+#             */
-/*   Updated: 2022/06/03 18:04:37 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/06/03 18:08:03 by lnr              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,7 @@ int	main_part1(t_sh *sh)
 				return ((long)ft_free(s) + 1);
 		}
 		if (!s)
-			return (write(2, "exit\n", 5) * 0 + 1);
+			return (write(2, "exit\n", 5) * 0 - 1);
 		i = -1;
 		while (ft_strchr(SPACES, s[++i]) && s[i])
 			;
