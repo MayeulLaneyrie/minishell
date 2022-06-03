@@ -137,45 +137,35 @@ int	set_red_fd(int in_out, t_list *lst)
 int	check_redirect(char *s, t_cmd *cmd, t_list *lst)
 {
 	int		i;
-	int		quote;
-	int		d_quote;
 	t_red	*tmp;
 	char	*new_word;
 	int		j;
 
 	i = 0;
 	j = 0;
-	quote = 0;
-	d_quote = 0;
 	tmp = malloc(sizeof(t_red));
+	if (!tmp)
+		return (-1);
 	if (s[i] == '>')
 		tmp->in_out = RED_OUT;
 	else if (s[i] == '<')
 		tmp->in_out = RED_IN;
 	tmp->mode = check_redirect_operator(s, &i);
 	if (!tmp->mode)
-		return (-1);
+		return (free(tmp), -1);
 	tmp->fd = set_red_fd(tmp->in_out, lst);
-	/*
-	in_out_quotes(s[i], &quote, &d_quote);
-	while (quote == 1 || d_quote == 1)
-	{
-		i++;
-		in_out_quotes(s[i], &quote, &d_quote);
-	}
-	*/
 	while (ft_strchr(SPACES, s[i]))
 		i++;
 	if (ft_strchr("<>", s[i]))
 		return (-1);
 	new_word = malloc(word_len(s + i) + 1);
 	if (!new_word)
-		return (-1);
+		return (free(tmp), -1);
 	i += word_cpy(new_word, s + i);
 	tmp->word = new_word;
 	if (tmp->mode == RED_APPEND && tmp->in_out == RED_IN && heredoc(tmp) < 0)
-		return (-1);
+		return (free(tmp), -1);
 	if (!ft_lstadd_back(&(cmd->red), ft_lstnew(tmp)))
-		return ((long)ft_lstclear(&cmd->red, &free) - 1);
+		return (free(tmp), (long)ft_lstclear(&cmd->red, &free) - 1);
 	return (i);
 }

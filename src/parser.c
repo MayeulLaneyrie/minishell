@@ -140,7 +140,8 @@ int	parse_cmd(char *s, t_sh *sh)
 		words = cut_words((char *)commands->data[i],
 				(t_cmd *)sh->pipeline->data[i]);
 		if (!words)
-			return ((unsigned long long)del_split(commands, &ft_free) - 3);
+			return (free(sh->pipeline->data[i]),
+				(unsigned long long)del_split(commands, &ft_free) - 3);
 		((t_cmd *)sh->pipeline->data[i])->av = (char **)words->data;
 		((t_cmd *)sh->pipeline->data[i])->ac = words->len;
 		sh->pipeline->len++;
