@@ -6,7 +6,7 @@
 /*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:49:00 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/02 22:40:10 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/03 14:59:38 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,9 @@ int	new_sh(int ac, char **av, char **envp, t_sh *sh)
 {
 	char	*tmp;
 
-	(void)ac;
 	if (!envp)
+		return (-1);
+	if (ac > 1 && exec_script(av[1]))
 		return (-1);
 	sh->env = load_env(envp);
 	if (!sh->env)

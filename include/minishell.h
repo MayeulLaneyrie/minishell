@@ -173,4 +173,18 @@ int		heredoc(t_red *red);
 
 int		apply_redir(t_cmd *cmd);
 
+int		exec_script(char *path);
+
+/*
+**	In signal_handler.c :
+*/
+
+void	sa_main_handler(int x);
+
+void	sa_stuff_handler(int x);
+
+void	sa_child_handler(int x);
+
+int		sig_init(int signo, void (*handler_fct)(int));
+
 #endif

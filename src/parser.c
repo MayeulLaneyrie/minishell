@@ -162,9 +162,17 @@ int	main_part1(t_sh *sh)
 	while (1)
 	{
 		if (isatty(0))
+		{
+			sig_init(SIGINT, sa_main_handler);
 			s = readline("$ ");
+			sig_init(SIGINT, SIG_IGN);
+		}
 		else
-			get_next_line(&s);
+		{
+			i = get_next_line(&s);
+			if (i < 1)
+				return ((long)ft_free(s) + 1);
+		}
 		if (!s)
 			return (write(2, "exit\n", 5) * 0 + 1);
 		i = -1;
