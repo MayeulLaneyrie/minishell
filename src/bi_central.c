@@ -51,7 +51,7 @@ int	bi_exit(t_sh *sh, t_cmd *cmd)
 
 int	builtin_search(char *s)
 {
-	static const char	*builtins[8] = {"echololo", "cd", "pwd", "export",
+	static const char	*builtins[8] = {"echo", "cd", "pwd", "export",
 		"unset", "env", "exit", NULL};
 	int					i;
 
