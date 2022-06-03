@@ -6,7 +6,7 @@
 /*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:49:21 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/02 23:32:57 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/03 13:00:34 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	apply_single_redir(t_red *red)
 		unlink(red->word);
 	if (dup2(fd, red->fd) < 0)
 		return (-1);
+	close(fd);
 	return (0);
 }
 

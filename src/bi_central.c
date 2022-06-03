@@ -6,7 +6,7 @@
 /*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:47:01 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/02 22:23:36 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/03 13:25:27 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,23 @@ int	builtin_exec(t_sh *sh, t_cmd *cmd)
 {
 	static const t_bi	builtins[8] = {&bi_echo, &bi_cd, &bi_pwd, &bi_export,
 		&bi_unset, &bi_env, &bi_exit, NULL};
+	int					ret;
+	int					save_fd[3];
+	int					i;
 
+	i = -1;
+	g_xt_stat = 1;
+	while (++i < 3)
+		save_fd[i] = dup(i);
+	if (apply_redir(cmd))
+		return (CMD_NOWAIT);
 	g_xt_stat = 0;
-	return (builtins[cmd->builtin_id](sh, cmd));
+	ret = builtins[cmd->builtin_id](sh, cmd);
+	i = -1;
+	while (++i < 3)
+	{
+		dup2(save_fd[i], i);
+		close(save_fd[i]);
+	}
+	return (ret);
 }
