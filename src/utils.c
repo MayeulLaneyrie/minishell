@@ -137,16 +137,12 @@ int	set_red_fd(int in_out, t_list *lst)
 int	check_redirect(char *s, t_cmd *cmd, t_list *lst)
 {
 	int		i;
-	int		quote;
-	int		d_quote;
 	t_red	*tmp;
 	char	*new_word;
 	int		j;
 
 	i = 0;
 	j = 0;
-	quote = 0;
-	d_quote = 0;
 	tmp = malloc(sizeof(t_red));
 	if (s[i] == '>')
 		tmp->in_out = RED_OUT;
@@ -156,14 +152,6 @@ int	check_redirect(char *s, t_cmd *cmd, t_list *lst)
 	if (!tmp->mode)
 		return (-1);
 	tmp->fd = set_red_fd(tmp->in_out, lst);
-	/*
-	in_out_quotes(s[i], &quote, &d_quote);
-	while (quote == 1 || d_quote == 1)
-	{
-		i++;
-		in_out_quotes(s[i], &quote, &d_quote);
-	}
-	*/
 	while (ft_strchr(SPACES, s[i]))
 		i++;
 	if (ft_strchr("<>", s[i]))

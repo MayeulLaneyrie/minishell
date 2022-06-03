@@ -127,12 +127,6 @@ int		check_env_var(char *s);
 int		convert_env_vars(t_sh *sh, char **s);
 
 /*
-**	Dans redirect.c :
-*/
-void	in_out_quotes(char c, int *quote, int *d_quote);
-int		fill_struct_redir(t_sh *sh, char *s);
-
-/*
 **	Dans cmd_launcher.c : (Lancement d'une commande)
 */
 int		main_part2(t_sh *sh);

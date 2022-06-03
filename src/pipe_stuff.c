@@ -6,7 +6,7 @@
 /*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:09:48 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/02 17:12:32 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/03 13:12:16 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	pipeline_spawner(t_sh *sh)
 			close(cmd[i]->pipe_in[STDIN]);
 			close(cmd[i]->pipe_in[STDOUT]);
 		}
+		//printf("FORK FOR [ %s ]( %d )\n", cmd[i]->av[0], cmd[i]->pid);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:09:15 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/02 22:23:33 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/03 13:01:29 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,10 @@ int	main_part2(t_sh *sh)
 		return (stat == CMD_EXIT);
 	i = -1;
 	while (++i < sh->pipeline->len)
+	{
 		waitpid(cmd[i]->pid, &stat, 0);
+		//printf("[ %d ] EXITED\n", cmd[i]->pid);
+	}
 	g_xt_stat = WEXITSTATUS(stat);
 	return (0);
 }
