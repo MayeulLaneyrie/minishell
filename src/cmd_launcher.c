@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:09:15 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/03 17:23:45 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/03 18:01:58 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	cmd_fork_and_after(t_sh *sh, t_cmd *cmd, int do_fork)
 		cmd->pid = fork();
 		if (cmd->pid)
 			return (CMD_WAIT);
-		sig_init(SIGINT, sa_child_handler);
+		sig_init(SIGINT, SIG_DFL);
 		sig_init(SIGQUIT, SIG_DFL);
 	}
 	if (apply_redir(cmd))
@@ -101,5 +101,6 @@ int	main_part2(t_sh *sh)
 	while (++i < sh->pipeline->len)
 		waitpid(cmd[i]->pid, &stat, 0);
 	g_xt_stat = WEXITSTATUS(stat);
+//	printf("XT_STAT WAS [ %d ]\n", g_xt_stat);
 	return (0);
 }
