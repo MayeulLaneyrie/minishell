@@ -47,11 +47,14 @@ int	main(int ac, char **av, char **envp)
 	t_sh	sh;
 	int		ret_main1;
 
-	printf("Welcome to minishell \"Endgame\"!\n");
+	sig_init(SIGINT, SIG_IGN);
+	sig_init(SIGQUIT, SIG_IGN);
 	if (!envp)
 		exit (EXIT_FAILURE);
 	if (new_sh(ac, av, envp, &sh) < 0)
 		return (-1);
+	if (isatty(0))
+		printf("Welcome to minishell \"Endgame\"!\n");
 	while (1)
 	{
 		ret_main1 = main_part1(&sh);

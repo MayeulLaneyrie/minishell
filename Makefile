@@ -21,7 +21,8 @@ SRCS =	src/main.c \
 		src/bi_cd.c \
 		src/bi_echo.c \
 		src/make_canonical.c \
-		src/gnl.c
+		src/gnl.c \
+		src/signal_handler.c
 
 OBJS		= ${SRCS:.c=.o}
 

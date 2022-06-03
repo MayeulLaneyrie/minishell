@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:49:21 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/03 16:27:35 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/06/03 17:23:55 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,20 @@ int	apply_redir(t_cmd *cmd)
 		head = head->next;
 	}
 	return (ret);
+}
+
+int	exec_script(char *path)
+{
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+	{
+		ft_err4("minishell", path, strerror(errno), NULL);
+		return (-1);
+	}
+	if (dup2(fd, 0) < 0)
+		return (-1);
+	close(fd);
+	return (0);
 }
