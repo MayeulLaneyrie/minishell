@@ -53,3 +53,45 @@ int	check_pipe(char *s)
 	}
 	return (nb_pipe);
 }
+
+/*
+**	verifie si une chaine de caractere contient seulement des espaces
+**	prend en paramatre une chaine de caractere
+**	return 1 s'il ya d'autre caractere que des espaces, 0 le cas echeant
+*/
+int	check_str(char *s)
+{
+	int	i;
+
+	i = 0;
+
+	while (s[i])
+	{
+		if ((ft_strchr(SPACES, s[i]) != NULL))
+			i++;
+		else
+			return (1);
+	}
+	return (0);
+}
+
+/*
+**	verifie si une string appartenant a un "t_split"
+	contient seulement des espaces
+**	prend en paramatre un t_split
+**	return 0 si une string contenant seulement des espaces est
+	presente dans t_split, 1 autrement
+*/
+int	check_commands(t_split *commands)
+{
+	int	i;
+
+	i = 0;
+	while (i < commands->len)
+	{
+		if (check_str((char *)commands->data[i]) == 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}

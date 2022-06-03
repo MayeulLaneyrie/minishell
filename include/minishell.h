@@ -113,11 +113,15 @@ int		get_next_line(char **line);
 t_split	*quote_split(char *s, char *set);
 
 /*
-**	Dans utils.c :
+**	Dans check1.c :
 */
 int		check_quote(char *s);
 int		check_pipe(char *s);
-int		check_redir(char *s);
+int		check_commands(t_split *commands);
+
+/*
+**	Dans check2.c :
+*/
 int		check_redirect(char *s, t_cmd *cmd, t_list *lst);
 
 /*

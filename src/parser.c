@@ -131,6 +131,8 @@ int	parse_cmd(char *s, t_sh *sh)
 	commands = quote_split(s, "|");
 	if (!commands)
 		return (-1);
+	if (!check_commands(commands))
+		return (-4);
 	sh->pipeline = new_split(commands->len);
 	i = -1;
 	while (++i < commands->len)
