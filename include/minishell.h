@@ -97,6 +97,15 @@ int		word_cpy(char *dst, char *src);
 int		cut_words(char *s, t_cmd *cmd, t_split **ret);
 
 /*
+**	Dans check_utils.c
+*/
+int		set_red_fd(int in_out, t_list *lst);
+int		in_or_out(char c);
+void	skip_spaces(char *s, int *i);
+void	fill_tmp_fd_mod_inout(t_red **tmp, char *s, int *i, t_list *lst);
+
+
+/*
 **	Dans dollar_subst.c :
 */
 
@@ -122,6 +131,7 @@ int		check_commands(t_split *commands);
 /*
 **	Dans check2.c :
 */
+int		check_redirect_operator(char *s, int *i);
 int		check_redirect(char *s, t_cmd *cmd, t_list *lst);
 
 /*

@@ -2,6 +2,7 @@ SRCS =	src/main.c \
 		src/newdel_cmd_sh.c \
 		src/parser.c \
 		src/dollar_subst.c \
+		src/check_utils.c \
 		src/check1.c \
 		src/check2.c \
 		src/cmd_launcher.c \
