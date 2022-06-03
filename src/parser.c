@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:26:06 by bifrah            #+#    #+#             */
-/*   Updated: 2022/06/03 16:27:19 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/06/03 17:11:59 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	cut_words(char *s, t_cmd *cmd, t_split	**ret)
 				l = check_redirect(s, cmd, tmp);
 			else
 				l = check_redirect(s, cmd, NULL);
-			if (l == -1)
+			if (l == -1 || l == -3)
 				return (ft_lstclear(&tmp, &free), -1);
 			if (l == -2)
 				return (ft_lstclear(&tmp, &free), -4);
