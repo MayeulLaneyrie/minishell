@@ -6,7 +6,7 @@
 /*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:47:01 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/03 13:17:34 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/03 13:25:27 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,19 @@ int	builtin_exec(t_sh *sh, t_cmd *cmd)
 	int					save_fd[3];
 	int					i;
 
-	i = 1;
+	i = -1;
+	g_xt_stat = 1;
 	while (++i < 3)
-		save_fd[i] == dup(i);
-	apply_redir();
+		save_fd[i] = dup(i);
+	if (apply_redir(cmd))
+		return (CMD_NOWAIT);
 	g_xt_stat = 0;
 	ret = builtins[cmd->builtin_id](sh, cmd);
+	i = -1;
+	while (++i < 3)
+	{
+		dup2(save_fd[i], i);
+		close(save_fd[i]);
+	}
 	return (ret);
 }
