@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlaneyri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:20:58 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/03 18:05:57 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/04 16:21:49 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,6 @@ void	sa_main_handler(int x)
 	rl_on_new_line();
 	rl_redisplay();
 	g_xt_stat = x + 128;
-}
-
-void	sa_stuff_handler(int x)
-{
-	write(1, "\n", 1);
-	g_xt_stat = x + 128;
-}
-
-void	sa_child_handler(int x)
-{
-	write(1, "\n", 1);
-	exit(x + 128);
 }
 
 int	sig_init(int signo, void (*handler_fct)(int))

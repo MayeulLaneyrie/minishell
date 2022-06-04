@@ -6,7 +6,7 @@
 /*   By: lnr <mayeul.lnr@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 18:29:03 by lnr               #+#    #+#             */
-/*   Updated: 2022/06/03 18:29:05 by lnr              ###   ########.fr       */
+/*   Updated: 2022/06/04 16:22:01 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,10 +205,6 @@ int		exec_script(char *path);
 */
 
 void	sa_main_handler(int x);
-
-void	sa_stuff_handler(int x);
-
-void	sa_child_handler(int x);
 
 int		sig_init(int signo, void (*handler_fct)(int));
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:46:46 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/03 18:14:56 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/04 16:12:12 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	heredoc_fork(int fd, char *word)
 		exit(EXIT_FAILURE);
 	else if (!pid)
 	{
-		sig_init(SIGINT, sa_child_handler);
+		sig_init(SIGINT, SIG_DFL);
 		line = NULL;
 		l = ft_strlen(word);
 		while (!rw_line(fd, word, l))
@@ -111,6 +111,7 @@ int	heredoc(t_red *red)
 	if (!pid)
 		exit(0);
 	waitpid(pid, &fd, 0);
-	g_xt_stat = WEXITSTATUS(fd);
+	if (WIFSIGNALED(fd))
+		g_xt_stat = 128 + WTERMSIG(fd);
 	return (0 - (g_xt_stat != 0));
 }

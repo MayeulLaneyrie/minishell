@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_stuff.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/02 17:09:48 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/03 17:22:49 by mlaneyri         ###   ########.fr       */
+/*   Created: 2022/06/04 16:18:19 by mlaneyri          #+#    #+#             */
+/*   Updated: 2022/06/04 16:22:33 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	spawn_pipe_cmd(t_sh *sh, t_cmd *cmd)
 {
-	sig_init(SIGINT, sa_child_handler);
+	sig_init(SIGINT, SIG_DFL);
 	sig_init(SIGQUIT, SIG_DFL);
 	if (cmd->is_piped[STDIN])
 	{
