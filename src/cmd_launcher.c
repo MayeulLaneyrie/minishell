@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:09:15 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/03 18:15:09 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/04 15:02:53 by lnr              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,17 @@ int	main_part2(t_sh *sh)
 		stat = cmd_proc(sh, cmd[0], 1);
 	if (stat || cmd[sh->pipeline->len - 1]->pid < 0)
 		return (stat == CMD_EXIT);
-	sig_init(SIGINT, sa_stuff_handler);
 	i = -1;
 	while (++i < sh->pipeline->len)
 		waitpid(cmd[i]->pid, &stat, 0);
-	g_xt_stat = WEXITSTATUS(stat);
+	if (WIFSIGNALED(stat))
+	{
+		g_xt_stat = 128 + WTERMSIG(stat);
+		if (WCOREDUMP(stat))
+			write(2, "Quit (core dumped)", 19);
+		write(2, "\n", 1);
+	}
+	else if (WIFEXITED(stat))
+		g_xt_stat = WEXITSTATUS(stat);
 	return (0);
 }
