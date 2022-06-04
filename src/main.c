@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:17:47 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/04 16:17:48 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/04 20:13:06 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(int ac, char **av, char **envp)
 		ret_main1 = main_part1(&sh);
 		if (ret_main1 > -4 && ret_main1 < 0)
 			break ;
-		if (ret_main1 != -4 && main_part2(&sh))
+		if (ret_main1 != -4 && ret_main1 != -6 && main_part2(&sh))
 			break ;
 		del_split(sh.pipeline, &del_cmd);
 		sh.pipeline = NULL;

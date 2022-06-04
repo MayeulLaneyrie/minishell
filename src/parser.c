@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:26:06 by bifrah            #+#    #+#             */
-/*   Updated: 2022/06/03 18:08:03 by lnr              ###   ########.fr       */
+/*   Updated: 2022/06/05 01:38:50 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,12 +111,8 @@ int	cut_words(char *s, t_cmd *cmd, t_split	**ret)
 				l = check_redirect(s, cmd, tmp);
 			else
 				l = check_redirect(s, cmd, NULL);
-			if (l == -1)
-				return (ft_lstclear(&tmp, &free), -1);
-			if (l == -2)
-				return (ft_lstclear(&tmp, &free), -4);
-			if (l == -3)
-				return (ft_lstclear(&tmp, &free), -6);
+			if (l < 0)
+				return (ft_lstclear(&tmp, &free), l);
 			s += l;
 		}
 		else
@@ -145,7 +141,7 @@ int	parse_cmd(char *s, t_sh *sh)
 	t_split	*words;
 	t_split	*commands;
 	int		i;
-	int		cutword_ret;
+	int		ctwrdret;
 
 	commands = quote_split(s, "|");
 	if (!commands)
@@ -159,11 +155,11 @@ int	parse_cmd(char *s, t_sh *sh)
 		sh->pipeline->data[i] = new_cmd();
 		if (!sh->pipeline->data[i])
 			return (-2);
-		cutword_ret = cut_words((char *)commands->data[i], (t_cmd *)sh->pipeline->data[i], &words);
-		if (cutword_ret == -4)
-			return (free(sh->pipeline->data[i]), (unsigned long long)del_split(commands, &ft_free) - 4);
-		if (cutword_ret == -6)
-			return (free(sh->pipeline->data[i]), (unsigned long long)del_split(commands, &ft_free) - 6);
+		ctwrdret = cut_words((char *)commands->data[i],
+			(t_cmd *)sh->pipeline->data[i], &words);
+		if (ctwrdret < -2)
+			return (free(sh->pipeline->data[i]),
+				(unsigned long long)del_split(commands, &ft_free) + ctwrdret);
 		if (!words)
 			return (free(sh->pipeline->data[i]),
 				(unsigned long long)del_split(commands, &ft_free) - 3);
