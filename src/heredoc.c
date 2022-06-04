@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:46:46 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/04 16:12:12 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/04 16:50:46 by lnr              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ int	rw_line(int fd, char *word, int l)
 	char	*line;
 
 	line = readline("> ");
+	if (!line)
+	{
+		ft_err4("minishell: warning: heredoc delimited by end-of-file", word,
+			"was wanted.\n", NULL);
+		return (1);
+	}
 	if (!ft_strncmp(line, word, l + 1))
 	{
 		free(line);
