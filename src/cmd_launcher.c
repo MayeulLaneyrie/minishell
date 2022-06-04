@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_launcher.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:09:15 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/04 09:29:00 by lnr              ###   ########.fr       */
+/*   Updated: 2022/06/04 16:27:33 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int	main_part2(t_sh *sh)
 		stat = cmd_proc(sh, cmd[0], 1);
 	if (stat || cmd[sh->pipeline->len - 1]->pid < 0)
 		return (stat == CMD_EXIT);
+<<<<<<< HEAD
 	g_xt_stat = 0;
 	sig_init(SIGINT, sa_stuff_handler);
 	i = -1;
@@ -104,4 +105,17 @@ int	main_part2(t_sh *sh)
 	if (!g_xt_stat)
 	g_xt_stat = WEXITSTATUS(stat);
 	return (0);
+=======
+	i = -1;
+	while (++i < sh->pipeline->len)
+		waitpid(cmd[i]->pid, &stat, 0);
+	if (WIFSIGNALED(stat))
+	{
+		g_xt_stat = 128 + WTERMSIG(stat);
+		if (WCOREDUMP(stat))
+			write(2, "Quit (core dumped)", 19);
+		return (0 * write(2, "\n", 1));
+	}
+	return (0 * (g_xt_stat = WEXITSTATUS(stat)));
+>>>>>>> signals
 }

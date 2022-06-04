@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   search_path.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/02 17:18:21 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/03 16:27:17 by bifrah           ###   ########.fr       */
+/*   Created: 2022/06/04 16:18:43 by mlaneyri          #+#    #+#             */
+/*   Updated: 2022/06/04 16:21:26 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int	is_reg(char *path)
+{
+	struct stat	path_stat;
+
+	stat(path, &path_stat);
+	return (S_ISREG(path_stat.st_mode));
+}
 
 char	*search_path(char *path, char *name, int cd)
 {
@@ -32,7 +40,7 @@ char	*search_path(char *path, char *name, int cd)
 			temp = ft_cat3(dirs->data[i], "/", name);
 		if (!temp)
 			exit(EXIT_FAILURE);
-		if (!access(temp, F_OK))
+		if (!access(temp, F_OK) && is_reg(temp))
 			return (temp + (unsigned long)del_split(dirs, &ft_free));
 		free(temp);
 	}

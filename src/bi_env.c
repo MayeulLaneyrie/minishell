@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bi_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/02 16:26:37 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/03 16:27:31 by bifrah           ###   ########.fr       */
+/*   Created: 2022/06/04 16:15:47 by mlaneyri          #+#    #+#             */
+/*   Updated: 2022/06/04 16:15:48 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	check_identifier(char *s, int stop_at_eq)
 	if (s[i] == '=' && !stop_at_eq)
 		failed -= 3;
 	if (failed)
-		ft_err4("minishell", "export", s, "not a valid identifier\n");
+		ft_err4("minishell", "identifier check", s, "not a valid identifier\n");
 	return (failed);
 }
 
