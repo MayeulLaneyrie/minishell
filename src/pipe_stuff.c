@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:09:48 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/03 17:22:49 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/04 09:28:52 by lnr              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	spawn_pipe_cmd(t_sh *sh, t_cmd *cmd)
 {
-	sig_init(SIGINT, sa_child_handler);
+	sig_init(SIGINT, SIG_DFL);
 	sig_init(SIGQUIT, SIG_DFL);
 	if (cmd->is_piped[STDIN])
 	{

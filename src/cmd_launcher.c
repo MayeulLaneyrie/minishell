@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:09:15 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/04 09:10:12 by lnr              ###   ########.fr       */
+/*   Updated: 2022/06/04 09:29:00 by lnr              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,6 @@ int	main_part2(t_sh *sh)
 	while (++i < sh->pipeline->len)
 		waitpid(cmd[i]->pid, &stat, 0);
 	if (!g_xt_stat)
-		g_xt_stat = WEXITSTATUS(stat);
+	g_xt_stat = WEXITSTATUS(stat);
 	return (0);
 }
