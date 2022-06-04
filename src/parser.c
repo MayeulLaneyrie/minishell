@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:26:06 by bifrah            #+#    #+#             */
-/*   Updated: 2022/06/05 01:38:50 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/06/05 01:40:18 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ int	parse_cmd(char *s, t_sh *sh)
 		if (!sh->pipeline->data[i])
 			return (-2);
 		ctwrdret = cut_words((char *)commands->data[i],
-			(t_cmd *)sh->pipeline->data[i], &words);
+				(t_cmd *)sh->pipeline->data[i], &words);
 		if (ctwrdret < -2)
 			return (free(sh->pipeline->data[i]),
 				(unsigned long long)del_split(commands, &ft_free) + ctwrdret);
