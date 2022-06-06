@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:26:06 by bifrah            #+#    #+#             */
-/*   Updated: 2022/06/06 20:15:37 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/06/06 21:35:24 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	no_redirect(char **s, t_list **tmp)
 	l = word_len(*s);
 	w = malloc(l + 1);
 	if (!w)
-		return (ft_lstclear(tmp, &free), -1);
+		return (-1);
 	*s += word_cpy(w, *s);
 	if (!ft_lstadd_back(tmp, ft_lstnew(w)))
-		return (ft_lstclear(tmp, &free), -1);
+		return (-1);
 	return (0);
 }
 
@@ -32,6 +32,23 @@ int	no_redirect(char **s, t_list **tmp)
 **	un t_split contenant les mots qu'elle contient, découpés selon les
 **	règles de quoting de bash.
 */
+
+int	skip_spaces_adress(char **s)
+{
+	int	jump;
+
+	jump = 0;
+	while (**s && ft_strchr(SPACES, **s))
+	{
+		jump = 1;
+		(*s)++;
+	}
+	if (jump == 1)
+		return (1);
+	else
+		return (0);
+}
+
 int	cut_words(char *s, t_cmd *cmd, t_split	**ret)
 {
 	int		l;
@@ -41,12 +58,7 @@ int	cut_words(char *s, t_cmd *cmd, t_split	**ret)
 	tmp = NULL;
 	while (*s)
 	{
-		jump = 0;
-		while (*s && ft_strchr(SPACES, *s))
-		{
-			jump = 1;
-			s++;
-		}
+		jump = skip_spaces_adress(&s);
 		if (!*s)
 			break ;
 		if (ft_strchr("<>", *s))
@@ -57,7 +69,8 @@ int	cut_words(char *s, t_cmd *cmd, t_split	**ret)
 			s += l;
 		}
 		else
-			no_redirect(&s, &tmp);
+			if (no_redirect(&s, &tmp) == -1)
+				return (ft_lstclear(&tmp, &free), -1);
 	}
 	(*ret) = list_to_split(&tmp);
 	if (!(*ret))
