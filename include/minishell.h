@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 18:29:03 by lnr               #+#    #+#             */
-/*   Updated: 2022/06/06 20:17:50 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/06/07 00:04:53 by lnr              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,8 @@ int		exec_script(char *path);
 */
 
 void	sa_main_handler(int x);
+
+void	sa_heredoc_handler(int x);
 
 int		sig_init(int signo, void (*handler_fct)(int));
 

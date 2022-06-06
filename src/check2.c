@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:26:27 by bifrah            #+#    #+#             */
-/*   Updated: 2022/06/06 20:12:51 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/06/07 00:30:57 by lnr              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,10 @@ int	check_redirect(char *s, t_cmd *cmd, t_list *lst, int jump)
 		return (free(tmp), -1);
 	i += word_cpy(new_word, s + i);
 	tmp->word = new_word;
-	if (tmp->mode == RED_APPEND && tmp->in_out == RED_IN && heredoc(tmp) < 0)
+	if (tmp->mode == RED_APPEND && tmp->in_out == RED_IN && heredoc(tmp))
 		return (free(tmp), ERR_DOC);
+	if (i)
+		return (i);
 	if (!ft_lstadd_back(&(cmd->red), ft_lstnew(tmp)))
 		return (free(tmp), (long)ft_lstclear(&cmd->red, &free) - 1);
 	return (i);

@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:46:46 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/04 16:50:46 by lnr              ###   ########.fr       */
+/*   Updated: 2022/06/07 00:32:07 by lnr              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	heredoc_fork(int fd, char *word)
 		exit(EXIT_FAILURE);
 	else if (!pid)
 	{
-		sig_init(SIGINT, SIG_DFL);
+		sig_init(SIGINT, sa_heredoc_handler);
 		line = NULL;
 		l = ft_strlen(word);
 		while (!rw_line(fd, word, l))
@@ -117,7 +117,6 @@ int	heredoc(t_red *red)
 	if (!pid)
 		exit(0);
 	waitpid(pid, &fd, 0);
-	if (WIFSIGNALED(fd))
-		g_xt_stat = 128 + WTERMSIG(fd);
+	g_xt_stat = WEXITSTATUS(fd);
 	return (0 - (g_xt_stat != 0));
 }

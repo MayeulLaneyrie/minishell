@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:20:58 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/04 16:21:49 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/07 00:06:06 by lnr              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ void	sa_main_handler(int x)
 	rl_on_new_line();
 	rl_redisplay();
 	g_xt_stat = x + 128;
+}
+
+void	sa_heredoc_handler(int x)
+{
+	write(1, "\n", 1);
+	exit(128 + x);
 }
 
 int	sig_init(int signo, void (*handler_fct)(int))
