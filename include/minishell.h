@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 18:29:03 by lnr               #+#    #+#             */
-/*   Updated: 2022/06/06 20:12:46 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/06/06 20:17:50 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,18 +99,18 @@
 extern int	g_xt_stat;
 
 /*
-**	Premières étapes du fonctionnement du shell :  lire une ligne, la découper
-**	et la parser. Doit renvoyer 0 si une ligne de commande a été correctement
-**	parsée, et n'importe quelle autre valeur pour indiquer que minishell doit
-**	s'arrêter.
-**	A l'appel, sh->cmd n'aura pas encore été initialisé. Au retour, cmd devra
-**	avoir été correctement initialisé, a moins qu'il faille quitter le shell.
+**	Dans parser.c
 */
-int		main_part1(t_sh *sh);
+int		no_redirect(char **s, t_list **tmp);
+int		cut_words(char *s, t_cmd *cmd, t_split **ret);
 int		parse_cmd(char *s, t_sh *sh);
+int		main_part1(t_sh *sh);
+
+/*
+**	Dans wrd_len_and_cpy.c
+*/
 int		word_len(char *s);
 int		word_cpy(char *dst, char *src);
-int		cut_words(char *s, t_cmd *cmd, t_split **ret);
 
 /*
 **	Dans check_utils.c
