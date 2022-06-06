@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:26:06 by bifrah            #+#    #+#             */
-/*   Updated: 2022/06/05 01:40:18 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/06/06 19:09:48 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ int	parse_cmd(char *s, t_sh *sh)
 	if (!commands)
 		return (-1);
 	if (!check_commands(commands))
-		return (-4);
+		return (ERR_SYNTAX);
 	sh->pipeline = new_split(commands->len);
 	i = -1;
 	while (++i < commands->len)
@@ -209,12 +209,12 @@ int	main_part1(t_sh *sh)
 	if (!s)
 		return (1);
 	parse_ret = parse_cmd(s, sh);
-	if (parse_ret != 0 && parse_ret != -4 && parse_ret != -6)
-		return ((unsigned long)ft_free((void *)s) + 1);
-	if (parse_ret == -4)
+	if (parse_ret == ERR_SYNTAX)
 		return (write(2, "Syntax error\n", 13),
-			(unsigned long)ft_free((void *)s) - 4);
+			(unsigned long)ft_free((void *)s) ERR_SYNTAX);
 	if (parse_ret == -6)
-		return ((unsigned long)ft_free((void *)s) - 6);
+		return ((unsigned long)ft_free((void *)s) ERR_DOC);
+	if (parse_ret != 0)
+		return ((unsigned long)ft_free((void *)s) + 1);
 	return (free(s), 0);
 }

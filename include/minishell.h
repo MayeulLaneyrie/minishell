@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnr <mayeul.lnr@gmail.com>                 +#+  +:+       +#+        */
+/*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 18:29:03 by lnr               #+#    #+#             */
-/*   Updated: 2022/06/04 16:22:01 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/06 19:09:30 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@
 # define WRONG_NB_QUOTE 2
 # define NULL_RDLINE 3
 # define BLANK_RDLINE 4
+
+# define ERROR -1
+# define ERR_SYNTAX -5
+# define ERR_DOC -6
 
 /*
 **	Juste une libft normale, avec des chaînes doublement chainées.

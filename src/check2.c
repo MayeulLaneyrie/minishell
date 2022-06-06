@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:26:27 by bifrah            #+#    #+#             */
-/*   Updated: 2022/06/06 18:43:15 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/06/06 19:17:46 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,14 @@ int	check_redirect(char *s, t_cmd *cmd, t_list *lst)
 	fill_tmp_fd_mod_inout(&tmp, s, &i, lst);
 	skip_spaces(s, &i);
 	if (!tmp->mode || ft_strchr("<>", s[i]) || i > (int)ft_strlen(s))
-		return (free(tmp), -4);
+		return (free(tmp), ERR_SYNTAX);
 	new_word = malloc(word_len(s + i) + 1);
 	if (!new_word)
 		return (free(tmp), -1);
 	i += word_cpy(new_word, s + i);
 	tmp->word = new_word;
 	if (tmp->mode == RED_APPEND && tmp->in_out == RED_IN && heredoc(tmp) < 0)
-		return (free(tmp), -6);
+		return (free(tmp), ERR_DOC);
 	if (!ft_lstadd_back(&(cmd->red), ft_lstnew(tmp)))
 		return (free(tmp), (long)ft_lstclear(&cmd->red, &free) - 1);
 	return (i);
