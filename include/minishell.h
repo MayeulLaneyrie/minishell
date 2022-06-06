@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 18:29:03 by lnr               #+#    #+#             */
-/*   Updated: 2022/06/06 19:09:30 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/06/06 20:12:46 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ int		check_commands(t_split *commands);
 **	Dans check2.c :
 */
 int		check_redirect_operator(char *s, int *i);
-int		check_redirect(char *s, t_cmd *cmd, t_list *lst);
+int		check_redirect(char *s, t_cmd *cmd, t_list *lst, int jump);
 
 /*
 **	Dans var_env.c :

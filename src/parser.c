@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:26:06 by bifrah            #+#    #+#             */
-/*   Updated: 2022/06/06 19:09:48 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/06/06 19:58:08 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,21 @@ int	word_cpy(char *dst, char *src)
 	return (*dst = '\0', i);
 }
 
+int	no_redirect(char **s, t_list **tmp)
+{
+	int		l;
+	char	*w;
+
+	l = word_len(*s);
+	w = malloc(l + 1);
+	if (!w)
+		return (ft_lstclear(tmp, &free), -1);
+	*s += word_cpy(w, *s);
+	if (!ft_lstadd_back(tmp, ft_lstnew(w)))
+		return (ft_lstclear(tmp, &free), -1);
+	return (0);
+}
+
 /*
 **	cut_words() prend en paramètre une chaine de caractères, et renvoie
 **	un t_split contenant les mots qu'elle contient, découpés selon les
@@ -90,7 +105,6 @@ int	word_cpy(char *dst, char *src)
 int	cut_words(char *s, t_cmd *cmd, t_split	**ret)
 {
 	int		l;
-	char	*w;
 	t_list	*tmp;
 	int		jump;
 
@@ -107,24 +121,13 @@ int	cut_words(char *s, t_cmd *cmd, t_split	**ret)
 			break ;
 		if (ft_strchr("<>", *s))
 		{
-			if (!jump)
-				l = check_redirect(s, cmd, tmp);
-			else
-				l = check_redirect(s, cmd, NULL);
+			l = check_redirect(s, cmd, tmp, jump);
 			if (l < 0)
 				return (ft_lstclear(&tmp, &free), l);
 			s += l;
 		}
 		else
-		{
-			l = word_len(s);
-			w = malloc(l + 1);
-			if (!w)
-				return (ft_lstclear(&tmp, &free), -1);
-			s += word_cpy(w, s);
-			if (!ft_lstadd_back(&tmp, ft_lstnew(w)))
-				return (ft_lstclear(&tmp, &free), -1);
-		}
+			no_redirect(&s, &tmp);
 	}
 	(*ret) = list_to_split(&tmp);
 	if (!(*ret))
