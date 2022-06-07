@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:26:06 by bifrah            #+#    #+#             */
-/*   Updated: 2022/06/07 00:31:42 by lnr              ###   ########.fr       */
+/*   Updated: 2022/06/07 15:00:37 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,26 @@ int	cut_words(char *s, t_cmd *cmd, t_split	**ret)
 	return (0);
 }
 
+int	while_of_parse_cmd(t_sh *sh, int i, t_split **commands, t_split **words)
+{
+	int	ret;
+
+	sh->pipeline->data[i] = new_cmd();
+	if (!sh->pipeline->data[i])
+		return (-2);
+	ret = cut_words((char *)((*commands)->data[i]),
+			(t_cmd *)sh->pipeline->data[i], words);
+	if (ret < -2)
+		return (ret);
+	if (!*words)
+		return (-3);
+	((t_cmd *)sh->pipeline->data[i])->av = (char **)(*words)->data;
+	((t_cmd *)sh->pipeline->data[i])->ac = (*words)->len;
+	sh->pipeline->len++;
+	free(*words);
+	return (0);
+}
+
 /*
 **	Parse le retour de readline :
 **	et stock les tokens dans un char ** (sh.pipeline.data.av)
@@ -87,7 +107,7 @@ int	parse_cmd(char *s, t_sh *sh)
 	t_split	*words;
 	t_split	*commands;
 	int		i;
-	int		ctwrdret;
+	int		ret;
 
 	commands = quote_split(s, "|");
 	if (!commands)
@@ -98,21 +118,12 @@ int	parse_cmd(char *s, t_sh *sh)
 	i = -1;
 	while (++i < commands->len)
 	{
-		sh->pipeline->data[i] = new_cmd();
-		if (!sh->pipeline->data[i])
+		ret = while_of_parse_cmd(sh, i, &commands, &words);
+		if (ret == -2)
 			return (-2);
-		ctwrdret = cut_words((char *)commands->data[i],
-				(t_cmd *)sh->pipeline->data[i], &words);
-		if (ctwrdret < -2)
+		if (ret < -2)
 			return (free(sh->pipeline->data[i]),
-				(unsigned long long)del_split(commands, &ft_free) + ctwrdret);
-		if (!words)
-			return (free(sh->pipeline->data[i]),
-				(unsigned long long)del_split(commands, &ft_free) - 3);
-		((t_cmd *)sh->pipeline->data[i])->av = (char **)words->data;
-		((t_cmd *)sh->pipeline->data[i])->ac = words->len;
-		sh->pipeline->len++;
-		free(words);
+				(unsigned long long)del_split(commands, &ft_free) + ret);
 	}
 	del_split(commands, &ft_free);
 	return (0);

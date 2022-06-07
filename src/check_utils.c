@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:56:33 by bifrah            #+#    #+#             */
-/*   Updated: 2022/06/06 20:12:40 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/06/07 15:19:29 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,11 @@ int	set_red_fd(int in_out, t_list *lst)
 void	skip_spaces(char *s, int *i)
 {
 	while (ft_strchr(SPACES, s[*i]))
+	{
 		(*i)++;
+		if (*i >= (int)ft_strlen(s))
+			return ;
+	}
 }
 
 int	in_or_out(char c)
