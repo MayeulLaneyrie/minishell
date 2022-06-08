@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:26:06 by bifrah            #+#    #+#             */
-/*   Updated: 2022/06/08 15:56:35 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/08 17:03:25 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ int	get_next_thing(char **s, t_cmd *cmd, t_sh *sh, t_list **tmp)
 		else
 			l = check_redirect(*s, cmd, NULL, sh);
 		if (l < 0)
-			return (ft_lstclear(tmp, &free), l);
+			return (ft_lstclear(tmp, &free), l
+				+ (long)ft_lstclear(&(cmd->red), &del_red));
 		*s += l;
 	}
 	else

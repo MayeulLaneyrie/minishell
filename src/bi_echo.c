@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:15:36 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/08 16:28:06 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/08 17:06:51 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	bi_echo(t_sh *sh, t_cmd *cmd)
 	opt = check_echo_opt(cmd);
 	if (cmd->ac == 1 || (cmd->ac == 2 && opt))
 		return (0 * write(1, "\n", 1 - (opt != 0)));
-	if (opt ==cmd->ac - 1)
+	if (opt == cmd->ac - 1)
 		return (0);
 	i = opt;
 	size = 0;

@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:15:23 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/04 16:15:25 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/08 17:29:58 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,22 @@
 
 int	exit_arg_checker(char *s)
 {
-	while (ft_strchr("\t \n", *s) && *s)
-		s++;
-	if (*s == '+' || *s == '-')
-		s++;
-	if (!ft_isdigit(*s))
+	int	i;
+
+	i = 0;
+	while (ft_strchr("\t \n", s[i]) && s[i])
+		i++;
+	if (s[i] == '+' || s[i] == '-')
+		i++;
+	if (!ft_isdigit(s[i]))
 		return (-1);
-	while (ft_isdigit(*s))
-		s++;
-	while (ft_strchr("\t \n", *s) && *s)
-		s++;
-	return (*s);
+	while (ft_isdigit(s[i]))
+		i++;
+	while (ft_strchr("\t \n", s[i]) && s[i])
+		i++;
+	if (i > 19)
+		return (-1);
+	return (s[i]);
 }
 
 int	bi_exit(t_sh *sh, t_cmd *cmd)
@@ -33,7 +38,8 @@ int	bi_exit(t_sh *sh, t_cmd *cmd)
 		write(2, "exit\n", 5);
 	if (cmd->ac < 2)
 		return (CMD_EXIT);
-	if (exit_arg_checker(cmd->av[1]))
+	if (exit_arg_checker(cmd->av[1])
+			| (ft_strncmp("9223372036854775807", cmd->av[1], 19) < 0))
 	{
 		g_xt_stat = 2;
 		return (ft_err4(sh->exec_name, cmd->av[0], cmd->av[1],

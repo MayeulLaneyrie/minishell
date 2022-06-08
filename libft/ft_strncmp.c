@@ -6,11 +6,12 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 13:02:41 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/05/31 21:39:48 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/08 17:31:07 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
