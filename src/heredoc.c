@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:46:46 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/08 04:21:12 by lnr              ###   ########.fr       */
+/*   Updated: 2022/06/08 13:06:51 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int	heredoc(t_red *red, t_sh *sh)
 	red->word = tmp_file;
 	close(fd);
 	if (!pid)
-		exit(0);
+		return (1);
 	waitpid(pid, &fd, 0);
 	g_xt_stat = WEXITSTATUS(fd);
 	return (0 - (g_xt_stat != 0));
