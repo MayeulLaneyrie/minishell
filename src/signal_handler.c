@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:20:58 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/07 00:06:06 by lnr              ###   ########.fr       */
+/*   Updated: 2022/06/08 13:36:04 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ void	sa_main_handler(int x)
 void	sa_heredoc_handler(int x)
 {
 	write(1, "\n", 1);
+	close(0);
+	close(1);
+	close(2);
 	exit(128 + x);
 }
 

@@ -29,13 +29,13 @@ OBJS		= ${SRCS:.c=.o}
 
 NAME		= minishell
 CC			= clang -Wall -Wextra -Werror -g3
-# ASAN		= -g -fsanitize=address
+ASAN		= -g -fsanitize=address
 RM			= rm -f
 AR			= ar rcs
 
 ${NAME}:	$(OBJS) libft.a
 	@ echo -n "\033[1mCompiling ${NAME}...\033[0m"
-	@ ${CC} ${OBJS} ./libft/libft.a -o ${NAME} -lreadline && echo " [DONE]"
+	@ ${CC} ${ASAN} ${OBJS} ./libft/libft.a -o ${NAME} -lreadline && echo " [DONE]"
 
 libft.a:
 	@ echo -n "\033[1mMaking libft...\033[0m"

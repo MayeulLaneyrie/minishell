@@ -6,11 +6,12 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:19:16 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/04 16:19:19 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/08 14:47:35 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/split_utils.h"
+#include <stdio.h>
 
 int	split_extend(t_split *split, int n)
 {
@@ -30,6 +31,8 @@ int	split_extend(t_split *split, int n)
 	}
 	free(split->data);
 	split->data = new->data;
+	split->len = new->len;
+	split->size = new->size;
 	free(new);
 	return (0);
 }

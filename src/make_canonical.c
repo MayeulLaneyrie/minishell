@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:17:57 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/04 16:17:58 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/08 14:31:40 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,12 @@ int	make_canonical(char *s)
 		while (s[i + gap] && s[i + gap] == '/')
 			gap++;
 	}
-	s[i] = '\0';
+	if (i && s[i - 1] == '/')
+	{
+		while (s[--i] == '/')
+			s[i] = '\0';
+	}
+	else
+		s[i] = '\0';
 	return (s[0]);
 }

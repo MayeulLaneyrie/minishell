@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:46:46 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/08 13:06:51 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/08 13:42:01 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ int	heredoc_fork(int fd, char *word, t_sh *sh)
 		l = ft_strlen(word);
 		while (!rw_line(fd, word, l, sh))
 			;
-		del_sh(sh);
 	}
 	return (pid);
 }
@@ -119,8 +118,10 @@ int	heredoc(t_red *red, t_sh *sh)
 	red->word = tmp_file;
 	close(fd);
 	if (!pid)
-		return (1);
+		return ((long)ft_free(tmp_file) + 1);
 	waitpid(pid, &fd, 0);
 	g_xt_stat = WEXITSTATUS(fd);
-	return (0 - (g_xt_stat != 0));
+	if (g_xt_stat)
+		return (unlink(tmp_file) + (long)ft_free(tmp_file) - 1);
+	return (0);
 }

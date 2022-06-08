@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:26:06 by bifrah            #+#    #+#             */
-/*   Updated: 2022/06/08 04:00:16 by lnr              ###   ########.fr       */
+/*   Updated: 2022/06/08 13:19:19 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,6 @@ int	main_part1(t_sh *sh)
 	if (parse_ret == -6)
 		return ((unsigned long)ft_free((void *)s) ERR_DOC);
 	if (parse_ret != 0)
-		return ((unsigned long)ft_free((void *)s) + 1);
+		return ((unsigned long)ft_free((void *)s) + parse_ret);
 	return (free(s), 0);
 }

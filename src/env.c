@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:17:11 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/04 16:17:13 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/08 14:47:49 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*get_var(t_split *env, char *name)
 		if (!ft_strncmp(((char **)env->data)[i], name, l)
 			&& ((char **)env->data)[i][l] == '=')
 			break ;
-	if (!((char **)env->data)[i])
+	if (!((char **)env->data)[i] || i == env->len)
 		return (NULL);
 	if (((char **)env->data)[i][l] != '=')
 		return (NULL);
