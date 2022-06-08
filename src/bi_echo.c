@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:15:36 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/04 16:15:38 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/08 16:28:06 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,27 @@
 
 int	check_echo_opt(t_cmd *cmd)
 {
-	int	opt;
+	int	leave;
+	int	j;
 	int	i;
 
-	opt = 0;
-	i = 1;
-	if (cmd->ac > 1 && cmd->av[1][0] == '-')
+	leave = 0;
+	j = 1;
+	while (!leave && j < cmd->ac)
 	{
-		while (cmd->av[1][i] && cmd->av[1][i] == 'n')
-			i++;
-		if (i > 1 && !cmd->av[1][i])
-			opt = 1;
+		leave = 1;
+		if (cmd->ac > 1 && cmd->av[j][0] == '-')
+		{
+			i = 1;
+			while (cmd->av[j][i] && cmd->av[j][i] == 'n')
+				i++;
+			if (i > 1 && !cmd->av[j][i])
+				leave = 0;
+		}
+		if (!leave)
+			j++;
 	}
-	return (opt);
+	return (j - 1);
 }
 
 int	echo_display(char *display, int opt, int size, t_cmd *cmd)
@@ -40,8 +48,9 @@ int	echo_display(char *display, int opt, int size, t_cmd *cmd)
 		ft_strlcat(display, cmd->av[i], size);
 		ft_strlcat(display, " ", size);
 	}
-	display[size - 1] = '\n';
-	write(1, display, size - opt);
+	if (size)
+		display[size - 1] = '\n';
+	write(1, display, size - (opt != 0));
 	free(display);
 	return (0);
 }
@@ -57,7 +66,9 @@ int	bi_echo(t_sh *sh, t_cmd *cmd)
 	g_xt_stat = 0;
 	opt = check_echo_opt(cmd);
 	if (cmd->ac == 1 || (cmd->ac == 2 && opt))
-		return (0 * write(1, "\n", 1 - opt));
+		return (0 * write(1, "\n", 1 - (opt != 0)));
+	if (opt ==cmd->ac - 1)
+		return (0);
 	i = opt;
 	size = 0;
 	while (++i < cmd->ac)
