@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:15:23 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/08 17:29:58 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/08 17:33:00 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	bi_exit(t_sh *sh, t_cmd *cmd)
 	if (cmd->ac < 2)
 		return (CMD_EXIT);
 	if (exit_arg_checker(cmd->av[1])
-			| (ft_strncmp("9223372036854775807", cmd->av[1], 19) < 0))
+		|| (ft_strncmp("9223372036854775807", cmd->av[1], 19) < 0))
 	{
 		g_xt_stat = 2;
 		return (ft_err4(sh->exec_name, cmd->av[0], cmd->av[1],
