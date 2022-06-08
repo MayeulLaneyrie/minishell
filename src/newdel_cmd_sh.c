@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:18:07 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/04 16:18:09 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/08 03:36:08 by lnr              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,8 @@ void	*del_sh(t_sh *sh)
 		return (NULL);
 	del_split(sh->pipeline, &del_cmd);
 	del_split(sh->env, &ft_free);
+	close(0);
+	close(1);
+	close(2);
 	return (NULL);
 }

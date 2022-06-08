@@ -6,11 +6,12 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:19:03 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/04 16:19:04 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/08 03:31:31 by lnr              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/split_utils.h"
+#include <stdio.h>
 
 t_split	*new_split(int n)
 {

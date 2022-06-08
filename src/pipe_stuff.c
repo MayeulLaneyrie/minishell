@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:18:19 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/04 16:27:23 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/08 03:28:19 by lnr              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	spawn_pipe_cmd(t_sh *sh, t_cmd *cmd)
 		close(cmd->pipe_in[STDIN]);
 	if (cmd->is_piped[STDOUT])
 		close(cmd->pipe_out[STDOUT]);
-	exit(g_xt_stat);
+	return (CMD_EXIT);
 }
 
 int	pipe_gen(t_cmd **cmd, int i)
@@ -63,12 +63,12 @@ int	pipeline_spawner(t_sh *sh)
 		if (cmd[i]->pid < 0)
 			exit(EXIT_FAILURE);
 		if (!cmd[i]->pid)
-			spawn_pipe_cmd(sh, cmd[i]);
+			return (spawn_pipe_cmd(sh, cmd[i]));
 		else if (i)
 		{
 			close(cmd[i]->pipe_in[STDIN]);
 			close(cmd[i]->pipe_in[STDOUT]);
 		}
 	}
-	return (0);
+	return (CMD_WAIT);
 }
