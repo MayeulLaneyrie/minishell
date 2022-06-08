@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:26:27 by bifrah            #+#    #+#             */
-/*   Updated: 2022/06/08 14:26:56 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/08 15:52:48 by bifrah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,20 @@ int	check_redirect_operator(char *s, int *i)
 	}
 }
 
+int	here_doc_mod(t_red **tmp, t_sh *sh)
+{
+	int	hd_ret;
+
+	hd_ret = 0;
+	if ((*tmp)->mode == RED_APPEND && (*tmp)->in_out == RED_IN)
+	{
+		hd_ret = heredoc(*tmp, sh);
+		if (hd_ret)
+			return (free(*tmp), (hd_ret < 0) * ERR_DOC + (hd_ret > 0) * -3);
+	}
+	return (hd_ret);
+}
+
 int	check_redirect(char *s, t_cmd *cmd, t_list *lst, t_sh *sh)
 {
 	int		i;
@@ -65,12 +79,9 @@ int	check_redirect(char *s, t_cmd *cmd, t_list *lst, t_sh *sh)
 		return (free(tmp), -1);
 	i += word_cpy(new_word, s + i);
 	tmp->word = new_word;
-	if (tmp->mode == RED_APPEND && tmp->in_out == RED_IN)
-	{
-		hd_ret = heredoc(tmp, sh);
-		if (hd_ret)
-			return (free(tmp), (hd_ret < 0) * ERR_DOC + (hd_ret > 0) * -3);
-	}
+	hd_ret = here_doc_mod(&tmp, sh);
+	if (hd_ret != 0)
+		return (hd_ret);
 	if (!ft_lstadd_back(&(cmd->red), ft_lstnew(tmp)))
 		return (free(tmp), (long)ft_lstclear(&cmd->red, &free) - 1);
 	return (i);
