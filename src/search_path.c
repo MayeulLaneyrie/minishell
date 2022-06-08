@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:18:43 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/04 16:21:26 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/08 04:37:50 by lnr              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,11 @@ int	is_reg(char *path)
 	return (S_ISREG(path_stat.st_mode));
 }
 
-char	*search_path(char *path, char *name, int cd)
+char	*search_through_dirs(t_split *dirs, char *name, int cd)
 {
-	t_split	*dirs;
-	char	*temp;
 	int		i;
+	char	*temp;
 
-	if (!path)
-		return (NULL);
-	dirs = ft_split(path, ':');
-	if (!dirs)
-		return (NULL);
 	i = -1;
 	while (dirs->data[++i])
 	{
@@ -46,4 +40,20 @@ char	*search_path(char *path, char *name, int cd)
 	}
 	del_split(dirs, &ft_free);
 	return (NULL);
+}
+
+char	*search_path(char *path, char *name, int cd)
+{
+	t_split	*dirs;
+	int		i;
+
+	if (!path)
+		path = ft_strdup("/bin");
+	if (!path)
+		return (NULL);
+	dirs = ft_split(path, ':');
+	if (!dirs)
+		return (NULL);
+	i = -1;
+	return (search_through_dirs(dirs, name, cd));
 }

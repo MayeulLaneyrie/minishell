@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:26:06 by bifrah            #+#    #+#             */
-/*   Updated: 2022/06/07 15:00:37 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/06/08 04:00:16 by lnr              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	skip_spaces_adress(char **s)
 		return (0);
 }
 
-int	cut_words(char *s, t_cmd *cmd, t_split	**ret)
+int	cut_words(char *s, t_cmd *cmd, t_split **ret, t_sh *sh)
 {
 	int		l;
 	t_list	*tmp;
@@ -63,7 +63,10 @@ int	cut_words(char *s, t_cmd *cmd, t_split	**ret)
 			break ;
 		if (ft_strchr("<>", *s))
 		{
-			l = check_redirect(s, cmd, tmp, jump);
+			if (!jump)
+				l = check_redirect(s, cmd, tmp, sh);
+			else
+				l = check_redirect(s, cmd, NULL, sh);
 			if (l < 0)
 				return (ft_lstclear(&tmp, &free), l);
 			s += l;
@@ -86,7 +89,7 @@ int	while_of_parse_cmd(t_sh *sh, int i, t_split **commands, t_split **words)
 	if (!sh->pipeline->data[i])
 		return (-2);
 	ret = cut_words((char *)((*commands)->data[i]),
-			(t_cmd *)sh->pipeline->data[i], words);
+			(t_cmd *)sh->pipeline->data[i], words, sh);
 	if (ret < -2)
 		return (ret);
 	if (!*words)

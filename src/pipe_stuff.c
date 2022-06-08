@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:18:19 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/08 03:28:19 by lnr              ###   ########.fr       */
+/*   Updated: 2022/06/08 04:28:57 by lnr              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	pipe_gen(t_cmd **cmd, int i)
 {
 	cmd[i]->is_piped[STDOUT] = 1;
 	if (pipe(cmd[i]->pipe_out))
-		exit(EXIT_FAILURE);
+		return (ft_err4("minishell: pipe failed\n", NULL, NULL, NULL) - 1);
 	cmd[i + 1]->pipe_in[STDIN] = cmd[i]->pipe_out[STDIN];
 	cmd[i + 1]->pipe_in[STDOUT] = cmd[i]->pipe_out[STDOUT];
 	return (0);
@@ -58,7 +58,8 @@ int	pipeline_spawner(t_sh *sh)
 		if (i)
 			cmd[i]->is_piped[STDIN] = 1;
 		if (i != sh->pipeline->len - 1)
-			pipe_gen(cmd, i);
+			if (pipe_gen(cmd, i))
+				return (CMD_NOWAIT);
 		cmd[i]->pid = fork();
 		if (cmd[i]->pid < 0)
 			exit(EXIT_FAILURE);

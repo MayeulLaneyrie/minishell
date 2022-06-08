@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:26:27 by bifrah            #+#    #+#             */
-/*   Updated: 2022/06/07 15:37:11 by bifrah           ###   ########.fr       */
+/*   Updated: 2022/06/08 04:01:53 by lnr              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	check_redirect_operator(char *s, int *i)
 	}
 }
 
-int	check_redirect(char *s, t_cmd *cmd, t_list *lst, int jump)
+int	check_redirect(char *s, t_cmd *cmd, t_list *lst, t_sh *sh)
 {
 	int		i;
 	t_red	*tmp;
@@ -55,10 +55,7 @@ int	check_redirect(char *s, t_cmd *cmd, t_list *lst, int jump)
 	tmp = malloc(sizeof(t_red));
 	if (!tmp)
 		return (-1);
-	if (!jump)
-		fill_tmp_fd_mod_inout(&tmp, s, &i, lst);
-	else
-		fill_tmp_fd_mod_inout(&tmp, s, &i, NULL);
+	fill_tmp_fd_mod_inout(&tmp, s, &i, lst);
 	skip_spaces(s, &i);
 	if (!tmp->mode || i > (int)ft_strlen(s) || ft_strchr("<>", s[i]))
 		return (free(tmp), ERR_SYNTAX);
@@ -67,7 +64,7 @@ int	check_redirect(char *s, t_cmd *cmd, t_list *lst, int jump)
 		return (free(tmp), -1);
 	i += word_cpy(new_word, s + i);
 	tmp->word = new_word;
-	if (tmp->mode == RED_APPEND && tmp->in_out == RED_IN && heredoc(tmp))
+	if (tmp->mode == RED_APPEND && tmp->in_out == RED_IN && heredoc(tmp, sh))
 		return (free(tmp), ERR_DOC);
 	if (!ft_lstadd_back(&(cmd->red), ft_lstnew(tmp)))
 		return (free(tmp), (long)ft_lstclear(&cmd->red, &free) - 1);

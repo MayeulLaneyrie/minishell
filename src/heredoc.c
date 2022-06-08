@@ -6,7 +6,7 @@
 /*   By: mlaneyri <mlaneyri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:46:46 by mlaneyri          #+#    #+#             */
-/*   Updated: 2022/06/07 00:32:07 by lnr              ###   ########.fr       */
+/*   Updated: 2022/06/08 04:21:12 by lnr              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*tmp_name(char *dir)
 	return (ret);
 }
 
-int	rw_line(int fd, char *word, int l)
+int	rw_line(int fd, char *word, int l, t_sh *sh)
 {
 	char	*line;
 
@@ -69,6 +69,9 @@ int	rw_line(int fd, char *word, int l)
 	}
 	if (line)
 	{
+		line = all_dollar_subst(sh->env, line);
+		if (!line)
+			exit(EXIT_FAILURE);
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		free(line);
@@ -76,7 +79,7 @@ int	rw_line(int fd, char *word, int l)
 	return (0);
 }
 
-int	heredoc_fork(int fd, char *word)
+int	heredoc_fork(int fd, char *word, t_sh *sh)
 {
 	int		l;
 	char	*line;
@@ -90,13 +93,14 @@ int	heredoc_fork(int fd, char *word)
 		sig_init(SIGINT, sa_heredoc_handler);
 		line = NULL;
 		l = ft_strlen(word);
-		while (!rw_line(fd, word, l))
+		while (!rw_line(fd, word, l, sh))
 			;
+		del_sh(sh);
 	}
 	return (pid);
 }
 
-int	heredoc(t_red *red)
+int	heredoc(t_red *red, t_sh *sh)
 {
 	char	*tmp_file;
 	int		fd;
@@ -110,7 +114,7 @@ int	heredoc(t_red *red)
 	if (!fd)
 		return (ft_puts("minishell: heredoc tmp file can't be created\n", 2)
 			- 1 + (long)ft_free(tmp_file));
-	pid = heredoc_fork(fd, red->word);
+	pid = heredoc_fork(fd, red->word, sh);
 	free(red->word);
 	red->word = tmp_file;
 	close(fd);

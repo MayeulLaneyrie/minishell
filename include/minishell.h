@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 18:29:03 by lnr               #+#    #+#             */
-/*   Updated: 2022/06/07 00:04:53 by lnr              ###   ########.fr       */
+/*   Updated: 2022/06/08 04:00:57 by lnr              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ extern int	g_xt_stat;
 **	Dans parser.c
 */
 int		no_redirect(char **s, t_list **tmp);
-int		cut_words(char *s, t_cmd *cmd, t_split **ret);
+int		cut_words(char *s, t_cmd *cmd, t_split **ret, t_sh *sh);
 int		parse_cmd(char *s, t_sh *sh);
 int		main_part1(t_sh *sh);
 
@@ -147,7 +147,7 @@ int		check_commands(t_split *commands);
 **	Dans check2.c :
 */
 int		check_redirect_operator(char *s, int *i);
-int		check_redirect(char *s, t_cmd *cmd, t_list *lst, int jump);
+int		check_redirect(char *s, t_cmd *cmd, t_list *lst, t_sh *sh);
 
 /*
 **	Dans var_env.c :
@@ -194,7 +194,7 @@ int		ft_err4(char *s1, char *s2, char *s3, char *s4);
 
 char	*tmp_name(char *path);
 
-int		heredoc(t_red *red);
+int		heredoc(t_red *red, t_sh *sh);
 
 /*
 **	Dans apply_redir.c :
