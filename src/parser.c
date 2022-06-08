@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:26:06 by bifrah            #+#    #+#             */
-/*   Updated: 2022/06/08 13:19:19 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2022/06/08 15:09:39 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,10 +171,10 @@ int	main_part1(t_sh *sh)
 	parse_ret = parse_cmd(s, sh);
 	if (parse_ret == ERR_SYNTAX)
 		return (write(2, "Syntax error\n", 13),
-			(unsigned long)ft_free((void *)s) ERR_SYNTAX);
+			(long)ft_free((void *)s) ERR_SYNTAX + 0 * (g_xt_stat = 2));
 	if (parse_ret == -6)
-		return ((unsigned long)ft_free((void *)s) ERR_DOC);
+		return ((long)ft_free((void *)s) ERR_DOC);
 	if (parse_ret != 0)
-		return ((unsigned long)ft_free((void *)s) + parse_ret);
+		return ((long)ft_free((void *)s) + parse_ret);
 	return (free(s), 0);
 }

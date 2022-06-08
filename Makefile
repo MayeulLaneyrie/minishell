@@ -35,7 +35,7 @@ AR			= ar rcs
 
 ${NAME}:	$(OBJS) libft.a
 	@ echo -n "\033[1mCompiling ${NAME}...\033[0m"
-	@ ${CC} ${ASAN} ${OBJS} ./libft/libft.a -o ${NAME} -lreadline && echo " [DONE]"
+	@ ${CC}  ${OBJS} ./libft/libft.a -o ${NAME} -lreadline && echo " [DONE]"
 
 libft.a:
 	@ echo -n "\033[1mMaking libft...\033[0m"
