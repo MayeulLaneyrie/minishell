@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 18:29:03 by lnr               #+#    #+#             */
-/*   Updated: 2022/06/08 04:00:57 by lnr              ###   ########.fr       */
+/*   Updated: 2022/06/08 15:45:58 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,16 @@ extern int	g_xt_stat;
 /*
 **	Dans parser.c
 */
-int		no_redirect(char **s, t_list **tmp);
-int		cut_words(char *s, t_cmd *cmd, t_split **ret, t_sh *sh);
 int		parse_cmd(char *s, t_sh *sh);
 int		main_part1(t_sh *sh);
+
+/*
+**	Dans parser2.c :
+*/
+int		no_redirect(char **s, t_list **tmp);
+int		cut_words(char *s, t_cmd *cmd, t_split **ret, t_sh *sh);
+int		while_of_parse_cmd(
+			t_sh *sh, int i, t_split **commands, t_split **words);
 
 /*
 **	Dans wrd_len_and_cpy.c
