@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:26:06 by bifrah            #+#    #+#             */
-/*   Updated: 2022/06/08 17:03:25 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2023/03/28 17:28:26 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	get_next_thing(char **s, t_cmd *cmd, t_sh *sh, t_list **tmp)
 	}
 	else
 		if (no_redirect(s, tmp) == -1)
-			return (ft_lstclear(tmp, &free), -1);
+			return (ft_lstclear(tmp, &free), -3);
 	return (0);
 }
 

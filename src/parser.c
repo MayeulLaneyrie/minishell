@@ -6,7 +6,7 @@
 /*   By: bifrah <bifrah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:26:06 by bifrah            #+#    #+#             */
-/*   Updated: 2022/06/08 15:42:02 by mlaneyri         ###   ########.fr       */
+/*   Updated: 2023/03/28 17:30:10 by mlaneyri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	parse_cmd(char *s, t_sh *sh)
 	if (!check_commands(commands))
 		return (ERR_SYNTAX);
 	sh->pipeline = new_split(commands->len);
+	if (!sh->pipeline)
+		return (-1);
 	i = -1;
 	while (++i < commands->len)
 	{
