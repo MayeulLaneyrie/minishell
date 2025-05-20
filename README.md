@@ -11,5 +11,5 @@ a few builtins.
 `make` to compile. The shell may then be launched with `./minishell`
 
 Here's a simple demonstration of minishell's usage:
-https://github.com/user-attachments/assets/1f710dbc-c55d-4338-b8af-4383e40f7389
+![](https://github.com/user-attachments/assets/1f710dbc-c55d-4338-b8af-4383e40f7389)
 
