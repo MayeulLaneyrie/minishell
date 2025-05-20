@@ -47,7 +47,7 @@ all:		${NAME}
 bonus:		${NAME}
 
 %.o:		%.c
-	@ echo -en "\e[1mBuilding objects...\e[0m"
+	@ echo -en "\e[1mBuilding object $@...\e[0m"
 	@ ${CC} -c $< -o $@ && echo " [DONE]"
 
 clean:
