@@ -52,7 +52,7 @@ int	supra_readline(char **s)
 	if (isatty(0))
 	{
 		sig_init(SIGINT, sa_main_handler);
-		*s = readline("$ ");
+		*s = readline("\e[1;34m$\e[0m ");
 		sig_init(SIGINT, SIG_IGN);
 	}
 	else
