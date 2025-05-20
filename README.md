@@ -12,6 +12,4 @@ a few builtins.
 
 Here's a simple demonstration of minishell's usage:
 
-<video width="320" height="240" controls>
-  <source src="https://github.com/user-attachments/assets/1f710dbc-c55d-4338-b8af-4383e40f7389" type="video/mp4">
-</video>
+https://raw.githubusercontent.com/MayeulLaneyrie/public_files/master/demo_minshell.mp4
