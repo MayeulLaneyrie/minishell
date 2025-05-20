@@ -11,5 +11,8 @@ a few builtins.
 `make` to compile. The shell may then be launched with `./minishell`
 
 Here's a simple demonstration of minishell's usage:
+<video width="320" height="240" controls>
+  <source src="https://github.com/user-attachments/assets/1f710dbc-c55d-4338-b8af-4383e40f7389" type="video/mp4">
+</video>
 ![](https://github.com/user-attachments/assets/1f710dbc-c55d-4338-b8af-4383e40f7389)
 
