@@ -45,7 +45,6 @@ char	*search_through_dirs(t_split *dirs, char *name, int cd)
 char	*search_path(char *path, char *name, int cd)
 {
 	t_split	*dirs;
-	int		i;
 
 	if (!path)
 		path = ft_strdup("/bin");
@@ -54,6 +53,5 @@ char	*search_path(char *path, char *name, int cd)
 	dirs = ft_split(path, ':');
 	if (!dirs)
 		return (NULL);
-	i = -1;
 	return (search_through_dirs(dirs, name, cd));
 }

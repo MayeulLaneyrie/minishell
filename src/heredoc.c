@@ -82,7 +82,6 @@ int	rw_line(int fd, char *word, int l, t_sh *sh)
 int	heredoc_fork(int fd, char *word, t_sh *sh)
 {
 	int		l;
-	char	*line;
 	int		pid;
 
 	pid = fork();
@@ -91,7 +90,6 @@ int	heredoc_fork(int fd, char *word, t_sh *sh)
 	else if (!pid)
 	{
 		sig_init(SIGINT, sa_heredoc_handler);
-		line = NULL;
 		l = ft_strlen(word);
 		while (!rw_line(fd, word, l, sh))
 			;

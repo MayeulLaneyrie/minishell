@@ -46,7 +46,7 @@ SRCS		=	ft_substr.c \
 OBJS		= ${SRCS:.c=.o}
 
 NAME		= libft.a
-CC			= clang -Wall -Wextra -Werror
+CC			= gcc -Wall -Wextra -Werror
 RM			= rm -f
 
 ${NAME}:	${OBJS} | silent
