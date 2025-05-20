@@ -9,3 +9,7 @@ a few builtins.
 ## Usage
 
 `make` to compile. The shell may then be launched with `./minishell`
+
+Here's a simple demonstration of minishell's usage:
+![image](https://github.com/user-attachments/assets/1f710dbc-c55d-4338-b8af-4383e40f7389)
+
